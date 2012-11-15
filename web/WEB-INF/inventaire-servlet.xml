@@ -2,34 +2,17 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
-                            http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
     <!-- the application context definition for the springapp DispatcherServlet -->
-    
-    
-    <bean id="viewResolver"
-          class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <property name="viewClass"
-                  value="org.springframework.web.servlet.view.JstlView">
-        </property>
-        <property name="prefix" value="/WEB-INF/jsp/"></property>
-        <property name="suffix" value=".jsp"></property>
-    </bean>
-
-
-
-    
     <bean id="messageSource"
-          class="org.springframework.context.support.ResourceBundleMessageSource">
+      class="org.springframework.context.support.ResourceBundleMessageSource">
         <property name="basename" value="messages"/>
     </bean>
-    
     <bean name="/hello.htm" class="inventaire.web.InventoryController">
         <property name="productManager" ref="productManager"/>
     </bean>
-    
-    
     <bean name="/priceincrease.htm"
-          class="inventaire.web.PriceIncreaseFormController">
+      class="inventaire.web.PriceIncreaseFormController">
         <property name="sessionForm" value="true"/>
         <property name="commandName" value="priceIncrease"/>
         <property name="commandClass" value="inventaire.service.PriceIncrease"/>
@@ -39,5 +22,14 @@
         <property name="formView" value="priceincrease"/>
         <property name="successView" value="hello.htm"/>
         <property name="productManager" ref="productManager"/>
+    </bean>
+
+    <bean id="viewResolver"
+      class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="viewClass"
+          value="org.springframework.web.servlet.view.JstlView">
+        </property>
+        <property name="prefix" value="/WEB-INF/jsp/"></property>
+        <property name="suffix" value=".jsp"></property>
     </bean>
 </beans>
