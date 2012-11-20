@@ -2,6 +2,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <html>
     <head>
+        <link type="text/css" rel="stylesheet" href="inc/style.css" />
         <title><fmt:message key="title"/></title>
         <style>
             .error { color: red; }

@@ -1,0 +1,57 @@
+body{
+    width: 700px;
+    margin: auto;
+
+}
+
+body, p, legend, label, input, select,td,th {
+    font: normal 8pt ubuntu normal,verdana, helvetica, sans-serif;
+}
+
+header{
+    padding: 5px; 
+    margin: 10px;
+    background-color: #3B5998;
+    color:  white;
+    text-align: right;
+}
+
+header a{
+    color:  white;
+    font-size: smaller;
+}
+
+p{
+    line-height: 22px;
+}
+
+/* Forms --------------------------------------------------------------------------------------- */
+fieldset {
+    padding: 10px;
+    border: 1px #0568CD solid;
+    margin: 10px;
+}
+
+legend {
+    font-weight: bold;
+    color: #0568CD;
+}
+
+form label {
+    float: left;
+    width: 200px;
+    margin: 3px 0px 0px 0px;
+}
+
+form input , select{
+    margin: 3px 3px 0px 0px;
+    border: 1px #999 solid;
+}
+
+form input.sansLabel {
+    margin-left: 200px;
+}
+
+.error {
+    color: #900;
+}

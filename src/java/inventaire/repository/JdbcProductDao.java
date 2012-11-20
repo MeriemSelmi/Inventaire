@@ -12,9 +12,6 @@ import inventaire.domain.Product;
 
 public class JdbcProductDao extends SimpleJdbcDaoSupport implements ProductDao {
 
-    /**
-     * Logger for this class and subclasses
-     */
     protected final Log logger = LogFactory.getLog(getClass());
 
     public List<Product> getProductList() {
@@ -28,13 +25,11 @@ public class JdbcProductDao extends SimpleJdbcDaoSupport implements ProductDao {
     public void saveProduct(Product prod) {
         logger.info("Saving product: " + prod.getDescription());
         int count = getSimpleJdbcTemplate().update(
-
-        "update products set description = :description, price = :price where id= :id",new MapSqlParameterSource().addValue("description",
+                "update products set description = :description, price = :price where id= :id", new MapSqlParameterSource().addValue("description",
                 prod.getDescription())
                 .addValue("price", prod.getPrice())
-                .addValue("id", prod.getId())
-        );
-logger.info("Rows affected: " + count);
+                .addValue("id", prod.getId()));
+        logger.info("Rows affected: " + count);
     }
 
     private static class ProductMapper implements ParameterizedRowMapper<Product> {

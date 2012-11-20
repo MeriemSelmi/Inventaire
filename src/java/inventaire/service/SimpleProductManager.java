@@ -31,8 +31,4 @@ public class SimpleProductManager implements ProductManager {
         this.productDao = productDao;
     }
 
-//    public void setProducts(List<Product> products) {
-//        this.products = products;
-//    }
-
 }

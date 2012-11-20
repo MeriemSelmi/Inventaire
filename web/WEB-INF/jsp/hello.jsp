@@ -7,6 +7,7 @@
 <%@ include file="/WEB-INF/jsp/include.jsp" %>
 <html>
     <head>
+        <link type="text/css" rel="stylesheet" href="inc/style.css" />
         <title><fmt:message key="title"/></title>
     </head>
     
