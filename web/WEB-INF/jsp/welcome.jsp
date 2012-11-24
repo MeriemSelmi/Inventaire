@@ -6,7 +6,7 @@
         <title><fmt:message key="title"/></title>
     </head>
     <body>
-        <a href="<c:url value="hello.htm"/>">Products manager</a><br>
-        <a href="<c:url value="hello.htm"/>">User manager</a>
+        <a href="<c:url value="productmanagement.htm"/>">Products manager</a><br>
+        <a href="<c:url value="usermanagement.htm"/>">User manager</a>
     </body>
 </html>

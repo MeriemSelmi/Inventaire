@@ -28,9 +28,6 @@ http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
     </bean>
     
     
-    <bean name="/welcome.htm" class="inventaire.web.AuthenticationController">
-        <property name="userManager" ref="userManager"/>
-    </bean>
     
     <bean name="/authentication.htm"
           class="inventaire.web.AuthenticationFormController">
@@ -45,6 +42,14 @@ http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
         <property name="userManager" ref="userManager"/>
     </bean>
 
+    <bean name="/welcome.htm" class="inventaire.web.WelcomeController">
+        
+    </bean>
+    
+    <bean name="/usermanagement.htm"
+          class="inventaire.web.UserManagementController">
+     </bean>
+     
     <bean id="viewResolver"
           class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="viewClass"
