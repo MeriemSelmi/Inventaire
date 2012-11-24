@@ -15,17 +15,17 @@ public class JdbcUserDao extends SimpleJdbcDaoSupport implements UserDao {
 
     @Override
     public User authenticate(String login,String pass) {
-        logger.info("Authentification!");
+        logger.info("JdbcUserDao: Authenticating...");
         List<User> users = getSimpleJdbcTemplate().query("select * FROM USERS where \"login\"='"+login+ "' and \"password\"='"+pass+"'", new UserMapper());
     
         for (User user : users) 
-        return user;
+            return user;
         return null;
     }
 
     @Override
     public List<User> getUsers() {
-        logger.info("Getting Users!");
+        logger.info("JdbcUserDao: getting list of all users");
         List<User> users = getSimpleJdbcTemplate().query(
                 "select * from USERS",
                 new JdbcUserDao.UserMapper());
@@ -45,7 +45,7 @@ public class JdbcUserDao extends SimpleJdbcDaoSupport implements UserDao {
             user.setPass(rs.getString("password"));
             user.setType(rs.getString("type"));
             user.setTelephone(rs.getString("telephone"));
-            user.setTelephone(rs.getString("mail"));
+            user.setMail(rs.getString("mail"));
 
             return user;
         }

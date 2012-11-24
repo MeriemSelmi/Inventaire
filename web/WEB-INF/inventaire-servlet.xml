@@ -48,8 +48,22 @@ http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
     
     <bean name="/usermanagement.htm"
           class="inventaire.web.UserManagementController">
-     </bean>
+        <property name="userManager" ref="userManager"/>
+    </bean>
      
+     <bean name="/useralteration.htm"
+          class="inventaire.web.UserAlterationFormController">
+        <property name="sessionForm" value="true"/>
+        <property name="commandName" value="userAlteration"/>
+        <property name="commandClass" value="inventaire.service.UserAlteration"/>
+        <property name="validator">
+            <bean class="inventaire.service.UserAlterationValidator"/>
+        </property>
+        <property name="formView" value="usermanagement"/>
+        <property name="successView" value="usermanagement.htm"/>
+        <property name="userManager" ref="userManager"/>
+    </bean>
+    
     <bean id="viewResolver"
           class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="viewClass"
