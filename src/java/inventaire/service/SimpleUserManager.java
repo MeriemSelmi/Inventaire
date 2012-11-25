@@ -17,9 +17,15 @@ public class SimpleUserManager implements UserManager {
     public User authenticate(String login,String pass) {
         return userDao.authenticate(login,pass) ;
     }
+
     
     public void setUserDao(UserDao userDao) {
         this.userDao = userDao;
     }
-    
+
+    @Override
+    public void update(int id, String name, String firstName, String mail, String telephone, String address, String login, String pass, String type) {
+        userDao.update(id, name, firstName, mail, telephone, address, login, pass, type);
+    }
+
 }

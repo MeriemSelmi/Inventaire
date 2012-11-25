@@ -4,8 +4,6 @@
  */
 package inventaire.web;
 
-import inventaire.domain.User;
-import inventaire.service.Authentication;
 import inventaire.service.UserAlteration;
 import inventaire.service.UserManager;
 import javax.servlet.ServletException;
@@ -30,14 +28,8 @@ public class UserAlterationFormController extends SimpleFormController{
         String pass = ((UserAlteration) command).getPass();
         
         logger.info("UserAlterationFormController: trying to alter with login="+login +" and password="+ pass);
-        boolean alterSucceeded = userManager.alter("", "", "", "", "", login, pass, "");
+        userManager.update(1, "", "", "", "", "", login, pass, "");
         
-        if(!alterSucceeded){
-            logger.info("AuthenticationFormController: alteration failed. Returning from user management view to " + getFormView());   
-        }
-        else{
-            logger.info("AuthenticationFormController: authentication succeeded. Returning from authentication form view to " + getSuccessView());
-        }
         return new ModelAndView(new RedirectView(getFormView().concat(".htm")));
         
     }

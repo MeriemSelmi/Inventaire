@@ -2,7 +2,8 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
-http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+       http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.1.xsd" xmlns:util="http://www.springframework.org/schema/util">
     <!-- the application context definition for the springapp DispatcherServlet -->
     
     <bean id="messageSource"
@@ -51,7 +52,7 @@ http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
         <property name="userManager" ref="userManager"/>
     </bean>
      
-     <bean name="/useralteration.htm"
+    <bean name="/useralteration.htm"
           class="inventaire.web.UserAlterationFormController">
         <property name="sessionForm" value="true"/>
         <property name="commandName" value="userAlteration"/>
@@ -72,4 +73,52 @@ http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
         <property name="prefix" value="/WEB-INF/jsp/"></property>
         <property name="suffix" value=".jsp"></property>
     </bean>
+    
+    
+    
+    
+    
+    <bean id="urlHandler"
+          class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping" >
+        <property name="mappings">
+            <map>
+                <entry key="/authentication.htm" value="AuthenticationFormController"/>
+                <entry key="/welcome.htm" value="WelcomeController"/>
+                <entry key="/user/*.htm" value="UserManagementController"/>
+            </map>
+        </property>
+    </bean>
+
+    <bean id="AuthenticationFormController" class="inventaire.web.AuthenticationFormController" > 
+        <property name="sessionForm" value="true"/>
+        <property name="commandName" value="authentication"/>
+        <property name="commandClass" value="inventaire.service.Authentication"/> 
+        <property name="validator">
+            <bean class="inventaire.service.AuthenticationValidator"/>
+        </property>
+        <property name="formView" value="authentication"/>
+        <property name="successView" value="welcome.htm"/>
+        <property name="userManager" ref="userManager"/>
+    </bean>
+    
+    
+    
+    <bean id="WelcomeController" class="inventaire.web.WelcomeController" />
+    
+    <bean id="UserManagementController" class="inventaire.web.UserManagementController" >
+        <property name="methodNameResolver" ref="userResolver" /> 
+        <property name="userManager" ref="userManager"/>
+    </bean>
+
+    <bean id="userResolver"
+          class="org.springframework.web.servlet.mvc.multiaction.PropertiesMethodNameResolver"
+          lazy-init="default">
+        <property name="mappings">
+            <props>
+                <prop key="/user/usermanagement.htm">listUsers</prop>
+                <prop key="/user/userupdate.htm">updateUser</prop>
+            </props>
+        </property>
+    </bean>
+    
 </beans>

@@ -1,6 +1,8 @@
 package inventaire.domain;
 
 import java.io.Serializable;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 public class User implements Serializable{
 
@@ -13,7 +15,8 @@ public class User implements Serializable{
     private String login;
     private String pass;
     private String type;
-
+    static private Map<String,String> userTypes;
+    
     public Integer getId() {
         return id;
     }
@@ -86,6 +89,16 @@ public class User implements Serializable{
         this.type = type;
     }
 
+    public static Map <String,String> getUserTypes(){
+        if(userTypes == null) {
+            userTypes = new LinkedHashMap<String,String>();
+            userTypes.put("null", "");
+            userTypes.put("Administrator", "Administrator");
+            userTypes.put("Storekeeper", "Storekeeper");
+        }
+        return userTypes;
+    }
+    @Override
     public String toString() {
         StringBuffer buffer = new StringBuffer();
         buffer.append("ID: " + id+ "\n");

@@ -55,3 +55,7 @@ form input.sansLabel {
 .error {
     color: #900;
 }
+
+table {
+    width: 100%
+}

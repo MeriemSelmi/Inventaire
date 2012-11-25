@@ -12,7 +12,7 @@
            http://www.springframework.org/schema/tx/spring-tx-2.0.xsd">
 
     <!-- the parent application context definition for the springapp application -->
-
+    
     <bean id="productManager" class="inventaire.service.SimpleProductManager">
         <property name="productDao" ref="productDao"/>
     </bean>

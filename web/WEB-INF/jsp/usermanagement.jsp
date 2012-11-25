@@ -4,7 +4,7 @@
 <html>
     
     <head>
-        <link type="text/css" rel="stylesheet" href="inc/style.css" />
+        <link type="text/css" rel="stylesheet" href="<c:url value="/inc/style.css"/>" />
         <title><fmt:message key="title"/></title>
     </head>
     
@@ -14,19 +14,23 @@
             <table>
                 <c:forEach var="user" items="${requestScope.users}">
                     <tr>
-                        <td>
+                        <td width="5%">
                             ${user.id}
                         </td>
                         <td>
-                            <a id="<c:out value='user${user.id}'/>">
+                            <a id="<c:out value='userinfo${user.id}'/>">
                                 <c:out value="${user.firstName} ${user.name}"/>
                             </a>
+                        </td>
+                        <td>
+                            <a id="<c:out value='userupdate${user.id}'/>">Update</a>   <a href="">Delete</a>
+                        </td>
                     </tr>
 
                     <tr>
                         <td></td>
-                        <td>
-                            <div id="<c:out value='user${user.id}'/>">
+                        <td colspan="2">
+                            <div id="<c:out value='userinfo${user.id}'/>">
                                 <p>
                                     Email : ${user.mail}<br>
                                     Telephone : ${user.telephone}<br>
@@ -36,8 +40,35 @@
                                 </p>
                             </div>
 
-                            <div id="<c:out value='alteruser${user.id}'/>">
-                                
+                            <div id="<c:out value='userupdate${user.id}'/>">
+                                <form:form method="post" action="userupdate.htm" commandName="userupdate">    
+                                    <label>Name : </label>
+                                    <form:input path="name"/><br>
+                                    
+                                    <label>First Name : </label>
+                                    <form:input path="firstName"/><br>
+                                    
+                                    <label>Mail : </label>
+                                    <form:input path="mail"/><br>
+                                    
+                                    <label>Telephone : </label>
+                                    <form:input path="telephone"/><br>
+                                    
+                                    <label>Address : </label>
+                                    <form:input path="address"/><br>
+                                    
+                                    <label>Login : </label>
+                                    <form:input path="login"/><br>
+                                    
+                                    <label>Password : </label>
+                                    <form:input path="pass" /><br>
+                                    
+                                    <label>Type : </label>
+                                    <form:select path="type" items="${userTypes}"/><br>
+                                    
+                                    <input type="number" name="id" value="${user.id}" hidden="">
+                                    <input type="submit" value="update"/>
+                                </form:form>
                             </div>
                         </td>
                     </tr>
@@ -46,8 +77,8 @@
             </table>
         </fieldset>
 
-        <script src="inc/jquery.js"></script>
-        <script src="inc/inventaire-script.js"></script>
+        <script src="<c:url value="/inc/jquery.js"/>"></script>
+        <script src="<c:url value="/inc/inventaire-script.js"/>"></script>
         <p id='test'></p>
     </body>
 </html>

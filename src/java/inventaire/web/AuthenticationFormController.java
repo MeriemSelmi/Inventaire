@@ -34,6 +34,7 @@ public class AuthenticationFormController extends SimpleFormController{
         
     }
 
+    @Override
     protected Object formBackingObject(HttpServletRequest request) throws ServletException {
         Authentication auth = new Authentication();
         auth.setLogin("");

@@ -30,6 +30,7 @@ public class PriceIncreaseFormController extends SimpleFormController {
         return new ModelAndView(new RedirectView(getSuccessView()));
     }
 
+    @Override
     protected Object formBackingObject(HttpServletRequest request) throws
             ServletException {
         PriceIncrease priceIncrease = new PriceIncrease();
