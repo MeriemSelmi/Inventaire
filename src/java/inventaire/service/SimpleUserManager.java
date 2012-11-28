@@ -18,14 +18,26 @@ public class SimpleUserManager implements UserManager {
         return userDao.authenticate(login,pass) ;
     }
 
-    
-    public void setUserDao(UserDao userDao) {
-        this.userDao = userDao;
+    @Override
+    public void update(int id, String name, String firstName, String mail, String telephone, String address, String login, String pass, String type) {
+        userDao.update( id, name, firstName, mail, telephone, address, login, pass, type);
     }
 
     @Override
-    public void update(int id, String name, String firstName, String mail, String telephone, String address, String login, String pass, String type) {
-        userDao.update(id, name, firstName, mail, telephone, address, login, pass, type);
+    public void add(String name, String firstName, String mail, String telephone, String address, String login, String pass, String type) {
+        userDao.add(name, firstName, mail, telephone, address, login, pass, type);
     }
 
+    @Override
+    public void delete(int id) {
+        userDao.delete(id);
+    }
+    
+    public List<User> findUsers(String keyword){
+        return userDao.findUsers(keyword);
+    }
+
+    public void setUserDao(UserDao userDao) {
+        this.userDao = userDao;
+    }
 }

@@ -13,18 +13,18 @@ import org.springframework.validation.Validator;
  *
  * @author Meriem
  */
-public class UserAlterationValidator implements Validator{
+public class UserUpdateValidator implements Validator{
     
     protected final Log logger = LogFactory.getLog(getClass());
     
     @Override
     public boolean supports(Class<?> clazz) {
-        return UserAlteration.class.equals(clazz);
+        return UserUpdate.class.equals(clazz);
     }
 
     @Override
     public void validate(Object o, Errors errors) {
-        UserAlteration userAlteration = (UserAlteration) o;
+        UserUpdate userAlteration = (UserUpdate) o;
         if (userAlteration == null) {
             errors.rejectValue("login", "error.not-specified", new Object[]{"Login"}, "Value required.");
             errors.rejectValue("pass", "error.not-specified",new Object[]{"Password"}, "Value required.");

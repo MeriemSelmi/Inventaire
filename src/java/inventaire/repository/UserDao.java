@@ -16,4 +16,7 @@ public interface UserDao {
     public User authenticate(String login,String pass);
     public List<User> getUsers();
     public void update(int id, String name, String firstName, String mail, String telephone, String address, String login, String pass, String type);
+    public void add(String name, String firstName, String mail, String telephone, String address, String login, String pass, String type);
+    public void delete(int id);
+    public List<User> findUsers(String keyword);
 }

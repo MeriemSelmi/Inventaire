@@ -92,7 +92,7 @@ public class User implements Serializable{
     public static Map <String,String> getUserTypes(){
         if(userTypes == null) {
             userTypes = new LinkedHashMap<String,String>();
-            userTypes.put("null", "");
+            userTypes.put("", "");
             userTypes.put("Administrator", "Administrator");
             userTypes.put("Storekeeper", "Storekeeper");
         }

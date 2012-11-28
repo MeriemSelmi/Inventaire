@@ -42,29 +42,9 @@ http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
         <property name="successView" value="welcome.htm"/>
         <property name="userManager" ref="userManager"/>
     </bean>
+    
+    <bean name="/welcome.htm" class="inventaire.web.WelcomeController"/>
 
-    <bean name="/welcome.htm" class="inventaire.web.WelcomeController">
-        
-    </bean>
-    
-    <bean name="/usermanagement.htm"
-          class="inventaire.web.UserManagementController">
-        <property name="userManager" ref="userManager"/>
-    </bean>
-     
-    <bean name="/useralteration.htm"
-          class="inventaire.web.UserAlterationFormController">
-        <property name="sessionForm" value="true"/>
-        <property name="commandName" value="userAlteration"/>
-        <property name="commandClass" value="inventaire.service.UserAlteration"/>
-        <property name="validator">
-            <bean class="inventaire.service.UserAlterationValidator"/>
-        </property>
-        <property name="formView" value="usermanagement"/>
-        <property name="successView" value="usermanagement.htm"/>
-        <property name="userManager" ref="userManager"/>
-    </bean>
-    
     <bean id="viewResolver"
           class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="viewClass"
@@ -115,8 +95,11 @@ http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
           lazy-init="default">
         <property name="mappings">
             <props>
-                <prop key="/user/usermanagement.htm">listUsers</prop>
+                <prop key="/user/usermanagement.htm">manageUsers</prop>
                 <prop key="/user/userupdate.htm">updateUser</prop>
+                <prop key="/user/useradd.htm">addUser</prop>
+                <prop key="/user/userdelete.htm">deleteUser</prop>
+                <prop key="/user/userfind.htm">findUsers</prop>
             </props>
         </property>
     </bean>

@@ -4,7 +4,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 
-public class UserAlteration {
+public class UserUpdate {
     protected final Log logger = LogFactory.getLog(getClass());
     private String name;
     private String firstName;
@@ -22,7 +22,7 @@ public class UserAlteration {
 
     public void setName(String lname) {
         this.name = lname;
-        logger.info("UserAlteration: name set to "+ name);
+        logger.info("UserUpdate: name set to "+ name);
     }
 
     public String getFirstName() {
@@ -31,7 +31,7 @@ public class UserAlteration {
 
     public void setFirstName(String firstName) {
         this.firstName = firstName;
-        logger.info("UserAlteration: first name set to "+ firstName);
+        logger.info("UserUpdate: first name set to "+ firstName);
     }
 
     public String getMail() {
@@ -40,7 +40,7 @@ public class UserAlteration {
 
     public void setMail(String mail) {
         this.mail = mail;
-        logger.info("UserAlteration: mail set to "+ mail);
+        logger.info("UserUpdate: mail set to "+ mail);
     }
 
     public String getTelephone() {
@@ -49,7 +49,7 @@ public class UserAlteration {
 
     public void setTelephone(String telephone) {
         this.telephone = telephone;
-        logger.info("UserAlteration: telephone set to "+ telephone);
+        logger.info("UserUpdate: telephone set to "+ telephone);
     }
 
     public String getAddress() {
@@ -58,7 +58,7 @@ public class UserAlteration {
 
     public void setAddress(String address) {
         this.address = address;
-        logger.info("UserAlteration: address set to "+ address);
+        logger.info("UserUpdate: address set to "+ address);
     }
 
     public String getLogin() {
@@ -67,7 +67,7 @@ public class UserAlteration {
 
     public void setLogin(String login) {
         this.login = login;
-        logger.info("UserAlteration: login set to "+ login);
+        logger.info("UserUpdate: login set to "+ login);
     }
 
     public String getPass() {
@@ -76,7 +76,7 @@ public class UserAlteration {
 
     public void setPass(String pass) {
         this.pass = pass;
-        logger.info("UserAlteration: pass set to "+ pass);
+        logger.info("UserUpdate: pass set to "+ pass);
     }
 
     public String getType() {
@@ -85,6 +85,6 @@ public class UserAlteration {
 
     public void setType(String type) {
         this.type = type;
-        logger.info("UserAlteration: type set to "+ type);
+        logger.info("UserUpdate: type set to "+ type);
     }
 }
