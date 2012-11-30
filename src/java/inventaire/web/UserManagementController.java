@@ -31,28 +31,24 @@ public class UserManagementController extends MultiActionController {
             throws Exception{
         Map<String, Object> model = new HashMap<String, Object>();
         
-        List<User> users = getAllUsers();
+        List<User> users = listUsers();
         model.put("users", users);
         
-        fillServices();
+        services = new HashMap<String, Object>();
+        services.put("userupdate", new UserUpdate());
+        services.put("useradd", new UserAdd());
+        services.put("userfind", new UserFind());
         model.put("userTypes", User.getUserTypes());
         
         logger.info("UserManagementController: returning the user management view");
         return new ModelAndView("usermanagement", model).addAllObjects(services);
     }
     
-    private List<User> getAllUsers()
+    private List<User> listUsers()
             throws Exception {
         logger.info("UserManagementController: getting all users in the database");
         List<User> users = userManager.getUsers();
         return users;
-    }
-    
-    private void fillServices(){
-        services = new HashMap<String, Object>();
-        services.put("userupdate", new UserUpdate());
-        services.put("useradd", new UserAdd());
-        services.put("userfind", new UserFind());
     }
     
     public ModelAndView updateUser(HttpServletRequest request, HttpServletResponse response, UserUpdate userUpdate)
