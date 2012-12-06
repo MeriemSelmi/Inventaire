@@ -8,7 +8,7 @@
     <body>
         <fieldset>
             <legend>Welcome</legend>
-            <a href="<c:url value="productmanagement.htm"/>">Product manager</a><br>
+            <a href="<c:url value="/product/productmanagement.htm"/>">Product manager</a><br>
             <a href="<c:url value="/user/usermanagement.htm"/>">User manager</a>
         </fieldset>
     </body>

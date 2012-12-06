@@ -13,17 +13,17 @@ import org.springframework.jdbc.core.simple.SimpleJdbcDaoSupport;
 public class JdbcProductDao extends SimpleJdbcDaoSupport implements ProductDao {
 
     protected final Log logger = LogFactory.getLog(getClass());
-    private static final String ADD_REQUEST = "INSERT INTO ROOT.PRODUCTS (\"name\", \"description\", \"quantity\", \"price\", \"supplier\") VALUES (?,?,?,?,?);";
-    private static final String UPDATE_REQUEST = "UPDATE ROOT.PRODUCTS SET \"name\"=? , \"description\"=? , \"quantity\"=? , \"price\"=? , \"supplier\"=? WHERE \"id\"=?;";
+    private static final String ADD_REQUEST = "INSERT INTO ROOT.PRODUCTS (\"name\", \"description\", \"quantity\", \"price\", \"supplier\") VALUES (?,?,?,?,?)";
+    private static final String UPDATE_REQUEST = "UPDATE ROOT.PRODUCTS SET \"name\"=? , \"description\"=? , \"quantity\"=? , \"price\"=? , \"supplier\"=? WHERE \"id\"=?";
     private static final String DELETE_REQUEST = "DELETE FROM ROOT.PRODUCTS WHERE \"id\"=?;";
-    private static final String FIND_REQUEST = "SELECT * FROM ROOT.PRODUCTS WHERE \"name\" LIKE ? OR \"description\" LIKE ? OR \"quantity\" LIKE ? OR \"price\" LIKE ? OR \"supplier\" LIKE ? ;";
-    private static final String LIST_REQUEST = "SELECT id,description,price FROM ROOT.PRODUCTS;";
+    private static final String FIND_REQUEST = "SELECT * FROM ROOT.PRODUCTS WHERE \"name\" LIKE ? OR \"description\" LIKE ? OR \"quantity\" LIKE ? OR \"price\" LIKE ? OR \"supplier\" LIKE ? ";
+    private static final String LIST_REQUEST = "SELECT * FROM ROOT.PRODUCTS";
 
 
     @Override
     public List<Product> list() {
         logger.info("Getting products!");
-        List<Product> products = getSimpleJdbcTemplate().query(LIST_REQUEST,new ProductMapper());
+        List<Product> products = getSimpleJdbcTemplate().query(LIST_REQUEST,new JdbcProductDao.ProductMapper());
         return products;
         
     }

@@ -13,7 +13,7 @@ http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
     <bean name="/hello.htm" class="inventaire.web.InventoryController">
         <property name="productManager" ref="productManager"/>
     </bean>
-    
+
     <bean name="/priceincrease.htm"
           class="inventaire.web.PriceIncreaseFormController">
         <property name="sessionForm" value="true"/>
@@ -26,6 +26,7 @@ http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
         <property name="successView" value="hello.htm"/>
         <property name="productManager" ref="productManager"/>
     </bean>
+
     
     
     
@@ -85,6 +86,8 @@ http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
     
     
     
+    
+    
     <bean id="WelcomeController" class="inventaire.web.WelcomeController" />
     
     <bean id="UserManagementController" class="inventaire.web.UserManagementController" >
@@ -92,6 +95,13 @@ http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
         <property name="userManager" ref="userManager"/>
     </bean>
 
+
+    <bean id="ProductManagementController" class="inventaire.web.ProductManagementController" >
+        <property name="methodNameResolver" ref="productResolver" />
+        <property name="productManager" ref="productManager" />
+    </bean>
+    
+    
     <bean id="userResolver"
           class="org.springframework.web.servlet.mvc.multiaction.PropertiesMethodNameResolver"
           lazy-init="default">
