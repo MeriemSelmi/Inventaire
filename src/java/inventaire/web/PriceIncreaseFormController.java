@@ -25,7 +25,7 @@ public class PriceIncreaseFormController extends SimpleFormController {
             throws ServletException {
         int increase = ((PriceIncrease) command).getPercentage();
         logger.info("Increasing prices by " + increase + "%.");
-        productManager.increasePrice(increase);
+        //productManager.increasePrice(increase);
         logger.info("returning from PriceIncreaseForm view to " + getSuccessView());
         return new ModelAndView(new RedirectView(getSuccessView()));
     }

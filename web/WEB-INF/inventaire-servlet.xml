@@ -4,8 +4,7 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
 http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
        http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.1.xsd" xmlns:util="http://www.springframework.org/schema/util">
-    <!-- the application context definition for the springapp DispatcherServlet -->
-    
+    <!-- the application context definition for the springapp DispatcherServlet -->  
     <bean id="messageSource"
           class="org.springframework.context.support.ResourceBundleMessageSource">
         <property name="basename" value="messages"/>
@@ -65,9 +64,12 @@ http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
                 <entry key="/authentication.htm" value="AuthenticationFormController"/>
                 <entry key="/welcome.htm" value="WelcomeController"/>
                 <entry key="/user/*.htm" value="UserManagementController"/>
+                <entry key="/product/*.htm" value="ProductManagementController" />
             </map>
         </property>
     </bean>
+
+
 
     <bean id="AuthenticationFormController" class="inventaire.web.AuthenticationFormController" > 
         <property name="sessionForm" value="true"/>
@@ -104,4 +106,20 @@ http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
         </property>
     </bean>
     
+    
+    <bean id="productResolver"
+           class="org.springframework.web.servlet.mvc.multiaction.PropertiesMethodNameResolver"
+          lazy-init="default">
+        <property name="mappings">
+             <props>
+                <prop key="/product/productmanagement.htm">manageProducts</prop>
+                <prop key="/product/productupdate.htm">updateProduct</prop>
+                <prop key="/product/productadd.htm">addProduct</prop>
+                <prop key="/product/productdelete.htm">deleteProduct</prop>
+                <prop key="/product/productfind.htm">findProducts</prop>
+            </props>
+        </property>
+            
+    </bean>
+               
 </beans>

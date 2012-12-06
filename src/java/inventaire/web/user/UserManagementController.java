@@ -1,4 +1,4 @@
-package inventaire.web;
+package inventaire.web.user;
 
 import inventaire.domain.User;
 import inventaire.service.UserAdd;
