@@ -10,3 +10,13 @@ CREATE TABLE Root.USERS  (
     "type" VARCHAR(25) NOT NULL, 
     PRIMARY KEY ("login")
 );
+
+CREATE TABLE Root.PRODUCTS (
+    "id" INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
+    "name" VARCHAR(25) NOT NULL, 
+    "description" VARCHAR(25) NOT NULL, 
+    "quantity" VARCHAR(25), 
+    "price" VARCHAR(25), 
+    "supplier" VARCHAR(25), 
+    PRIMARY KEY ("id")
+);
