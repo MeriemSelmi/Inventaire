@@ -4,46 +4,13 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
 http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
        http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.1.xsd" xmlns:util="http://www.springframework.org/schema/util">
-    <!-- the application context definition for the springapp DispatcherServlet -->  
+
+    
+      
     <bean id="messageSource"
           class="org.springframework.context.support.ResourceBundleMessageSource">
         <property name="basename" value="messages"/>
     </bean>
-    
-    <bean name="/hello.htm" class="inventaire.web.InventoryController">
-        <property name="productManager" ref="productManager"/>
-    </bean>
-
-    <bean name="/priceincrease.htm"
-          class="inventaire.web.PriceIncreaseFormController">
-        <property name="sessionForm" value="true"/>
-        <property name="commandName" value="priceIncrease"/>
-        <property name="commandClass" value="inventaire.service.PriceIncrease"/>
-        <property name="validator">
-            <bean class="inventaire.service.PriceIncreaseValidator"/>
-        </property>
-        <property name="formView" value="priceincrease"/>
-        <property name="successView" value="hello.htm"/>
-        <property name="productManager" ref="productManager"/>
-    </bean>
-
-    
-    
-    
-    <bean name="/authentication.htm"
-          class="inventaire.web.AuthenticationFormController">
-        <property name="sessionForm" value="true"/>
-        <property name="commandName" value="authentication"/>
-        <property name="commandClass" value="inventaire.service.Authentication"/>
-        <property name="validator">
-            <bean class="inventaire.service.AuthenticationValidator"/>
-        </property>
-        <property name="formView" value="authentication"/>
-        <property name="successView" value="welcome.htm"/>
-        <property name="userManager" ref="userManager"/>
-    </bean>
-    
-    <bean name="/welcome.htm" class="inventaire.web.WelcomeController"/>
 
     <bean id="viewResolver"
           class="org.springframework.web.servlet.view.InternalResourceViewResolver">
@@ -53,10 +20,6 @@ http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
         <property name="prefix" value="/WEB-INF/jsp/"></property>
         <property name="suffix" value=".jsp"></property>
     </bean>
-    
-    
-    
-    
     
     <bean id="urlHandler"
           class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping" >
@@ -71,7 +34,6 @@ http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
     </bean>
 
 
-
     <bean id="AuthenticationFormController" class="inventaire.web.AuthenticationFormController" > 
         <property name="sessionForm" value="true"/>
         <property name="commandName" value="authentication"/>
@@ -84,17 +46,12 @@ http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
         <property name="userManager" ref="userManager"/>
     </bean>
     
-    
-    
-    
-    
     <bean id="WelcomeController" class="inventaire.web.WelcomeController" />
     
     <bean id="UserManagementController" class="inventaire.web.UserManagementController" >
         <property name="methodNameResolver" ref="userResolver" /> 
         <property name="userManager" ref="userManager"/>
     </bean>
-
 
     <bean id="ProductManagementController" class="inventaire.web.ProductManagementController" >
         <property name="methodNameResolver" ref="productResolver" />
