@@ -3,114 +3,149 @@ package inventaire.domain;
 import java.io.Serializable;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import javax.persistence.*;
 
-public class User implements Serializable{
+@Entity
+@Table(name = "USERS", schema = "ROOT", uniqueConstraints =
+@UniqueConstraint(columnNames = "LOGIN"))
+public class User implements Serializable {
 
-    private Integer id;
-    private String name;
+    public static final String USER_ROLE_ADMINISTRATOR = "Administrator";
+    public static final String USER_ROLE_STOREKEEPER = "Storekeeper";
+    public static final Map<String, String> USER_ROLES = new LinkedHashMap<String, String>() {{
+            put("", "");
+            put("Administrator", "Administrator");
+            put("Storekeeper", "Storekeeper");
+    }};
+    
+    private int id;
+    private String lastName;
     private String firstName;
-    private String mail;
+    private String email;
     private String telephone;
     private String address;
     private String login;
-    private String pass;
-    private String type;
-    static private Map<String,String> userTypes;
-    
-    public Integer getId() {
-        return id;
+    private String password;
+    private String role;
+
+    public User() {
     }
 
-    public void setId(Integer id) {
+    public User(int id, String lastName, String firstName, String login, String password, String role) {
+        this.id = id;
+        this.lastName = lastName;
+        this.firstName = firstName;
+        this.login = login;
+        this.password = password;
+        this.role = role;
+    }
+
+    public User(int id, String lastName, String firstName, String email, String telephone, String address, String login, String password, String role) {
+        this.id = id;
+        this.lastName = lastName;
+        this.firstName = firstName;
+        this.email = email;
+        this.telephone = telephone;
+        this.address = address;
+        this.login = login;
+        this.password = password;
+        this.role = role;
+    }
+
+    @Id
+    @Column(name = "ID", unique = true, nullable = false)
+    public int getId() {
+        return this.id;
+    }
+
+    public void setId(int id) {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    @Column(name = "LASTNAME", nullable = false, length = 25)
+    public String getLastName() {
+        return this.lastName;
     }
 
-    public void setName(String lname) {
-        this.name = lname;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
+    @Column(name = "FIRSTNAME", nullable = false, length = 25)
     public String getFirstName() {
-        return firstName;
+        return this.firstName;
     }
 
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
 
-    public String getMail() {
-        return mail;
+    @Column(name = "EMAIL", length = 25)
+    public String getEmail() {
+        return this.email;
     }
 
-    public void setMail(String mail) {
-        this.mail = mail;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
+    @Column(name = "TELEPHONE", length = 25)
     public String getTelephone() {
-        return telephone;
+        return this.telephone;
     }
 
     public void setTelephone(String telephone) {
         this.telephone = telephone;
     }
 
+    @Column(name = "ADDRESS", length = 25)
     public String getAddress() {
-        return address;
+        return this.address;
     }
 
     public void setAddress(String address) {
         this.address = address;
     }
 
+    @Column(name = "LOGIN", unique = true, nullable = false, length = 25)
     public String getLogin() {
-        return login;
+        return this.login;
     }
 
     public void setLogin(String login) {
         this.login = login;
     }
 
-    public String getPass() {
-        return pass;
+    @Column(name = "PASSWORD", nullable = false, length = 25)
+    public String getPassword() {
+        return this.password;
     }
 
-    public void setPass(String pass) {
-        this.pass = pass;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
-    public String getType() {
-        return type;
+    @Column(name = "ROLE", nullable = false, length = 25)
+    public String getRole() {
+        return this.role;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setRole(String role) {
+        this.role = role;
     }
 
-    public static Map <String,String> getUserTypes(){
-        if(userTypes == null) {
-            userTypes = new LinkedHashMap<String,String>();
-            userTypes.put("", "");
-            userTypes.put("Administrator", "Administrator");
-            userTypes.put("Storekeeper", "Storekeeper");
-        }
-        return userTypes;
-    }
     @Override
     public String toString() {
         StringBuffer buffer = new StringBuffer();
-        buffer.append("ID: " + id+ "\n");
-        buffer.append("Name: " + name + "\n");
-        buffer.append("Firstname: " + firstName+ "\n");
-        buffer.append("Mail: " + mail+ "\n");
-        buffer.append("Telephone: " + telephone+ "\n");
-        buffer.append("Adress: " + address+ "\n");
-        buffer.append("Login: " + login+ "\n");
-        buffer.append("Password: " + pass+ "\n");
-        buffer.append("Type: " + type+ "\n");
+        buffer.append("ID: " + id + "\n");
+        buffer.append("Name: " + lastName + "\n");
+        buffer.append("Firstname: " + firstName + "\n");
+        buffer.append("Mail: " + email + "\n");
+        buffer.append("Telephone: " + telephone + "\n");
+        buffer.append("Adress: " + address + "\n");
+        buffer.append("Login: " + login + "\n");
+        buffer.append("Password: " + password + "\n");
+        buffer.append("Role: " + role + "\n");
         return buffer.toString();
     }
-    
 }

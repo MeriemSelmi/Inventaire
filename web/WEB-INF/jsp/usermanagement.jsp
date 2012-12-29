@@ -20,13 +20,13 @@
             <div id="<c:out value='useradd'/>">
                 <form:form method="post" action="useradd.htm" commandName="useradd">    
                     <label>Name : </label>
-                    <form:input path="name"/><br>
+                    <form:input path="lastName"/><br>
 
                     <label>First Name : </label>
                     <form:input path="firstName"/><br>
 
                     <label>Mail : </label>
-                    <form:input path="mail"/><br>
+                    <form:input path="email"/><br>
 
                     <label>Telephone : </label>
                     <form:input path="telephone"/><br>
@@ -38,17 +38,17 @@
                     <form:input path="login"/><br>
 
                     <label>Password : </label>
-                    <form:input path="pass" /><br>
+                    <form:input path="password" /><br>
 
-                    <label>Type : </label>
-                    <form:select path="type" items="${userTypes}"/><br>
+                    <label>Role : </label>
+                    <form:select path="role" items="${userRoles}"/><br>
                     <input type="submit" value="add"/>
                 </form:form>
             </div>
                 
                 <div>
                 <c:forEach var="usersFound" items="${requestScope.usersFound}">
-                    <a href="">${usersFound.firstName} ${usersFound.name}</a><br>
+                    <a href="">${usersFound.firstName} ${usersFound.lastName}</a><br>
                 </c:forEach>
                 </div>
         </fieldset>
@@ -63,7 +63,7 @@
                         </td>
                         <td>
                             <a id="<c:out value='userinfo${user.id}'/>">
-                                <c:out value="${user.firstName} ${user.name}"/>
+                                <c:out value="${user.firstName} ${user.lastName}"/>
                             </a>
                         </td>
                         <td>
@@ -76,24 +76,24 @@
                         <td colspan="2">
                             <div id="<c:out value='userinfo${user.id}'/>">
                                 <p>
-                                    Email : ${user.mail}<br>
+                                    Email : ${user.email}<br>
                                     Telephone : ${user.telephone}<br>
                                     Address : ${user.address}<br>
                                     Login : ${user.login}<br>
-                                    Type : ${user.type}<br>
+                                    Role : ${user.role}<br>
                                 </p>
                             </div>
 
                             <div id="<c:out value='userupdate${user.id}'/>">
                                 <form:form method="post" action="userupdate.htm" commandName="userupdate">    
                                     <label>Name : </label>
-                                    <form:input path="name"/><br>
+                                    <form:input path="lastName"/><br>
 
                                     <label>First Name : </label>
                                     <form:input path="firstName"/><br>
 
                                     <label>Mail : </label>
-                                    <form:input path="mail"/><br>
+                                    <form:input path="email"/><br>
 
                                     <label>Telephone : </label>
                                     <form:input path="telephone"/><br>
@@ -105,10 +105,10 @@
                                     <form:input path="login"/><br>
 
                                     <label>Password : </label>
-                                    <form:input path="pass" /><br>
+                                    <form:input path="password" /><br>
 
-                                    <label>Type : </label>
-                                    <form:select path="type" items="${userTypes}"/><br>
+                                    <label>Role : </label>
+                                    <form:select path="role" items="${userTypes}"/><br>
 
                                     <input type="number" name="id" value="${user.id}" hidden="">
                                     <input type="submit" value="update"/>

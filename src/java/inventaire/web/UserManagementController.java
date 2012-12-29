@@ -38,7 +38,7 @@ public class UserManagementController extends MultiActionController {
         services.put("userupdate", new UserUpdate());
         services.put("useradd", new UserAdd());
         services.put("userfind", new UserFind());
-        model.put("userTypes", User.getUserTypes());
+        model.put("userRoles", User.USER_ROLES);
         
         logger.info("UserManagementController: returning the user management view");
         return new ModelAndView("usermanagement", model).addAllObjects(services);
@@ -54,31 +54,31 @@ public class UserManagementController extends MultiActionController {
     public ModelAndView updateUser(HttpServletRequest request, HttpServletResponse response, UserUpdate userUpdate)
             throws Exception {
         int id = Integer.parseInt(request.getParameter("id"));
-        String name= userUpdate.getName();
+        String name= userUpdate.getLastName();
         String firstName= userUpdate.getFirstName();
-        String mail= userUpdate.getMail();
+        String mail= userUpdate.getEmail();
         String telephone= userUpdate.getTelephone();
         String address= userUpdate.getAddress();
         String login= userUpdate.getLogin();
-        String pass= userUpdate.getPass();
-        String type= userUpdate.getType();
+        String password= userUpdate.getPassword();
+        String type= userUpdate.getRole();
         
         logger.info("UserManagementController: trying to update user");
-        userManager.update(id, name, firstName, mail, telephone, address, login, pass, type);
+        userManager.update(id, name, firstName, mail, telephone, address, login, password, type);
        
         return new ModelAndView(new RedirectView("usermanagement.htm"));
     }
     
     public ModelAndView addUser(HttpServletRequest request, HttpServletResponse response, UserAdd userAdd)
             throws Exception {
-        String name= userAdd.getName();
+        String name= userAdd.getLastName();
         String firstName= userAdd.getFirstName();
-        String mail= userAdd.getMail();
+        String mail= userAdd.getEmail();
         String telephone= userAdd.getTelephone();
         String address= userAdd.getAddress();
         String login= userAdd.getLogin();
-        String pass= userAdd.getPass();
-        String type= userAdd.getType();
+        String pass= userAdd.getPassword();
+        String type= userAdd.getRole();
         
         logger.info("UserManagementController: trying to add user");
         userManager.add(name, firstName, mail, telephone, address, login, pass, type);

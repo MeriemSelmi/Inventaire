@@ -84,14 +84,14 @@ public class JdbcUserDao extends SimpleJdbcDaoSupport implements UserDao {
             User user = new User();
 
             user.setId(rs.getInt("id"));
-            user.setName(rs.getString("name"));
+            user.setLastName(rs.getString("name"));
             user.setFirstName(rs.getString("firstname"));
             user.setAddress(rs.getString("address"));
             user.setLogin(rs.getString("login"));
-            user.setPass(rs.getString("password"));
-            user.setType(rs.getString("type"));
+            user.setPassword(rs.getString("password"));
+            user.setRole(rs.getString("type"));
             user.setTelephone(rs.getString("telephone"));
-            user.setMail(rs.getString("mail"));
+            user.setEmail(rs.getString("mail"));
 
             return user;
         }
