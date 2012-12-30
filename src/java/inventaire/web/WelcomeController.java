@@ -15,7 +15,7 @@ public class WelcomeController implements Controller{
     @Override
     public ModelAndView handleRequest(HttpServletRequest req, HttpServletResponse res) throws Exception {
         
-        logger.info("WelcomeController: returning authentication view");        
+        logger.info("WelcomeController: returning welcome view");        
  //       Map<String, Object> model = new HashMap<String, Object>();
  //       model.put("user", this.userManager.authentifier(req.getParameter("login"),req.getParameter("password")));
  //       return new ModelAndView("welcome", "model", model);

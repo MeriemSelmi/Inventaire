@@ -108,7 +108,7 @@
                                     <form:input path="password" /><br>
 
                                     <label>Role : </label>
-                                    <form:select path="role" items="${userTypes}"/><br>
+                                    <form:select path="role" items="${userRoles}"/><br>
 
                                     <input type="number" name="id" value="${user.id}" hidden="">
                                     <input type="submit" value="update"/>

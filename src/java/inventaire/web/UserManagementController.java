@@ -53,55 +53,76 @@ public class UserManagementController extends MultiActionController {
     
     public ModelAndView updateUser(HttpServletRequest request, HttpServletResponse response, UserUpdate userUpdate)
             throws Exception {
-        int id = Integer.parseInt(request.getParameter("id"));
-        String name= userUpdate.getLastName();
-        String firstName= userUpdate.getFirstName();
-        String mail= userUpdate.getEmail();
-        String telephone= userUpdate.getTelephone();
-        String address= userUpdate.getAddress();
-        String login= userUpdate.getLogin();
-        String password= userUpdate.getPassword();
-        String type= userUpdate.getRole();
+        User user = new User();
+        user.setId(Integer.parseInt(request.getParameter("id")));
+        user.setLastName(userUpdate.getLastName());
+        user.setFirstName( userUpdate.getFirstName());
+        user.setEmail( userUpdate.getEmail());
+        user.setTelephone(userUpdate.getTelephone());
+        user.setAddress(userUpdate.getAddress());
+        user.setLogin(userUpdate.getLogin());
+        user.setPassword(userUpdate.getPassword());
+        user.setRole(userUpdate.getRole());
         
         logger.info("UserManagementController: trying to update user");
-        userManager.update(id, name, firstName, mail, telephone, address, login, password, type);
-       
+        try{
+            userManager.update(user);
+        }catch(Exception e){
+            //login duplicated
+            return new ModelAndView(new InternalResourceView("usermanagement.htm"));
+        }
+        
         return new ModelAndView(new RedirectView("usermanagement.htm"));
     }
     
     public ModelAndView addUser(HttpServletRequest request, HttpServletResponse response, UserAdd userAdd)
             throws Exception {
-        String name= userAdd.getLastName();
-        String firstName= userAdd.getFirstName();
-        String mail= userAdd.getEmail();
-        String telephone= userAdd.getTelephone();
-        String address= userAdd.getAddress();
-        String login= userAdd.getLogin();
-        String pass= userAdd.getPassword();
-        String type= userAdd.getRole();
+        User user = new User();
+        user.setLastName(userAdd.getLastName());
+        user.setFirstName( userAdd.getFirstName());
+        user.setEmail( userAdd.getEmail());
+        user.setTelephone(userAdd.getTelephone());
+        user.setAddress(userAdd.getAddress());
+        user.setLogin(userAdd.getLogin());
+        user.setPassword(userAdd.getPassword());
+        user.setRole(userAdd.getRole());
         
         logger.info("UserManagementController: trying to add user");
-        userManager.add(name, firstName, mail, telephone, address, login, pass, type);
-       
+        try{
+            userManager.add(user);
+        }catch(Exception e){
+            return new ModelAndView(new InternalResourceView("usermanagement.htm"));
+            //login duplicated
+        }
+        
         return new ModelAndView(new RedirectView("usermanagement.htm"));
     }
     
     public ModelAndView deleteUser(HttpServletRequest request, HttpServletResponse response)
             throws Exception {
-        int id = Integer.parseInt(request.getParameter("id"));
+        User user = new User();
+        user.setId(Integer.parseInt(request.getParameter("id")));
+        
         logger.info("UserManagementController: trying to delete user");
-        userManager.delete(id);
+        userManager.delete(user);
+        
         return new ModelAndView(new RedirectView("usermanagement.htm"));
     }
     
     public ModelAndView findUsers(HttpServletRequest request, HttpServletResponse response, UserFind userfind){
         String keyword = userfind.getKeyword();
-        
+        List<User> usersFound;
         logger.info("UserManagementController: getting all users in the database corresponding to "+ keyword);
-        List<User> usersFound = userManager.findUsers(keyword);
+
+        try {
+            usersFound = userManager.findUsers(keyword);
+            logger.info("UserManagementController: returning the user management view");
+            request.setAttribute("usersFound", usersFound);
+        } catch (Exception ex) { 
+            //no users found
+            return new ModelAndView(new InternalResourceView("usermanagement.htm"));
+        }
         
-        logger.info("UserManagementController: returning the user management view");
-        request.setAttribute("usersFound", usersFound);
         return new ModelAndView(new InternalResourceView("usermanagement.htm"));
     }
     

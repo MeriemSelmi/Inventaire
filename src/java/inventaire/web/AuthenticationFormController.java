@@ -18,11 +18,11 @@ public class AuthenticationFormController extends SimpleFormController{
 
     public ModelAndView onSubmit(Object command) throws ServletException {
         String login = ((Authentication) command).getLogin();
-        String pass = ((Authentication) command).getPass();
+        String pass = ((Authentication) command).getPassword();
         
         logger.info("AuthenticationFormController: trying to authenticate with login="+login +" and password="+ pass);
         try {
-            User user = userManager.authenticate(login,pass);
+            User user = userManager.authenticate(login, pass);
             logger.info("AuthenticationFormController: authentication succeeded. Returning from authentication form view to " + getSuccessView());
             return new ModelAndView(new RedirectView(getSuccessView()));
             
@@ -36,7 +36,7 @@ public class AuthenticationFormController extends SimpleFormController{
     protected Object formBackingObject(HttpServletRequest request) throws ServletException {
         Authentication auth = new Authentication();
         auth.setLogin("");
-        auth.setPass("");
+        auth.setPassword("");
         return auth;
     }
 
