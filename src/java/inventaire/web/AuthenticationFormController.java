@@ -21,17 +21,15 @@ public class AuthenticationFormController extends SimpleFormController{
         String pass = ((Authentication) command).getPass();
         
         logger.info("AuthenticationFormController: trying to authenticate with login="+login +" and password="+ pass);
-        User user = userManager.authenticate(login,pass);
-        
-        if(user==null){
-            logger.info("AuthenticationFormController: authentication failed. Returning from authentication form view to " + getFormView());
-            return new ModelAndView(new RedirectView(getFormView().concat(".htm")));
-        }
-        else{
+        try {
+            User user = userManager.authenticate(login,pass);
             logger.info("AuthenticationFormController: authentication succeeded. Returning from authentication form view to " + getSuccessView());
             return new ModelAndView(new RedirectView(getSuccessView()));
-        }
-        
+            
+        } catch (Exception e) {
+            logger.info("AuthenticationFormController: authentication failed. Returning from authentication form view to " + getFormView());
+            return new ModelAndView(new RedirectView(getFormView().concat(".htm")));
+        }        
     }
 
     @Override
