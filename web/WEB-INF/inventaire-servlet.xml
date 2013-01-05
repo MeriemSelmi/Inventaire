@@ -69,6 +69,7 @@ http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
                 <prop key="/user/useradd.htm">addUser</prop>
                 <prop key="/user/userdelete.htm">deleteUser</prop>
                 <prop key="/user/userfind.htm">findUsers</prop>
+                <prop key="/user/logout.htm">logout</prop>
             </props>
         </property>
     </bean>

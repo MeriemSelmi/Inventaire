@@ -6,6 +6,7 @@
         <title><fmt:message key="title"/></title>
     </head>
     <body>
+        <%@ include file="/WEB-INF/jsp/header.jsp" %>
         <fieldset>
             <legend>Welcome</legend>
             <a href="<c:url value="/product/productmanagement.htm"/>">Product manager</a><br>

@@ -1,5 +1,6 @@
 package inventaire.service;
 
+import inventaire.domain.User;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -25,6 +26,13 @@ public class Authentication {
 
     public String getPassword() {
         return password;
+    }
+    
+    public User getUser(){
+        User user = new User();
+        user.setLogin(login);
+        user.setPassword(password);
+        return user;
     }
 
 }

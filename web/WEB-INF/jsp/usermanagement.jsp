@@ -9,7 +9,7 @@
     </head>
 
     <body>
-
+        <%@ include file="/WEB-INF/jsp/header.jsp" %>
         <fieldset>
             <legend>Actions</legend>
             <a id="<c:out value='useradd'/>">Add user</a>
