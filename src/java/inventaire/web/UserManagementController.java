@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.web.servlet.ModelAndView;
@@ -29,6 +30,9 @@ public class UserManagementController extends MultiActionController {
 
     public ModelAndView manageUsers(HttpServletRequest request, HttpServletResponse response)
             throws Exception {
+        if(hasInvalidSession(request))
+            return new ModelAndView(new RedirectView("../authentication.htm"));
+
         Map<String, Object> model = new HashMap<String, Object>();
 
         List<User> users = listUsers();
@@ -42,6 +46,7 @@ public class UserManagementController extends MultiActionController {
 
         logger.info("UserManagementController: returning the user management view");
         return new ModelAndView("usermanagement", model).addAllObjects(services);
+
     }
 
     private List<User> listUsers()
@@ -53,6 +58,9 @@ public class UserManagementController extends MultiActionController {
 
     public ModelAndView updateUser(HttpServletRequest request, HttpServletResponse response, UserUpdate userUpdate)
             throws Exception {
+        if(hasInvalidSession(request))
+            return new ModelAndView(new RedirectView("../authentication.htm"));
+        
         User user = new User();
         user.setId(Integer.parseInt(request.getParameter("id")));
         user.setLastName(userUpdate.getLastName());
@@ -77,6 +85,9 @@ public class UserManagementController extends MultiActionController {
 
     public ModelAndView addUser(HttpServletRequest request, HttpServletResponse response, UserAdd userAdd)
             throws Exception {
+        if(hasInvalidSession(request))
+            return new ModelAndView(new RedirectView("../authentication.htm"));
+        
         User user = new User();
         user.setLastName(userAdd.getLastName());
         user.setFirstName(userAdd.getFirstName());
@@ -100,6 +111,9 @@ public class UserManagementController extends MultiActionController {
 
     public ModelAndView deleteUser(HttpServletRequest request, HttpServletResponse response)
             throws Exception {
+        if(hasInvalidSession(request))
+            return new ModelAndView(new RedirectView("../authentication.htm"));
+        
         User user = new User();
         user.setId(Integer.parseInt(request.getParameter("id")));
 
@@ -110,6 +124,9 @@ public class UserManagementController extends MultiActionController {
     }
 
     public ModelAndView findUsers(HttpServletRequest request, HttpServletResponse response, UserFind userfind) {
+        if(hasInvalidSession(request))
+            return new ModelAndView(new RedirectView("../authentication.htm"));
+        
         String keyword = userfind.getKeyword();
         List<User> usersFound;
         logger.info("UserManagementController: getting all users in the database corresponding to " + keyword);
@@ -135,5 +152,14 @@ public class UserManagementController extends MultiActionController {
 
     public void setUserManager(UserManager userManager) {
         this.userManager = userManager;
+    }
+
+    private boolean hasInvalidSession(HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        if (session.getAttribute("loggedUser") == null) {
+            return true;
+        }
+        else 
+            return false;
     }
 }
