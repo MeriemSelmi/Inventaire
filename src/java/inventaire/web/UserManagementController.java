@@ -150,6 +150,22 @@ public class UserManagementController extends MultiActionController {
         return new ModelAndView(new RedirectView("../authentication.htm"));
     }
 
+    public ModelAndView manageProfile(HttpServletRequest request, HttpServletResponse response)
+            throws Exception {
+        if(hasInvalidSession(request))
+            return new ModelAndView(new RedirectView("../authentication.htm"));
+        
+        Map<String, Object> model = new HashMap<String, Object>();
+        model.put("userRoles", User.USER_ROLES);
+        
+        services = new HashMap<String, Object>();
+        services.put("userupdate", new UserUpdate());
+        
+        logger.info("UserManagementController: returning the profile management view");
+        return new ModelAndView("userupdate", model).addAllObjects(services);
+
+    }
+    
     public void setUserManager(UserManager userManager) {
         this.userManager = userManager;
     }
