@@ -28,6 +28,7 @@ http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
                 <entry key="/authentication.htm" value="AuthenticationFormController"/>
                 <entry key="/welcome.htm" value="WelcomeController"/>
                 <entry key="/user/*.htm" value="UserManagementController"/>
+                <entry key="/profile/*.htm" value="ProfileManagementController"/>
                 <entry key="/product/*.htm" value="ProductManagementController" />
             </map>
         </property>
@@ -53,6 +54,11 @@ http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
         <property name="userManager" ref="userManager"/>
     </bean>
 
+    <bean id="ProfileManagementController" class="inventaire.web.ProfileManagementController" >
+        <property name="methodNameResolver" ref="profileResolver" /> 
+        <property name="userManager" ref="userManager"/>
+    </bean>
+    
     <bean id="ProductManagementController" class="inventaire.web.ProductManagementController" >
         <property name="methodNameResolver" ref="productResolver" />
         <property name="productManager" ref="productManager" />
@@ -68,19 +74,28 @@ http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
                 <prop key="/user/userupdate.htm">updateUser</prop>
                 <prop key="/user/useradd.htm">addUser</prop>
                 <prop key="/user/userdelete.htm">deleteUser</prop>
-                <prop key="/user/userfind.htm">findUsers</prop>
-                <prop key="/user/profilemanagement.htm">manageProfile</prop>
+                <prop key="/user/userfind.htm">findUsers</prop>             
                 <prop key="/user/logout.htm">logout</prop>
             </props>
         </property>
     </bean>
     
-    
-    <bean id="productResolver"
-           class="org.springframework.web.servlet.mvc.multiaction.PropertiesMethodNameResolver"
+    <bean id="profileResolver"
+          class="org.springframework.web.servlet.mvc.multiaction.PropertiesMethodNameResolver"
           lazy-init="default">
         <property name="mappings">
-             <props>
+            <props>
+                <prop key="/profile/profilemanagement.htm">manageProfile</prop>
+                <prop key="/profile/profileupdate.htm">updateProfile</prop>
+            </props>
+        </property>
+    </bean>
+    
+    <bean id="productResolver"
+          class="org.springframework.web.servlet.mvc.multiaction.PropertiesMethodNameResolver"
+          lazy-init="default">
+        <property name="mappings">
+            <props>
                 <prop key="/product/productmanagement.htm">manageProducts</prop>
                 <prop key="/product/productupdate.htm">updateProduct</prop>
                 <prop key="/product/productadd.htm">addProduct</prop>
