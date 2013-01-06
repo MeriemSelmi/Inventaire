@@ -61,16 +61,8 @@ public class UserManagementController extends MultiActionController {
         if(hasInvalidSession(request))
             return new ModelAndView(new RedirectView("../authentication.htm"));
         
-        User user = new User();
+        User user = userUpdate.getUser();
         user.setId(Integer.parseInt(request.getParameter("id")));
-        user.setLastName(userUpdate.getLastName());
-        user.setFirstName(userUpdate.getFirstName());
-        user.setEmail(userUpdate.getEmail());
-        user.setTelephone(userUpdate.getTelephone());
-        user.setAddress(userUpdate.getAddress());
-        user.setLogin(userUpdate.getLogin());
-        user.setPassword(userUpdate.getPassword());
-        user.setRole(userUpdate.getRole());
 
         logger.info("UserManagementController: trying to update user");
         try {
@@ -88,16 +80,8 @@ public class UserManagementController extends MultiActionController {
         if(hasInvalidSession(request))
             return new ModelAndView(new RedirectView("../authentication.htm"));
         
-        User user = new User();
-        user.setLastName(userAdd.getLastName());
-        user.setFirstName(userAdd.getFirstName());
-        user.setEmail(userAdd.getEmail());
-        user.setTelephone(userAdd.getTelephone());
-        user.setAddress(userAdd.getAddress());
-        user.setLogin(userAdd.getLogin());
-        user.setPassword(userAdd.getPassword());
-        user.setRole(userAdd.getRole());
-
+        User user = userAdd.getUser();
+        
         logger.info("UserManagementController: trying to add user");
         try {
             userManager.add(user);

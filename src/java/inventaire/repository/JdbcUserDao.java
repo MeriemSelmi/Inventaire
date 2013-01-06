@@ -18,21 +18,22 @@ public class JdbcUserDao implements UserDao{
     private Query query;
     
     @Override
-    public User authenticate(String login, String password) throws Exception{
+    public User authenticate(User user) throws Exception{
         logger.info("JdbcUserDao: Authenticating...");
         session = HibernateUtil.getSessionFactory().getCurrentSession();
         
         session.beginTransaction();
         query = session.createQuery("FROM User WHERE login=:login AND password=:password")
-                .setParameter("login", login)
-                .setParameter("password", password);
-        User user = (User) query.uniqueResult();
+                .setParameter("login", user.getLogin())
+                .setParameter("password", user.getPassword());
+        user=null;
+        user = (User) query.uniqueResult();
         session.getTransaction().commit();
         
         if(user != null)
             return user;
         else
-            throw new Exception("JdbcUserDao: Authenticating failed. No such user with login="+login+" and password="+password);
+            throw new Exception("JdbcUserDao: Authenticating failed. No such user with login="+user.getLogin()+" and password="+user.getPassword());
     }
 
     @Override

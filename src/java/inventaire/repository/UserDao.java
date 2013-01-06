@@ -9,7 +9,7 @@ import java.util.List;
  */
 public interface UserDao {
     
-    public User authenticate(String login,String password) throws Exception;
+    public User authenticate(User user) throws Exception;
     public List<User> getUsers() throws Exception;
     public User getUserById(int id);
     public void update(User user) throws Exception;

@@ -8,7 +8,7 @@ public interface UserManager extends Serializable {
 
 
     public List<User> getUsers() throws Exception;
-    public  User authenticate(String login,String password) throws Exception;
+    public  User authenticate(User user) throws Exception;
     public void update(User user) throws Exception;
     public void add(User user) throws Exception;
     public void delete(User user) throws Exception;

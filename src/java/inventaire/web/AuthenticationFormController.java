@@ -21,12 +21,11 @@ public class AuthenticationFormController extends SimpleFormController {
     @Override
     public ModelAndView onSubmit(HttpServletRequest request, HttpServletResponse response,
             Object command, BindException errors) throws ServletException {
-        String login = ((Authentication) command).getLogin();
-        String pass = ((Authentication) command).getPassword();
+        User user = ((Authentication) command).getUser();
 
-        logger.info("AuthenticationFormController: trying to authenticate with login=" + login + " and password=" + pass);
+        logger.info("AuthenticationFormController: trying to authenticate with login=" + user.getLogin() + " and password=" + user.getPassword());
         try {
-            User user = userManager.authenticate(login, pass);
+            user = userManager.authenticate(user);
             request.getSession(true).setAttribute("loggedUser", user);
             logger.info("AuthenticationFormController: authentication succeeded. Returning from authentication form view to " + getSuccessView());
             return new ModelAndView(new RedirectView(getSuccessView()));

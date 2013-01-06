@@ -1,5 +1,6 @@
 package inventaire.service;
 
+import inventaire.domain.User;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -86,5 +87,9 @@ public class UserAdd {
     public void setRole(String role) {
         this.role = role;
         logger.info("UserAdd: role set to "+ role);
+    }
+    
+    public User getUser(){
+        return new User(-1, lastName, firstName, email, telephone, address, login, password, role);
     }
 }

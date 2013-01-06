@@ -15,8 +15,8 @@ public class SimpleUserManager implements UserManager {
     }
 
     @Override
-    public User authenticate(String login, String password) throws Exception {
-        return userDao.authenticate(login, password);
+    public User authenticate(User user) throws Exception {
+        return userDao.authenticate(user);
     }
 
     @Override
