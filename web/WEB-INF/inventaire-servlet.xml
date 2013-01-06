@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans
-http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
-       http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.1.xsd" xmlns:util="http://www.springframework.org/schema/util">
+       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+       http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.1.xsd
+       http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd" >
 
     
       
@@ -30,11 +32,12 @@ http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
                 <entry key="/user/*.htm" value="UserManagementController"/>
                 <entry key="/profile/*.htm" value="ProfileManagementController"/>
                 <entry key="/product/*.htm" value="ProductManagementController" />
+                <entry key="/security.htm" value="SecurityController" />
             </map>
         </property>
     </bean>
-
-
+    
+    
     <bean id="AuthenticationFormController" class="inventaire.web.AuthenticationFormController" > 
         <property name="sessionForm" value="true"/>
         <property name="commandName" value="authentication"/>
@@ -58,6 +61,8 @@ http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
         <property name="methodNameResolver" ref="profileResolver" /> 
         <property name="userManager" ref="userManager"/>
     </bean>
+    
+    <bean id="SecurityController" class="inventaire.web.SecurityController" />
     
     <bean id="ProductManagementController" class="inventaire.web.ProductManagementController" >
         <property name="methodNameResolver" ref="productResolver" />
@@ -105,5 +110,16 @@ http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
         </property>
             
     </bean>
+    
+     <mvc:interceptors>
+         <mvc:interceptor>
+             <mvc:mapping path="/user/*"/>
+             <bean class="inventaire.web.SecurityInterceptor" />
+         </mvc:interceptor>
+         <mvc:interceptor>
+             <mvc:mapping path="/welcome.htm"/>
+             <bean class="inventaire.web.SessionInterceptor" />
+         </mvc:interceptor>
+    </mvc:interceptors> 
                
 </beans>
