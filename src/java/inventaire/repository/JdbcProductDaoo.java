@@ -15,27 +15,29 @@ public class JdbcProductDaoo implements ProductDao{
 
     @Override
     public List<Product> list() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return null;
+//        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
     public void add(Product p) {
-        throw new UnsupportedOperationException("Not supported yet.");
+//        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
     public void delete(int id) {
-        throw new UnsupportedOperationException("Not supported yet.");
+//        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
     public void update(int id, String name, String description, int quantity, float price, String supplier) {
-        throw new UnsupportedOperationException("Not supported yet.");
+//        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
     public Product find(String critere) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return null;
+//      throw new UnsupportedOperationException("Not supported yet.");
     }
     
 }
