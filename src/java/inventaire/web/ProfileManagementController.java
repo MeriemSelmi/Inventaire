@@ -37,16 +37,8 @@ public class ProfileManagementController extends MultiActionController{
     public ModelAndView updateProfile(HttpServletRequest request, HttpServletResponse response, UserUpdate userUpdate)
             throws Exception {
         
-        User user = new User();
+        User user = userUpdate.getUser();
         user.setId(Integer.parseInt(request.getParameter("id")));
-        user.setLastName(userUpdate.getLastName());
-        user.setFirstName(userUpdate.getFirstName());
-        user.setEmail(userUpdate.getEmail());
-        user.setTelephone(userUpdate.getTelephone());
-        user.setAddress(userUpdate.getAddress());
-        user.setLogin(userUpdate.getLogin());
-        user.setPassword(userUpdate.getPassword());
-        user.setRole(userUpdate.getRole());
 
         logger.info("ProfileManagementController: trying to update user");
         try {
@@ -58,6 +50,12 @@ public class ProfileManagementController extends MultiActionController{
         }
 
         return new ModelAndView(new RedirectView("profilemanagement.htm"));
+    }
+
+    public ModelAndView logout(HttpServletRequest request, HttpServletResponse response)
+            throws Exception {
+        request.getSession().invalidate();
+        return new ModelAndView(new RedirectView("/authentication.htm", true));
     }
     
     public void setUserManager(UserManager userManager) {

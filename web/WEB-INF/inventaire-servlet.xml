@@ -80,7 +80,6 @@
                 <prop key="/user/useradd.htm">addUser</prop>
                 <prop key="/user/userdelete.htm">deleteUser</prop>
                 <prop key="/user/userfind.htm">findUsers</prop>             
-                <prop key="/user/logout.htm">logout</prop>
             </props>
         </property>
     </bean>
@@ -92,6 +91,7 @@
             <props>
                 <prop key="/profile/profilemanagement.htm">manageProfile</prop>
                 <prop key="/profile/profileupdate.htm">updateProfile</prop>
+                <prop key="/profile/logout.htm">logout</prop>
             </props>
         </property>
     </bean>
@@ -111,15 +111,18 @@
             
     </bean>
     
-     <mvc:interceptors>
-         <mvc:interceptor>
-             <mvc:mapping path="/user/*"/>
-             <bean class="inventaire.web.SecurityInterceptor" />
-         </mvc:interceptor>
-         <mvc:interceptor>
-             <mvc:mapping path="/welcome.htm"/>
-             <bean class="inventaire.web.SessionInterceptor" />
-         </mvc:interceptor>
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/welcome.htm"/>
+            <mvc:mapping path="/user/*"/>
+            <mvc:mapping path="/product/*"/>
+            <mvc:mapping path="/profile/*"/>
+            <bean class="inventaire.web.SessionInterceptor" />
+        </mvc:interceptor>
+        <mvc:interceptor>
+            <mvc:mapping path="/user/*"/>
+            <bean class="inventaire.web.SecurityInterceptor" />
+        </mvc:interceptor>
     </mvc:interceptors> 
                
 </beans>

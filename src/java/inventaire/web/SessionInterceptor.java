@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package inventaire.web;
 
 import inventaire.domain.User;
@@ -19,7 +15,7 @@ public class SessionInterceptor extends HandlerInterceptorAdapter{
         User user = (User) request.getSession().getAttribute("loggedUser");
         if(user!=null)
             return true;
-        response.sendRedirect("security.htm");
+        request.getRequestDispatcher("/security.htm").forward(request, response);
         return false;
     }
 }

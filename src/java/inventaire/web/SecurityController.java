@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package inventaire.web;
 
 import javax.servlet.http.HttpServletRequest;
@@ -18,7 +14,7 @@ public class SecurityController implements Controller{
 
     @Override
     public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        return new ModelAndView(new RedirectView("authentication.htm"));
+        return new ModelAndView(new RedirectView("/authentication.htm", true));
     }
     
 }
