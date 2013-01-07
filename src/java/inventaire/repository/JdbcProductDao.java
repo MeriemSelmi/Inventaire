@@ -24,10 +24,10 @@ public class JdbcProductDao extends SimpleJdbcDaoSupport implements ProductDao {
     public List<Product> list() {
         logger.info("Getting products!");
         List<Product> products = getSimpleJdbcTemplate().query(LIST_REQUEST,new JdbcProductDao.ProductMapper());
+      
         return products;
         
     }
-
     @Override
     public void add(Product p) {
         logger.info("Adding a product!");

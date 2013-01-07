@@ -47,7 +47,9 @@ public class ProductManagementController extends MultiActionController {
     public ModelAndView manageProducts(HttpServletRequest request, HttpServletResponse response)throws Exception{
         logger.info("ProductManagementController: returning list products view");   
         Map<String, Object> model = new HashMap<String, Object>();
-        model.put("products",this.listProducts());
+        List<Product> products =  this.listProducts();
+        model.put("products",products);
+        
         return new ModelAndView("productmanagement", "model", model);       
     }
     
