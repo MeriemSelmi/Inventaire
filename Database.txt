@@ -20,3 +20,31 @@ CREATE TABLE Root.PRODUCTS (
     "supplier" VARCHAR(25), 
     PRIMARY KEY ("id")
 );
+
+=======================================================================================
+Database : Inventory
+user : root
+pass : root
+default schema ROOT
+
+CREATE TABLE Root.USERS  (
+    "ID" INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
+    "LASTNAME" VARCHAR(25) NOT NULL, 
+    "FIRSTNAME" VARCHAR(25) NOT NULL, 
+    "EMAIL" VARCHAR(25), 
+    "TELEPHONE" VARCHAR(25), 
+    "ADDRESS" VARCHAR(25), 
+    "LOGIN" VARCHAR(25) NOT NULL UNIQUE, 
+    "PASSWORD" VARCHAR(25) NOT NULL, 
+    "ROLE" VARCHAR(25) NOT NULL, 
+    PRIMARY KEY ("ID")
+);
+
+INSERT INTO ROOT.USERS ("LASTNAME", "FIRSTNAME", "EMAIL", "TELEPHONE", "ADDRESS", "LOGIN", "PASSWORD", "ROLE") VALUES ('Gudmundsdottir', 'Bjork', 'bjork@bjork.com', '509874623', 'Reykjavik, Islande', 'bjork', 'bjork', 'Administrator');
+INSERT INTO ROOT.USERS ("LASTNAME", "FIRSTNAME", "EMAIL", "TELEPHONE", "ADDRESS", "LOGIN", "PASSWORD", "ROLE") VALUES ('Affleck', 'Ben', 'ben@affleck.com', '2345678', 'Los Angles, USA', 'ben', 'ben', 'Administrator');
+INSERT INTO ROOT.USERS ("LASTNAME", "FIRSTNAME", "EMAIL", "TELEPHONE", "ADDRESS", "LOGIN", "PASSWORD", "ROLE") VALUES ('Allen', 'Woody', 'woody@allen.com', '55691343', 'New York, USA', 'woody', 'woody', 'Storekeeper');
+INSERT INTO ROOT.USERS ("LASTNAME", "FIRSTNAME", "EMAIL", "TELEPHONE", "ADDRESS", "LOGIN", "PASSWORD", "ROLE") VALUES ('Damon', 'Matt', 'matt@damon.com', '2092357', 'Boston, USA', 'matt', 'matt', 'Storekeeper');
+INSERT INTO ROOT.USERS ("LASTNAME", "FIRSTNAME", "EMAIL", "TELEPHONE", "ADDRESS", "LOGIN", "PASSWORD", "ROLE") VALUES ('Bloom', 'Orlando', 'orlondo@bloom.com', '90556123', 'Canterbury, UK', 'bloom', 'bloom', 'Storekeeper');
+INSERT INTO ROOT.USERS ("LASTNAME", "FIRSTNAME", "EMAIL", "TELEPHONE", "ADDRESS", "LOGIN", "PASSWORD", "ROLE") VALUES ('Neeson', 'Liam', 'liam@neeson.com', '2932485', 'Ballymena, Irlande', 'liam', 'liam', 'Storekeeper');
+INSERT INTO ROOT.USERS ("LASTNAME", "FIRSTNAME", "EMAIL", "TELEPHONE", "ADDRESS", "LOGIN", "PASSWORD", "ROLE") VALUES ('Black', 'Jack', 'jack@black.com', '123', 'Miami, USA', 'jack', 'jack', 'Storekeeper');
+

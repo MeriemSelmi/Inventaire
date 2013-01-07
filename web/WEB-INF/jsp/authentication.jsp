@@ -24,8 +24,8 @@
                 <form:errors path="login" cssClass="error"/><br>
 
                 <label>Password : </label>
-                <form:input path="pass"/>
-                <form:errors path="pass" cssClass="error"/><br>
+                <form:input path="password"/>
+                <form:errors path="password" cssClass="error"/><br>
 
                 <input type="submit" value="Authenticate" class="sansLabel">
                 <input type="reset" value="Reset">

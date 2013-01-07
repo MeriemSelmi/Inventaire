@@ -1,28 +1,29 @@
 package inventaire.service;
 
+import inventaire.domain.User;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 
 public class UserAdd {
     protected final Log logger = LogFactory.getLog(getClass());
-    private String name;
+    private String lastName;
     private String firstName;
-    private String mail;
+    private String email;
     private String telephone;
     private String address;
     private String login;
-    private String pass;
-    private String type;
+    private String password;
+    private String role;
 
     
-    public String getName() {
-        return name;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setName(String lname) {
-        this.name = lname;
-        logger.info("UserAdd: name set to "+ name);
+    public void setLastName(String lname) {
+        this.lastName = lname;
+        logger.info("UserAdd: name set to "+ lastName);
     }
 
     public String getFirstName() {
@@ -34,12 +35,12 @@ public class UserAdd {
         logger.info("UserAdd: first name set to "+ firstName);
     }
 
-    public String getMail() {
-        return mail;
+    public String getEmail() {
+        return email;
     }
 
-    public void setMail(String mail) {
-        this.mail = mail;
+    public void setEmail(String mail) {
+        this.email = mail;
         logger.info("UserAdd: mail set to "+ mail);
     }
 
@@ -70,21 +71,25 @@ public class UserAdd {
         logger.info("UserAdd: login set to "+ login);
     }
 
-    public String getPass() {
-        return pass;
+    public String getPassword() {
+        return password;
     }
 
-    public void setPass(String pass) {
-        this.pass = pass;
-        logger.info("UserAdd: pass set to "+ pass);
+    public void setPassword(String password) {
+        this.password = password;
+        logger.info("UserAdd: password set to "+ password);
     }
 
-    public String getType() {
-        return type;
+    public String getRole() {
+        return role;
     }
 
-    public void setType(String type) {
-        this.type = type;
-        logger.info("UserAdd: type set to "+ type);
+    public void setRole(String role) {
+        this.role = role;
+        logger.info("UserAdd: role set to "+ role);
+    }
+    
+    public User getUser(){
+        return new User(-1, lastName, firstName, email, telephone, address, login, password, role);
     }
 }

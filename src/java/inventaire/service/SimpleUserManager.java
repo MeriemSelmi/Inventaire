@@ -2,42 +2,61 @@ package inventaire.service;
 
 import inventaire.domain.User;
 import inventaire.repository.UserDao;
+import java.lang.reflect.Method;
 import java.util.List;
 
 public class SimpleUserManager implements UserManager {
-    
+
     private UserDao userDao;
-    
+
     @Override
-    public List<User> getUsers() {
+    public List<User> getUsers() throws Exception {
         return userDao.getUsers();
     }
 
     @Override
-    public User authenticate(String login,String pass) {
-        return userDao.authenticate(login,pass) ;
+    public User authenticate(User user) throws Exception {
+        return userDao.authenticate(user);
     }
 
     @Override
-    public void update(int id, String name, String firstName, String mail, String telephone, String address, String login, String pass, String type) {
-        userDao.update( id, name, firstName, mail, telephone, address, login, pass, type);
+    public void update(User user) throws Exception {
+        User oldUser = userDao.getUserById(user.getId());
+        setUserEmptyFields(user, oldUser);
+        userDao.update(user);
+    }
+
+    private void setUserEmptyFields(User user, User oldUser){
+        String[] fields = {"LastName", "FirstName", "Address", "Email", "Telephone", "Login", "Password", "Role"};
+        try {
+        for (String field : fields) {
+            Method getter = User.class.getMethod("get" + field);
+            Method setter = User.class.getMethod("set" + field, String.class);
+            String oldValue = (String) getter.invoke(oldUser);
+            String newValue = (String) getter.invoke(user);
+            if (newValue.trim().isEmpty()) {
+                setter.invoke(user, oldValue);
+            }
+        }
+        }catch(Exception e){}
     }
 
     @Override
-    public void add(String name, String firstName, String mail, String telephone, String address, String login, String pass, String type) {
-        userDao.add(name, firstName, mail, telephone, address, login, pass, type);
+    public void add(User user) throws Exception {
+        userDao.add(user);
     }
 
     @Override
-    public void delete(int id) {
-        userDao.delete(id);
+    public void delete(User user) throws Exception {
+        userDao.delete(user);
     }
-    
-    public List<User> findUsers(String keyword){
+
+    @Override
+    public List<User> findUsers(String keyword) throws Exception {
         return userDao.findUsers(keyword);
     }
 
-    public void setUserDao(UserDao userDao) {
+    public void setUserDao(UserDao userDao) throws Exception {
         this.userDao = userDao;
     }
 }

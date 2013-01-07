@@ -19,16 +19,16 @@ public class AuthenticationValidator implements Validator {
         Authentication auth = (Authentication) o;
         if (auth == null) {
             errors.rejectValue("login", "error.not-specified", new Object[]{"Login"}, "Value required.");
-            errors.rejectValue("pass", "error.not-specified",new Object[]{"Password"}, "Value required.");
+            errors.rejectValue("password", "error.not-specified",new Object[]{"Password"}, "Value required.");
         } 
         else {
-            logger.info("Authenticating with " + auth + ": " + auth.getLogin() + " " + auth.getPass());
+            logger.info("Authenticating with " + auth + ": " + auth.getLogin() + " " + auth.getPassword());
             
             if (auth.getLogin().trim().length() == 0) {
                 errors.rejectValue("login", "error.empty", new Object[]{"Login"}, "Login must be entered.");
             }
-            if (auth.getPass().trim().length() == 0) {
-                errors.rejectValue("pass", "error.empty",new Object[]{"Password"}, "Password must be entered.");
+            if (auth.getPassword().trim().length() == 0) {
+                errors.rejectValue("password", "error.empty",new Object[]{"Password"}, "Password must be entered.");
             }
 
         }

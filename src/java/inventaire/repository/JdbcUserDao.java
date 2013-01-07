@@ -1,99 +1,128 @@
 package inventaire.repository;
 
 import inventaire.domain.User;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.List;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.springframework.jdbc.core.simple.ParameterizedRowMapper;
-import org.springframework.jdbc.core.simple.SimpleJdbcDaoSupport;
+import org.hibernate.Query;
+import org.hibernate.Session;
 
-public class JdbcUserDao extends SimpleJdbcDaoSupport implements UserDao {
+/**
+ *
+ * @author Meriem
+ */
+public class JdbcUserDao implements UserDao{
 
     protected final Log logger = LogFactory.getLog(getClass());
-    private static final String SQL_AUTHENTICATE = "SELECT * FROM USERS WHERE \"login\"=? and \"password\"=?";
-    private static final String SQL_LIST = "SELECT * FROM USERS";
-    private static final String SQL_UPDATE1 = "UPDATE USERS SET \"";
-    private static final String SQL_UPDATE2 = "\"=? WHERE \"id\" =?";
-    private static final String SQL_ADD = "INSERT INTO ROOT.USERS (\"name\", \"firstname\", \"mail\", \"telephone\", \"address\", \"login\", \"password\", \"type\") VALUES (?,?,?,?,?,?,?,?)";
-    private static final String SQL_DELETE = "DELETE FROM USERS WHERE \"id\" = ?";
-    private static final String SQL_FIND = "SELECT * FROM USERS WHERE \"name\" LIKE ? OR \"firstname\" LIKE ? OR \"mail\" LIKE ? OR  \"telephone\" LIKE ? OR  \"address\" LIKE ? OR \"login\" LIKE ? OR \"password\" LIKE ? OR  \"type\" LIKE ?";
- 
+    private Session session;
+    private Query query;
+    
     @Override
-    public User authenticate(String login, String pass) {
+    public User authenticate(User user) throws Exception{
         logger.info("JdbcUserDao: Authenticating...");
-        List<User> users = getSimpleJdbcTemplate().query(SQL_AUTHENTICATE, new UserMapper(), login, pass);
-        for (User user : users) {
+        session = HibernateUtil.getSessionFactory().getCurrentSession();
+        
+        session.beginTransaction();
+        query = session.createQuery("FROM User WHERE login=:login AND password=:password")
+                .setParameter("login", user.getLogin())
+                .setParameter("password", user.getPassword());
+        user=null;
+        user = (User) query.uniqueResult();
+        session.getTransaction().commit();
+        
+        if(user != null)
             return user;
-        }
-        return null;
+        else
+            throw new Exception("JdbcUserDao: Authenticating failed. No such user with login="+user.getLogin()+" and password="+user.getPassword());
     }
 
     @Override
-    public List<User> getUsers() {
+    public List<User> getUsers() throws Exception{
         logger.info("JdbcUserDao: Getting list of all users");
-        List<User> users = getSimpleJdbcTemplate().query(SQL_LIST, new JdbcUserDao.UserMapper());
-        return users;
+        session = HibernateUtil.getSessionFactory().getCurrentSession();
+        
+        session.beginTransaction();
+        query = session.createQuery("FROM User");
+        List<User> users = query.list();
+        session.getTransaction().commit();
+        
+        if(users.size() > 0)
+            return users;
+        else
+            throw new Exception("JdbcUserDao: No users found in the database");
     }
 
     @Override
-    public void update(int id, String name, String firstName, String mail, String telephone, String address, String login, String pass, String type) {
+    public void update(User user) throws Exception{
         logger.info("JdbcUserDao: Updating user...");
-        updateColumnIfNotEmpty(id, "name", name);
-        updateColumnIfNotEmpty(id, "firstname", firstName);
-        updateColumnIfNotEmpty(id, "mail", mail);
-        updateColumnIfNotEmpty(id, "telephone", telephone);
-        updateColumnIfNotEmpty(id, "address", address);
-        updateColumnIfNotEmpty(id, "login", login);
-        updateColumnIfNotEmpty(id, "password", pass);
-        updateColumnIfNotEmpty(id, "type", type);
+        session = HibernateUtil.getSessionFactory().getCurrentSession();
+        
+        session.beginTransaction();
+        try{
+            session.update(user);
+            session.getTransaction().commit();
+        }catch(Exception e){
+            session.getTransaction().rollback();
+            session.clear();
+            throw new Exception("JdbcUserDao: The login already exists in the database");
+        }
     }
 
-    private void updateColumnIfNotEmpty(int id, String columnName, String columnValue) {
-        if (isNotEmptyParameter(columnValue)) {
-            String sqlUpdateFull = SQL_UPDATE1 + columnName + SQL_UPDATE2;
-            getSimpleJdbcTemplate().update(sqlUpdateFull, columnValue, id);
+    @Override
+    public void add(User user) throws Exception {
+        logger.info("JdbcUserDao: Adding user...");
+        session = HibernateUtil.getSessionFactory().getCurrentSession();
+        
+        session.beginTransaction();
+        try{
+            session.save(user);
+            session.getTransaction().commit();
+        }catch(Exception e){
+            session.getTransaction().rollback();
+            session.clear();
+            throw new Exception("JdbcUserDao: The login already exists in the database");
         }
+    }
+
+    @Override
+    public void delete(User user) throws Exception{
+        logger.info("JdbcUserDao: Deleting user...");
+        session = HibernateUtil.getSessionFactory().getCurrentSession();
+        
+        session.beginTransaction();
+        query = session.createQuery("DELETE User WHERE id=:id")
+                .setParameter("id", user.getId());
+        query.executeUpdate();
+        session.getTransaction().commit();
+    }
+
+    @Override
+    public List<User> findUsers(String keyword) throws Exception{
+        logger.info("JdbcUserDao: Getting list of all users corresponding to " + keyword);
+        session = HibernateUtil.getSessionFactory().getCurrentSession();
+        
+        session.beginTransaction();
+        query = session.createQuery("FROM User WHERE lastname LIKE :keyword OR firstname LIKE :keyword OR email LIKE :keyword OR login LIKE :keyword OR  role LIKE :keyword")
+                .setParameter("keyword", "%"+keyword+"%");
+        List<User> users = query.list();
+        session.getTransaction().commit();
+        if(users.size() > 0)
+            return users;
+        else
+            throw new Exception("JdbcUserDao: No users found in the database corresponding to " + keyword);
+    }
+
+    @Override
+    public User getUserById(int id) {
+        logger.info("JdbcUserDao: Getting user with id=" + id);
+        session = HibernateUtil.getSessionFactory().getCurrentSession();
+        
+        session.beginTransaction();
+        query = session.createQuery("FROM User WHERE id=:id")
+                .setParameter("id", id);
+        User user = (User) query.uniqueResult();
+        session.getTransaction().commit();
+        return user;
     }
     
-    private boolean isNotEmptyParameter(String param) {
-        return !(param == null || param.trim().length() == 0);
-    }
-
-    @Override
-    public void add(String name, String firstName, String mail, String telephone, String address, String login, String pass, String type) {
-        getSimpleJdbcTemplate().update(SQL_ADD, name, firstName, mail, telephone, address, login, pass, type);
-    }
-
-    @Override
-    public void delete(int id) {
-        getSimpleJdbcTemplate().update(SQL_DELETE, id);
-    }
-
-    @Override
-    public List<User> findUsers(String keyword) {
-        logger.info("JdbcUserDao: Getting list of all users corresponding to " + keyword);
-        List<User> users = getSimpleJdbcTemplate().query(SQL_FIND, new JdbcUserDao.UserMapper(), "%"+keyword+"%", "%"+keyword+"%", "%"+keyword+"%", "%"+keyword+"%", "%"+keyword+"%", "%"+keyword+"%", "%"+keyword+"%", "%"+keyword+"%");
-        return users;
-    }
-
-    private static class UserMapper implements ParameterizedRowMapper<User> {
-
-        public User mapRow(ResultSet rs, int rowNum) throws SQLException {
-            User user = new User();
-
-            user.setId(rs.getInt("id"));
-            user.setName(rs.getString("name"));
-            user.setFirstName(rs.getString("firstname"));
-            user.setAddress(rs.getString("address"));
-            user.setLogin(rs.getString("login"));
-            user.setPass(rs.getString("password"));
-            user.setType(rs.getString("type"));
-            user.setTelephone(rs.getString("telephone"));
-            user.setMail(rs.getString("mail"));
-
-            return user;
-        }
-    }
 }
