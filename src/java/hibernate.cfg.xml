@@ -7,11 +7,10 @@
     <property name="hibernate.connection.url">jdbc:derby://localhost:1527/Inventory</property>
     <property name="hibernate.connection.username">root</property>
     <property name="hibernate.connection.password">root</property>
-    
     <property name="hibernate.show_sql">true</property>
     <property name="hibernate.current_session_context_class">thread</property>
     <property name="hibernate.query.factory_class">org.hibernate.hql.ast.ASTQueryTranslatorFactory</property>
-    
     <mapping class="inventaire.domain.User"/>
+    <mapping class="inventaire.domain.Product"/>
   </session-factory>
 </hibernate-configuration>

@@ -10,6 +10,8 @@
 <html >
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <!--<link type="text/css" rel="stylesheet" href="<c:url value="/inc/style.css"/>" />-->
+        <link type="text/css" rel="stylesheet" href="<c:url value="/inc/jquery-ui.css"/>" />
         <title>Product | List</title>
     </head>
     <style>
@@ -56,7 +58,10 @@
                 </td>
             </tr>
         </table>
-        <script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js'></script>
+        
+        <script src="<c:url value="/inc/jquery.js"/>"></script>
+        <script src="<c:url value="/inc/jquery-ui.js"/>"></script>
+        <script src="<c:url value="/inc/inventaire-script.js"/>"></script>
         <script type="text/javascript">
 
            
