@@ -38,16 +38,24 @@
                   <div class="listProduct" >  
                       <table>
                           <tr>
-                              <td class="product">
-                            
+                              <td>
+                                  <div id="products">
                                     <c:forEach var="product" items='${requestScope.model.products}' >
                                       
-                                        <p> <c:out value="${product.name}"></c:out></p>
-                                        <button onclick="showing(${product.name})" >click!</button> 
-                                        <div id="${product.name}" hidden="hidden" >
-                                           FICHE DESCRIPTIVE
+                                        <h3> <c:out value="${product.name}"></c:out></h3>
+                                        
+                                        <div class="productDiv">
+                                            <ul type="none">
+                                                <li class="champ">Product:${product.name}</li>  
+                                                <li>Description:${product.description} </li>
+                                                 <li>Price:${product.price}</li>
+                                                <li>Quantity: ${product.quantity}</li>
+                                                
+                                            </ul>
+                                                <button> Update </button>
                                         </div>
                                     </c:forEach>   
+                                  </div>
                               </td>
                           </tr>
                       </table>
@@ -61,17 +69,7 @@
         
         <script src="<c:url value="/inc/jquery.js"/>"></script>
         <script src="<c:url value="/inc/jquery-ui.js"/>"></script>
-        <script src="<c:url value="/inc/inventaire-script.js"/>"></script>
-        <script type="text/javascript">
+        <script src="<c:url value="/inc/product-script.js"/>"></script>
 
-           
-            
-            function showing(s){
-                var id='#'+s;
-                $(id).show();   
-            };
-            
-                
-        </script>
     </body>
 </html>

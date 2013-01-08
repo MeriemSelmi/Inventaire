@@ -10,8 +10,10 @@ public class SimpleProductManager implements ProductManager {
     // private List<Product> products;
     private ProductDao productDao;
 
-    public List<Product> listProducts() {
-        return productDao.list();
+  
+    @Override
+    public List<Product> listProducts() throws Exception{
+        return productDao.list() ;
     }
     
 
