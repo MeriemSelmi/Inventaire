@@ -1,4 +1,4 @@
-package inventaire.web;
+package inventaire.security;
 
 import inventaire.domain.User;
 import javax.servlet.http.HttpServletRequest;

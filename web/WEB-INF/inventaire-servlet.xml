@@ -62,7 +62,7 @@
         <property name="userManager" ref="userManager"/>
     </bean>
     
-    <bean id="SecurityController" class="inventaire.web.SecurityController" />
+    <bean id="SecurityController" class="inventaire.security.SecurityController" />
     
     <bean id="ProductManagementController" class="inventaire.web.ProductManagementController" >
         <property name="methodNameResolver" ref="productResolver" />
@@ -117,11 +117,11 @@
             <mvc:mapping path="/user/*"/>
             <mvc:mapping path="/product/*"/>
             <mvc:mapping path="/profile/*"/>
-            <bean class="inventaire.web.SessionInterceptor" />
+            <bean class="inventaire.security.SessionInterceptor" />
         </mvc:interceptor>
         <mvc:interceptor>
             <mvc:mapping path="/user/*"/>
-            <bean class="inventaire.web.SecurityInterceptor" />
+            <bean class="inventaire.security.SecurityInterceptor" />
         </mvc:interceptor>
     </mvc:interceptors> 
                
