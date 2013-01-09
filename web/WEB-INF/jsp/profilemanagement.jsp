@@ -59,6 +59,8 @@
             </form:form>
         </div>
 
+        <%@ include file="/WEB-INF/jsp/footer.jsp" %>
+        
         <script src="<c:url value="/inc/jquery.js"/>"></script>
         <script src="<c:url value="/inc/jquery-ui.js"/>"></script>
         <script src="<c:url value="/inc/inventaire-script.js"/>"></script>

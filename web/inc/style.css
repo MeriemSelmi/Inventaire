@@ -8,7 +8,7 @@ body, p, legend, label, input, select,td,th {
     font: normal 8pt ubuntu normal,verdana, helvetica, sans-serif;
 }
 
-header{
+header, footer{
     padding: 5px; 
     margin: 10px;
     background-color: #3B5998;
@@ -16,7 +16,7 @@ header{
     text-align: right;
 }
 
-header a{
+header a, footer a{
     color:  white;
     font-size: smaller;
 }
