@@ -20,10 +20,10 @@ public class AuthenticationFormController extends SimpleFormController {
 
     @Override
     public ModelAndView onSubmit(HttpServletRequest request, HttpServletResponse response,
-            Object command, BindException errors) throws ServletException {
+            Object command, BindException errors) throws Exception {
         User user = ((Authentication) command).getUser();
-
         logger.info("AuthenticationFormController: trying to authenticate with login=" + user.getLogin() + " and password=" + user.getPassword());
+
         try {
             user = userManager.authenticate(user);
             request.getSession(true).setAttribute("loggedUser", user);
@@ -31,17 +31,18 @@ public class AuthenticationFormController extends SimpleFormController {
             return new ModelAndView(new RedirectView(getSuccessView()));
 
         } catch (Exception e) {
+            errors.rejectValue("error", "error.authentication.failed");
             logger.info("AuthenticationFormController: authentication failed. Returning from authentication form view to " + getFormView());
-            return new ModelAndView(new RedirectView(getFormView().concat(".htm")));
+            return showForm(request, response, errors);
         }
     }
 
     @Override
     protected Object formBackingObject(HttpServletRequest request) throws ServletException {
-        Authentication auth = new Authentication();
-        auth.setLogin("");
-        auth.setPassword("");
-        return auth;
+        Authentication authentication = new Authentication();
+        authentication.setLogin("");
+        authentication.setPassword("");
+        return authentication;
     }
 
     public UserManager getUserManager() {

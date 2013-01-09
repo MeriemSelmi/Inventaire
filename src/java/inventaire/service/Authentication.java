@@ -9,6 +9,7 @@ public class Authentication {
     protected final Log logger = LogFactory.getLog(getClass());
     private String login;
     private String password;
+    private String error;
     
     public void setLogin(String login){ 
         this.login = login; 
@@ -27,6 +28,16 @@ public class Authentication {
     public String getPassword() {
         return password;
     }
+
+    public String getError() {
+        return error;
+    }
+
+    public void setError(String error) {
+        this.error = error;
+    }
+    
+    
     
     public User getUser(){
         User user = new User();

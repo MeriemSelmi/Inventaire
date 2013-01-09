@@ -18,7 +18,9 @@
         <fieldset>
             <legend>Authenticate</legend>
             
-            <form:form method="post" commandName="authentication">    
+            <form:form method="post" commandName="authentication"> 
+                <form:errors path="error" cssClass="error" /> <br>
+                
                 <label>Login : </label>
                 <form:input path="login"/>
                 <form:errors path="login" cssClass="error"/><br>
