@@ -6,7 +6,10 @@ package inventaire.web;
 
 import inventaire.domain.Product;
 import inventaire.domain.User;
+import inventaire.service.ProductAdd;
+import inventaire.service.ProductFind;
 import inventaire.service.ProductManager;
+import inventaire.service.ProductUpdate;
 import inventaire.service.UserAdd;
 import inventaire.service.UserFind;
 import inventaire.service.UserManager;
@@ -20,6 +23,8 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
+import org.springframework.web.servlet.view.InternalResourceView;
+import org.springframework.web.servlet.view.RedirectView;
 
 /**
  *
@@ -30,6 +35,7 @@ public class ProductManagementController extends MultiActionController {
     
     protected final Log logger = LogFactory.getLog(getClass());
     private ProductManager productManager;
+    private Map<String, Object> services;
 
     public ProductManager getProductManager() {
         return productManager;
@@ -39,7 +45,7 @@ public class ProductManagementController extends MultiActionController {
         this.productManager = productManager;
     }
     
-        private List<Product> listProducts(){        
+        private List<Product> listProducts() throws Exception{        
         List<Product> products=productManager.listProducts();       
         return products;
 }
@@ -50,7 +56,17 @@ public class ProductManagementController extends MultiActionController {
         List<Product> products =  this.listProducts();
         model.put("products",products);
         
-        return new ModelAndView("productmanagement", "model", model);       
+        
+        services = new HashMap<String, Object>();
+        services.put("productupdate", new ProductUpdate());
+        services.put("productadd", new ProductAdd());
+        services.put("productfind", new ProductFind());
+        
+
+        logger.info("ProductManagementController: returning the product management view");
+        return new ModelAndView("productmanagement","model", model).addAllObjects(services);
+        
+        
     }
     
 
@@ -58,7 +74,20 @@ public class ProductManagementController extends MultiActionController {
     public ModelAndView addProduct(){return null;
 }
     
-    public ModelAndView UpdateProduct(){return null;
+    public ModelAndView UpdateProduct(HttpServletRequest req, HttpServletResponse res,ProductUpdate ProductUpdate){
+        Product product = ProductUpdate.getProduct();
+        product.setId(Integer.parseInt(req.getParameter("id")));
+
+        logger.info("ProductManagementController: trying to update product");
+        try {
+            productManager.UpdateProduct(product);
+        } catch (Exception e) {
+            //login duplicated
+            return new ModelAndView(new InternalResourceView("productmanagement.htm"));
+        }
+
+        return new ModelAndView(new RedirectView("productmanagement.htm"));
+        
 }
     
     public ModelAndView deleteProduct(){

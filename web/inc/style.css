@@ -4,14 +4,6 @@ body{
 
 }
 
-td{
-    background: #f9f8f9;
-    border-radius: 20px;
-    padding: 10px;
-
-    
-}
-
 
 header{
     padding: 5px; 
@@ -44,7 +36,7 @@ legend {
 
 form label {
     float: left;
-    width: 200px;
+    width: 100px;
     margin: 3px 0px 0px 0px;
 }
 
@@ -62,93 +54,6 @@ form input.sansLabel {
 }
 
 table {
-    width: 100%
-}
-
-.productDiv{
-    font-family: Century Gothic,Corbel,Calibri;
-    border-style: double;
-    border-color: #a8dc6f;
-
-}
-
-
-.champ{
-    font-family: corbel;
-    font-size: 20px;
-
-    color: #666666;
-
-}
-.text{
-    font-family: corbel;
-    font-size: 15px;
-    color: #222222;
-
-
-}
-
-
-.info{
-    border-style: double;
-    border-color: #dddddd;
-    border-width: 1;
-
-
-
-}   
-
-
-
-.welcome{
-    
-    font-size: 30px;
-    font-family: century gothic;
-    border-width: 1;
-    border-style: double;
-    border-color: #a8dc6f;
-    color:#a8dc6f
-    
-    
-}
-
-
-
-
-.button {
-	-moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
-	-webkit-box-shadow:inset 0px 1px 0px 0px #ffffff;
-	box-shadow:inset 0px 1px 0px 0px #ffffff;
-	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #e0e0e0), color-stop(1, #fffcff) );
-	background:-moz-linear-gradient( center top, #e0e0e0 5%, #fffcff 100% );
-	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#e0e0e0', endColorstr='#fffcff');
-	background-color:#e0e0e0;
-	-moz-border-radius:6px;
-	-webkit-border-radius:6px;
-	border-radius:6px;
-	border:1px solid #dcdcdc;
-	display:inline-block;
-	color:#524452;
-	font-family:century gothic;
-	font-size:15px;
-	font-weight:bold;
-	padding:6px 24px;
-	text-decoration:none;
-	text-shadow:1px 1px 0px #ffffff;
-}.button:hover {
-	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #fffcff), color-stop(1, #e0e0e0) );
-	background:-moz-linear-gradient( center top, #fffcff 5%, #e0e0e0 100% );
-	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#fffcff', endColorstr='#e0e0e0');
-	background-color:#fffcff;
-}.button:active {
-	position:relative;
-	top:1px;
-}
-
-.title{
-    font-family: century gothic;
-    color: #999;
-    
-    
+    width: 100%;
 }
 

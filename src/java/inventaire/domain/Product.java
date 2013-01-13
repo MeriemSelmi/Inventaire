@@ -43,6 +43,14 @@ public class Product  implements java.io.Serializable {
        this.price = price;
        this.supplier = supplier;
     }
+        public Product( String name, String description, String quantity, String price, String supplier) {
+       this.id= -1;
+       this.name = name;
+       this.description = description;
+       this.quantity = quantity;
+       this.price = price;
+       this.supplier = supplier;
+    }
    
      @Id 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
