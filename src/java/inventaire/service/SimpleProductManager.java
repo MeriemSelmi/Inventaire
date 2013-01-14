@@ -23,23 +23,24 @@ public class SimpleProductManager implements ProductManager {
     }
 
     @Override
-    public void addProduct(Product p) {
+    public void addProduct(Product p) throws Exception{
         productDao.add(p);
     }
 
     @Override
-    public void deleteProduct(int id) {
+    public void deleteProduct(int id) throws Exception{
         productDao.delete(id);
+        throw new Exception("JdbcProductDao: Error connecting to database.");
     }
 
     @Override
-    public void UpdateProduct(int id,String name,String description,int quantity,float price,String supplier) {
-        productDao.update(id, name, description, quantity, price, supplier);
+    public void UpdateProduct(Product product) throws Exception {
+        productDao.update(product);
     }
 
     @Override
-    public Product findProduct(String critere) {
-        return productDao.find(critere);
+    public List<Product> findProduct(String key) throws Exception{
+        return productDao.find(key);
     }
 
 }

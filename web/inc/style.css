@@ -8,7 +8,11 @@ body{
 header{
     padding: 5px; 
     margin: 10px;
-    background-color: #3B5998;
+    background-color: #593eda;
+    border-radius: 5px;
+    border-color: #bfbfbf;
+    border-style: double;
+    font-family: century gothic;
     color:  white;
     text-align: right;
 }
@@ -50,7 +54,8 @@ form input.sansLabel {
 }
 
 .error {
-    color: #900;
+    color: #f82727;
+    font-size: 20px;
 }
 
 table {
