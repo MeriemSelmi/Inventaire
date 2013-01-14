@@ -63,6 +63,6 @@
         
         <script src="<c:url value="/inc/jquery.js"/>"></script>
         <script src="<c:url value="/inc/jquery-ui.js"/>"></script>
-        <script src="<c:url value="/inc/inventaire-script.js"/>"></script>
+        <script src="<c:url value="/inc/profile-script.js"/>"></script>
     </body>
 </html>
