@@ -1,26 +1,31 @@
 
 
-
-$(function() {
-
+var icons = {
+      header: "ui-icon-star",
+      activeHeader: "ui-icon-star"
+    };
     
- 
+    
+$(function() {
     $( "#accordion" ).accordion({
-      collapsible:true,
-      
+        icons: icons,
+      collapsible:true,      
       heightStyle: "content",
       event: "click hoverintent"
-    });
- 
-    
-    
+    });  
   });
   
-  function updateForm(n){
-    runEffect(n);
-    return false;
+  function showForm(n){
+
+           
+        runShowEffect(n);
+        return false;
+        
+}
+     
+ 
    
-  }
+  
  
   var cfg = ($.hoverintent = {
     sensitivity: 7,
@@ -28,13 +33,21 @@ $(function() {
   });
   
   
-  function runEffect(n){
-        
+  function runShowEffect(n){
+      
       var options = {};
        options = { percent: 100 };
        $( "#"+n ).show("blind" , options,500);
+       $( "#"+n ).attr('hidden','false');
+       
     };
 
+  function runHideEffect(n){
+      
+      var options = {};
+      options = { percent: 0 };
+      $( "#"+n).hide( "blind", options,500 );
+  }
     
  
   $.event.special.hoverintent = {
@@ -84,4 +97,8 @@ $(function() {
   };
 
 
+function viderChamps(c){
 
+  $(c).attr('value','');
+  $(c).css('color','black');
+}

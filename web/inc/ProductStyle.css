@@ -10,34 +10,36 @@ root {
     display: block;
 }
 
+
+#global{
+    width:100%;
+    margin-bottom:100px;
+    margin-top:10px;
+    
+}
 td{
     background: #fcfcfc;
-    border-radius: 20px;
-    padding: 10px;
-
-    
+    border-radius: 18px;
+    padding: 10px;    
 }
 
 
 .productDiv{
-    font-family: Century Gothic,Corbel,Calibri;
-    border-style: double;
+    font-family: Century Gothic;    
     border-color: #a8dc6f;
-
 }
 
 
 .champ{
-    font-family: corbel;
+    font-family: Century Gothic;
     font-size: 20px;
-
     color: #666666;
 
 }
 .text{
-    font-family: corbel;
-    font-size: 15px;
-    color: #222222;
+    font-family: Century Gothic;
+    font-size: 20px;
+    color: #505051;
 
 
 }
@@ -46,7 +48,7 @@ td{
 .info{
     border-style: double;
     border-color: #dddddd;
-    border-width: 1;
+    border-width: 1px;
 
 
 
@@ -54,18 +56,21 @@ td{
 
 
 
-.welcome{
-    
+.welcome{   
     font-size: 30px;
     font-family: century gothic;
-    border-width: 1;
+    border-width: 1px;
     border-style: double;
-    border-color: #a8dc6f;
-    color:#a8dc6f
-    
-    
+    border-color: #c6baff;
+    border-radius: 10px;
+    color: #8a71ff;    
 }
 
+.textareas{
+    font-family: Century Gothic;
+    border-radius: 3px;
+    
+}
 
 
 
@@ -102,7 +107,28 @@ td{
 .title{
     font-family: century gothic;
     color: #999;
-    
-    
+    font-size: 23px;    
 }
 
+#pName,#pDescription,#pQuantity,#pPrice,#pSupplier{
+    color:lightgrey;
+    font-family: century gothic;
+}
+
+#deleteButton,#updateButton,#addButton,a,#hideButton1,#hideButton2{
+    
+    cursor: pointer; 
+}
+
+#hideButton1,#hideButton2{
+  background-image: url(up.png);
+  background-repeat: no-repeat;
+  width:40px;
+  height:40px;
+  padding: 0;
+    
+}
+.noDeco{
+    background: white;
+    
+}

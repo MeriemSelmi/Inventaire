@@ -5,15 +5,10 @@
 package inventaire.web;
 
 import inventaire.domain.Product;
-import inventaire.domain.User;
 import inventaire.service.ProductAdd;
 import inventaire.service.ProductFind;
 import inventaire.service.ProductManager;
 import inventaire.service.ProductUpdate;
-import inventaire.service.UserAdd;
-import inventaire.service.UserFind;
-import inventaire.service.UserManager;
-import inventaire.service.UserUpdate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -45,62 +40,103 @@ public class ProductManagementController extends MultiActionController {
         this.productManager = productManager;
     }
     
-        private List<Product> listProducts() throws Exception{        
+    private List<Product> listProducts() throws Exception{        
         List<Product> products=productManager.listProducts();       
         return products;
-}
+    }
     
     public ModelAndView manageProducts(HttpServletRequest request, HttpServletResponse response)throws Exception{
         logger.info("ProductManagementController: returning list products view");   
         Map<String, Object> model = new HashMap<String, Object>();
         List<Product> products =  this.listProducts();
-        model.put("products",products);
-        
-        
-        services = new HashMap<String, Object>();
-        services.put("productupdate", new ProductUpdate());
-        services.put("productadd", new ProductAdd());
-        services.put("productfind", new ProductFind());
-        
-
+        model.put("products",products);             
+        model.put("productupdate", new ProductUpdate());
+        model.put("productadd", new ProductAdd());
+        model.put("productfind", new ProductFind());
+        try{       
         logger.info("ProductManagementController: returning the product management view");
-        return new ModelAndView("productmanagement","model", model).addAllObjects(services);
+        return new ModelAndView("productmanagement","model", model).addAllObjects(model);
+        }
         
+        catch(Exception e){
+            logger.info("ProductManagementController: returning the exception content");
+            model.put("exception", e);
+            return new ModelAndView("productmanagement","model", model).addAllObjects(model);
+        }   
         
     }
     
 
     
-    public ModelAndView addProduct(){return null;
-}
+    public ModelAndView addProduct(HttpServletRequest req,HttpServletResponse res,ProductAdd productAdd) throws Exception{
+        Product product = productAdd.getProduct(); 
+        try{             
+        productManager.addProduct(product);       
+        return new ModelAndView(new RedirectView("productmanagement.htm"));
+        }
+        catch(Exception e){
+            req.setAttribute("exception", e);
+            return new ModelAndView(new RedirectView("productmanagement.htm"));
+            
+        }
+        }
     
-    public ModelAndView UpdateProduct(HttpServletRequest req, HttpServletResponse res,ProductUpdate ProductUpdate){
+    public ModelAndView updateProduct(HttpServletRequest req, HttpServletResponse res,ProductUpdate ProductUpdate){
         Product product = ProductUpdate.getProduct();
-        product.setId(Integer.parseInt(req.getParameter("id")));
-
+        product.setId(req.getParameter("id"));
         logger.info("ProductManagementController: trying to update product");
         try {
             productManager.UpdateProduct(product);
-        } catch (Exception e) {
-            //login duplicated
+        } 
+        catch (Exception e) {
+            req.setAttribute("exception", e);
             return new ModelAndView(new InternalResourceView("productmanagement.htm"));
         }
 
+        return new ModelAndView(new RedirectView("productmanagement.htm"));        
+}
+    
+    public ModelAndView deleteProduct(HttpServletRequest req,HttpServletResponse res) throws Exception{      
+        logger.info("UserManagementController: trying to delete product");       
+        try{
+        int id = Integer.parseInt(req.getParameter("id"));       
+        productManager.deleteProduct(id);
         return new ModelAndView(new RedirectView("productmanagement.htm"));
+        }
+        catch(Exception e){
+            req.setAttribute("exception", e);
+            return new ModelAndView(new RedirectView("productmanagement.htm"));
+            
+        }
         
-}
-    
-    public ModelAndView deleteProduct(){
-        return null;
+        
     }
     
-    public ModelAndView findProduct(){return null;
+    public ModelAndView findProducts(HttpServletRequest req,HttpServletResponse res,ProductFind productFind) throws Exception{       
+        String key = productFind.getKey();
+        List<Product> products = (List<Product>) productManager.findProduct(key);
+        Map<String, Object> model = new HashMap<String, Object>();       
+        model.put("products",products);             
+        model.put("productupdate", new ProductUpdate());
+        model.put("productadd", new ProductAdd());
+        model.put("productfind", new ProductFind());
+        try{       
+        logger.info("ProductManagementController: returning the product management view");
+        return new ModelAndView("productmanagement","model", model).addAllObjects(model);
+        }
+        
+        catch(Exception e){
+            model.put("exception", e);
+            return new ModelAndView("productmanagement","model", model).addAllObjects(model);
+        }   
+
     }
-    
-    
-    
-    
-    
-    
-    
 }
+    
+    
+    
+    
+    
+    
+    
+

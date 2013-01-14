@@ -1,4 +1,4 @@
-package inventaire.repository;
+/* package inventaire.repository;
 
 import inventaire.domain.Product;
 import java.sql.ResultSet;
@@ -68,4 +68,5 @@ public class JdbcProductDaoo extends SimpleJdbcDaoSupport implements ProductDao 
             return prod;
         }
     }
-}
+} 
+*/
