@@ -24,27 +24,65 @@ public class JdbcProductDao implements ProductDao{
     @Override
     public List<Product> list() throws Exception{
         logger.info("JdbcProductDao: Getting list of all products");
-        session = HibernateUtil.getSessionFactory().getCurrentSession();
-        
+        session = HibernateUtil.getSessionFactory().getCurrentSession();       
         session.beginTransaction();
-        query = session.createQuery("FROM Product");
-        List<Product> products = query.list();
-        session.getTransaction().commit();
+        try{
+            query = session.createQuery("FROM Product");
+            List<Product> products = query.list();
+            session.getTransaction().commit();
+            if(products.size() > 0)
+                return products;
+            else
+                throw new Exception("JdbcUserDao: No products found in the database");
+          }
+        catch(Exception e){
+            throw e;
+        }
         
-        if(products.size() > 0)
-            return products;
-        else
-            throw new Exception("JdbcUserDao: No products found in the database");
+        
     }
 
     @Override
     public void add(Product product) throws Exception{
-        try{
         logger.info("JDBCProductDao: Adding a product ... ");
         session = HibernateUtil.getSessionFactory().getCurrentSession();
         session.beginTransaction();
-        session.save(product);
-        session.getTransaction().commit();
+        try{       
+            session.save(product);
+            session.getTransaction().commit();
+        }
+        catch(Exception e){
+            session.getTransaction().rollback(); //Annuler la transaction
+            session.clear();
+        }
+    }
+
+    @Override
+    public void delete(int id) throws Exception{
+        logger.info("JdbcUserDao: Deleting product...");
+        session = HibernateUtil.getSessionFactory().getCurrentSession();
+        try{  
+            session.beginTransaction();
+            query = session.createQuery("DELETE Product WHERE id=:id")
+                    .setParameter("id", String.valueOf(id));
+            query.executeUpdate();
+            session.getTransaction().commit();
+        }
+        catch(Exception e){
+           session.getTransaction().rollback();
+           session.clear();
+        }
+    }
+
+    @Override
+    public void update(Product product) throws Exception{
+        logger.info("JdbcProductDao: Updating a product");
+        session = HibernateUtil.getSessionFactory().getCurrentSession();
+        try{
+            session.beginTransaction();
+            session.update(product);
+            session.getTransaction().commit();
+            session.clear();
         }
         catch(Exception e){
             session.getTransaction().rollback();
@@ -53,48 +91,17 @@ public class JdbcProductDao implements ProductDao{
     }
 
     @Override
-    public void delete(int id) throws Exception{
-        try{
-        logger.info("JdbcUserDao: Deleting product...");
-        session = HibernateUtil.getSessionFactory().getCurrentSession();
-        
-        session.beginTransaction();
-        query = session.createQuery("DELETE Product WHERE id=:id")
-                .setParameter("id", String.valueOf(id));
-        query.executeUpdate();
-        session.getTransaction().commit();
-        }
-        catch(Exception e){
-            
-        }
-    }
-
-    @Override
-    public void update(Product product) throws Exception{
-        logger.info("JdbcProductDao: Updating a product");
-        session = HibernateUtil.getSessionFactory().getCurrentSession();
-        
-        session.beginTransaction();
-        session.update(product);
-
-        session.getTransaction().commit();
-        session.clear();
-
-        throw new Exception("JdbcProductDao: Product already exists in database.");
-    }
-
-    @Override
     public List<Product> find(String key) throws Exception{
-        System.out.print("I'm in JDBC!");
-       try{ logger.info("JdbcUserDao: finding products...");
+        logger.info("JdbcUserDao: finding products...");
         session = HibernateUtil.getSessionFactory().getCurrentSession();
-        
-        session.beginTransaction();
-        query = session.createQuery("FROM Product WHERE name LIKE :key OR description LIKE :key OR quantity LIKE :key OR price LIKE :key OR supplier LIKE :key")
-                .setParameter("key", "%"+key+"%");
-        List<Product> products = query.list();
-        session.getTransaction().commit();
-        return products;}
+        try{        
+            session.beginTransaction();
+            query = session.createQuery("FROM Product WHERE name LIKE :key OR description LIKE :key OR supplier LIKE :key")
+                    .setParameter("key", "%"+key+"%");
+            List<Product> products = query.list();
+            session.getTransaction().commit();
+            return products;
+        }
        catch(Exception e){
            return null;
        }

@@ -45,23 +45,23 @@ public class ProductManagementController extends MultiActionController {
         return products;
     }
     
-    public ModelAndView manageProducts(HttpServletRequest request, HttpServletResponse response)throws Exception{
+    public ModelAndView manageProducts(HttpServletRequest req, HttpServletResponse res)throws Exception{
         logger.info("ProductManagementController: returning list products view");   
         Map<String, Object> model = new HashMap<String, Object>();
+        try{
         List<Product> products =  this.listProducts();
         model.put("products",products);             
         model.put("productupdate", new ProductUpdate());
         model.put("productadd", new ProductAdd());
-        model.put("productfind", new ProductFind());
-        try{       
+        model.put("productfind", new ProductFind());             
         logger.info("ProductManagementController: returning the product management view");
         return new ModelAndView("productmanagement","model", model).addAllObjects(model);
         }
         
         catch(Exception e){
             logger.info("ProductManagementController: returning the exception content");
-            model.put("exception", e);
-            return new ModelAndView("productmanagement","model", model).addAllObjects(model);
+            req.setAttribute("exception", e);
+            return new ModelAndView(new RedirectView("productmanagement.htm"));
         }   
         
     }
@@ -90,7 +90,7 @@ public class ProductManagementController extends MultiActionController {
         } 
         catch (Exception e) {
             req.setAttribute("exception", e);
-            return new ModelAndView(new InternalResourceView("productmanagement.htm"));
+            return new ModelAndView(new RedirectView("productmanagement.htm"));
         }
 
         return new ModelAndView(new RedirectView("productmanagement.htm"));        
@@ -121,8 +121,8 @@ public class ProductManagementController extends MultiActionController {
         model.put("productadd", new ProductAdd());
         model.put("productfind", new ProductFind());
         try{       
-        logger.info("ProductManagementController: returning the product management view");
-        return new ModelAndView("productmanagement","model", model).addAllObjects(model);
+            logger.info("ProductManagementController: returning the product management view");
+            return new ModelAndView("productmanagement","model", model).addAllObjects(model);
         }
         
         catch(Exception e){
