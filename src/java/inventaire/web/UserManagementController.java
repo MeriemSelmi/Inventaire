@@ -3,6 +3,7 @@ package inventaire.web;
 import inventaire.domain.User;
 import inventaire.service.UserAdd;
 import inventaire.service.UserFind;
+import inventaire.service.UserFindValidator;
 import inventaire.service.UserManager;
 import inventaire.service.UserUpdate;
 import java.util.HashMap;
@@ -12,6 +13,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.validation.BindException;
+import org.springframework.validation.FieldError;
+import org.springframework.validation.ObjectError;
+import org.springframework.web.bind.ServletRequestBindingException;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
 import org.springframework.web.servlet.view.InternalResourceView;
@@ -29,7 +34,7 @@ public class UserManagementController extends MultiActionController {
 
     public ModelAndView manageUsers(HttpServletRequest request, HttpServletResponse response)
             throws Exception {
-        
+
         Map<String, Object> model = new HashMap<String, Object>();
 
         List<User> users = listUsers();
@@ -55,7 +60,7 @@ public class UserManagementController extends MultiActionController {
 
     public ModelAndView updateUser(HttpServletRequest request, HttpServletResponse response, UserUpdate userUpdate)
             throws Exception {
-        
+
         User user = userUpdate.getUser();
         user.setId(Integer.parseInt(request.getParameter("id")));
 
@@ -72,9 +77,9 @@ public class UserManagementController extends MultiActionController {
 
     public ModelAndView addUser(HttpServletRequest request, HttpServletResponse response, UserAdd userAdd)
             throws Exception {
-        
+
         User user = userAdd.getUser();
-        
+
         logger.info("UserManagementController: trying to add user");
         try {
             userManager.add(user);
@@ -88,7 +93,7 @@ public class UserManagementController extends MultiActionController {
 
     public ModelAndView deleteUser(HttpServletRequest request, HttpServletResponse response)
             throws Exception {
-        
+
         User user = new User();
         user.setId(Integer.parseInt(request.getParameter("id")));
 
@@ -99,7 +104,7 @@ public class UserManagementController extends MultiActionController {
     }
 
     public ModelAndView findUsers(HttpServletRequest request, HttpServletResponse response, UserFind userfind) {
-        
+
         String keyword = userfind.getKeyword();
         List<User> usersFound;
         logger.info("UserManagementController: getting all users in the database corresponding to " + keyword);
@@ -115,9 +120,29 @@ public class UserManagementController extends MultiActionController {
 
         return new ModelAndView(new InternalResourceView("usermanagement.htm"));
     }
-    
+
+    public ModelAndView hanldeBindException(HttpServletRequest request, HttpServletResponse response, ServletRequestBindingException bindingException) {
+        BindException bindException = (BindException) bindingException.getRootCause();
+/*
+        for (Object object : bindException.getAllErrors()) {
+            if (object instanceof FieldError) {
+                FieldError fieldError = (FieldError) object;
+
+                System.out.println(fieldError.getField());
+            }
+
+            if (object instanceof ObjectError) {
+                ObjectError objectError = (ObjectError) object;
+
+                System.out.println(objectError.getCode());
+            }
+        }
+    */
+        return new ModelAndView(new RedirectView("/user/usermanagement.htm", true)).addAllObjects(bindException.getModel()); 
+    }
+
     public void setUserManager(UserManager userManager) {
         this.userManager = userManager;
     }
-
+    
 }

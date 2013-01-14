@@ -52,9 +52,14 @@
     
     <bean id="WelcomeController" class="inventaire.web.WelcomeController" />
     
-    <bean id="UserManagementController" class="inventaire.web.UserManagementController" >
+    <bean id="UserManagementController" class="inventaire.web.UserManagementController" name="/user/usermanagement.htm">
         <property name="methodNameResolver" ref="userResolver" /> 
         <property name="userManager" ref="userManager"/>
+        <property name="validators">
+            <list>
+                <bean class="inventaire.service.UserFindValidator"/>
+            </list>
+        </property>
     </bean>
 
     <bean id="ProfileManagementController" class="inventaire.web.ProfileManagementController" >

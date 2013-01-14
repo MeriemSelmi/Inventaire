@@ -1,6 +1,6 @@
 <%@ include file="/WEB-INF/jsp/include.jsp" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <html>
 
     <head>
@@ -16,8 +16,19 @@
             <a id="<c:out value='useradd'/>">Add user</a>
             <form:form method="post" action="userfind.htm" commandName="userfind">    
                 <form:input path="keyword" title="find user"/><input type="submit" value="Go"/>
+                <form:errors path="keyword"/>${keyword}
             </form:form>
-
+<!--
+            <spring:hasBindErrors name="userfind">
+                <div>
+                    <ul>
+                        <c:forEach var="error" items="${errors.allErrors}">
+                            <li>${error.defaultMessage}</li>
+                        </c:forEach>
+                    </ul>
+                </div>
+            </spring:hasBindErrors>    
+-->
             <div>
                 <c:forEach var="usersFound" items="${requestScope.usersFound}">
                     <a href="">${usersFound.firstName} ${usersFound.lastName}</a><br>
@@ -106,9 +117,9 @@
                 <input type="submit" value="update"/>
             </form:form>
         </div>
-            
+
         <%@ include file="/WEB-INF/jsp/footer.jsp" %>
-        
+
         <script src="<c:url value="/inc/jquery.js"/>"></script>
         <script src="<c:url value="/inc/jquery-ui.js"/>"></script>
         <script src="<c:url value="/inc/user-script.js"/>"></script>
