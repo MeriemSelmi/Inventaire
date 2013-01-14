@@ -1,0 +1,6 @@
+INSERT INTO ROOT.PRODUCTS ("NAME", "DESCRIPTION", "QUANTITY", "PRICE", "SUPPLIER") VALUES ('Chaise', 'bois', '40', '15', 'Bricorama');
+INSERT INTO ROOT.PRODUCTS ("NAME", "DESCRIPTION", "QUANTITY", "PRICE", "SUPPLIER") VALUES ('Bureau', 'tete de negre', '40', '15', 'Bricorama');
+INSERT INTO ROOT.PRODUCTS ("NAME", "DESCRIPTION", "QUANTITY", "PRICE", "SUPPLIER") VALUES ('Armoire', 'bois blanc', '40', '15', 'Bricorama');
+INSERT INTO ROOT.PRODUCTS ("NAME", "DESCRIPTION", "QUANTITY", "PRICE", "SUPPLIER") VALUES ('Table de nuit', 'verre', '40', '15', 'Bricorama');
+INSERT INTO ROOT.PRODUCTS ("NAME", "DESCRIPTION", "QUANTITY", "PRICE", "SUPPLIER") VALUES ('Table basse', 'tete de negre', '40', '15', 'Bricorama');
+INSERT INTO ROOT.PRODUCTS ("NAME", "DESCRIPTION", "QUANTITY", "PRICE", "SUPPLIER") VALUES ('Dressing', 'bois', '40', '15', 'Bricorama');

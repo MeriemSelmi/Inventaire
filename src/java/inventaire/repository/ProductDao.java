@@ -6,8 +6,8 @@ import java.util.List;
 public interface ProductDao {
 
     public List<Product> list() throws Exception;
-    public void add(Product p);
-    public void delete(int id);
-    public void update(int id,String name,String description,int quantity,float price,String supplier);
-    public Product find(String critere);
+    public void add(Product p) throws Exception;
+    public void delete(int id) throws Exception;
+    public void update(Product product) throws Exception;
+    public List<Product> find(String key) throws Exception;
 }
