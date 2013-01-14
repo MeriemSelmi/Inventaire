@@ -57,6 +57,8 @@
         <property name="userManager" ref="userManager"/>
         <property name="validators">
             <list>
+                <bean class="inventaire.service.UserAddValidator"/>
+                <bean class="inventaire.service.UserUpdateValidator"/>
                 <bean class="inventaire.service.UserFindValidator"/>
             </list>
         </property>
@@ -65,6 +67,11 @@
     <bean id="ProfileManagementController" class="inventaire.web.ProfileManagementController" >
         <property name="methodNameResolver" ref="profileResolver" /> 
         <property name="userManager" ref="userManager"/>
+        <property name="validators">
+            <list>
+                <bean class="inventaire.service.UserUpdateValidator"/>
+            </list>
+        </property>
     </bean>
     
     <bean id="SecurityController" class="inventaire.security.SecurityController" />

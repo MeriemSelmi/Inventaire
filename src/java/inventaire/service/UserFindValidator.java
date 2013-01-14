@@ -18,6 +18,6 @@ public class UserFindValidator implements Validator {
     @Override
     public void validate(Object o, Errors errors) {
         logger.info("UserFind Validator");
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "keyword", "error.empty", new Object[]{"Keyword"}, "aaaaaa");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "keyword", "error.empty", new Object[]{"Keyword"});
     }
 }
