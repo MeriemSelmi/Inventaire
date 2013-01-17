@@ -126,15 +126,15 @@
                         <form:form method="post" action="productadd.htm" commandName="productadd" >
                         <table>                            
                             <tr><td class="champ">Name:</td>
-                                <td><form:input path="name" class="textareas"  /> </td></tr>
+                                <td><form:input path="name" class="textareas"  name="productName" /> </td></tr>
                             <tr><td class="champ">Description:</td>
-                                <td><form:input path="description" class="textareas" /></td></tr>
+                                <td><form:input path="description" class="textareas" name="productDescription" /></td></tr>
                             <tr><td class="champ">Quantity:</td>
-                                <td><form:input path="quantity" class="textareas" /></td></tr>
+                                <td><form:input path="quantity" class="textareas" name="productQuantity" /></td></tr>
                             <tr><td class="champ">Price:</td>
-                                <td><form:input path="price" class="textareas" /></td></tr>
+                                <td><form:input path="price" class="textareas" name="productPrice" /></td></tr>
                             <tr><td class="champ">Supplier:</td>
-                                <td><form:input path="supplier" class="textareas" /></td></tr>
+                                <td><form:input path="supplier" class="textareas" name="productSupplier" /></td></tr>
                             <tr><td><input type="submit" value="Validate" class="button"/></td></tr>
                         </table>
                         </form:form>
