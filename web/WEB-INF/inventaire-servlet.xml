@@ -122,7 +122,18 @@
     <bean id="ProductManagementController" class="inventaire.web.ProductManagementController" >
         <property name="methodNameResolver" ref="productResolver" />
         <property name="productManager" ref="productManager" />
+        <property name="validators">          
+            <list>
+                <bean class="inventaire.service.ProductAddValidator"/>
+                <bean class="inventaire.service.ProductUpdateValidator"/>
+                <bean class="inventaire.service.ProductFindValidator"/>
+ 
+            </list>
+        </property>
     </bean>
+    
+    
+    <bean name="productAddValidate" class="inventaire.service.ProductAddValidator" />
     
     <bean id="productResolver"
           class="org.springframework.web.servlet.mvc.multiaction.PropertiesMethodNameResolver"
@@ -138,6 +149,8 @@
         </property>
             
     </bean>
+    
+    
 
     
  

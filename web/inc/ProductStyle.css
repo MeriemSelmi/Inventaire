@@ -23,6 +23,12 @@ td{
     padding: 10px;    
 }
 
+.error{
+    color: red;
+    font-family: Century Gothic;
+    
+}
+
 
 .productDiv{
     font-family: Century Gothic;    

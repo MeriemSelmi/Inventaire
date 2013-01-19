@@ -5,6 +5,7 @@
 package inventaire.service;
 
 import inventaire.domain.Product;
+import java.util.Map;
 
 /**
  *
@@ -16,6 +17,13 @@ public class ProductAdd {
     private String quantity;
     private String price;
     private String supplier;
+    private Map<String, String> errors;
+    
+    public Map<String,String> addError(String msg){
+        errors.put("erreur", msg);
+        
+        return errors;
+    }
 
     public String getName() {
         return name;
