@@ -16,5 +16,7 @@
                 <a href="<c:url value="/user/usermanagement.htm"/>">User manager</a>
             </c:if>
         </fieldset>
+            
+            <h4>${exception}</h4>
     </body>
 </html>

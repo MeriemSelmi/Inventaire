@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.validation.BindException;
+import org.springframework.web.bind.ServletRequestBindingException;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
 import org.springframework.web.servlet.view.InternalResourceView;
@@ -56,6 +58,12 @@ public class ProfileManagementController extends MultiActionController{
             throws Exception {
         request.getSession().invalidate();
         return new ModelAndView(new RedirectView("/authentication.htm", true));
+    }
+    
+    public ModelAndView hanldeBindException(HttpServletRequest request, HttpServletResponse response, ServletRequestBindingException bindingException) {
+        BindException bindException = (BindException) bindingException.getRootCause();
+
+        return new ModelAndView(new RedirectView("/profile/profilemanagement.htm", true)).addAllObjects(bindException.getModel()); 
     }
     
     public void setUserManager(UserManager userManager) {

@@ -4,14 +4,15 @@ body{
 
 }
 
-body, p, legend, label, input, select,td,th {
-    font: normal 8pt ubuntu normal,verdana, helvetica, sans-serif;
-}
 
 header, footer{
     padding: 5px; 
     margin: 10px;
-    background-color: #3B5998;
+    background-color: #593eda;
+    border-radius: 5px;
+    border-color: #bfbfbf;
+    border-style: double;
+    font-family: century gothic;
     color:  white;
     text-align: right;
 }
@@ -39,7 +40,7 @@ legend {
 
 form label {
     float: left;
-    width: 200px;
+    width: 100px;
     margin: 3px 0px 0px 0px;
 }
 
@@ -53,16 +54,11 @@ form input.sansLabel {
 }
 
 .error {
-    color: #900;
+    color: #f82727;
+    font-size: 20px;
 }
 
 table {
-    width: 100%
+    width: 100%;
 }
 
-.productDiv{
-    font-family: Century Gothic,Corbel,Calibri;
-    border-style: double;
-    border-color: #a8dc6f;
-    
-}

@@ -6,8 +6,8 @@ import java.util.List;
 
 public interface ProductManager extends Serializable {
     public List<Product> listProducts() throws Exception;
-    public void addProduct(Product p);
-    public void deleteProduct(int id);
-    public void UpdateProduct(int id,String name,String description,int quantity,float price,String supplier);
-    public Product findProduct(String critere);
+    public void addProduct(Product p) throws Exception;
+    public void deleteProduct(int id) throws Exception;
+    public void UpdateProduct(Product product) throws Exception;
+    public List<Product> findProduct(String critere) throws Exception;
 }

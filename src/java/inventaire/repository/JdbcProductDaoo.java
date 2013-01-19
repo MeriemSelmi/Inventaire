@@ -1,4 +1,4 @@
-package inventaire.repository;
+/* package inventaire.repository;
 
 import inventaire.domain.Product;
 import java.sql.ResultSet;
@@ -40,9 +40,9 @@ public class JdbcProductDaoo extends SimpleJdbcDaoSupport implements ProductDao 
     }
 
     @Override
-    public void update(int id,String name,String description,int quantity,float price,String supplier) {
+    public void update(Product product) {
         logger.info("Updating a product!");
-        getSimpleJdbcTemplate().update(UPDATE_REQUEST, name,description,quantity,price,supplier,id);
+        getSimpleJdbcTemplate().update(UPDATE_REQUEST, product.getName(),product.getDescription(),product.getQuantity(),product.getPrice(),product.getSupplier(),product.getId());
     }
 
     @Override
@@ -68,4 +68,5 @@ public class JdbcProductDaoo extends SimpleJdbcDaoSupport implements ProductDao 
             return prod;
         }
     }
-}
+} 
+*/

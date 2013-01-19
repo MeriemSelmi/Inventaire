@@ -38,24 +38,66 @@ public class JdbcProductDao implements ProductDao{
     }
 
     @Override
-    public void add(Product p) {
-//        throw new UnsupportedOperationException("Not supported yet.");
+    public void add(Product product) throws Exception{
+        try{
+        logger.info("JDBCProductDao: Adding a product ... ");
+        session = HibernateUtil.getSessionFactory().getCurrentSession();
+        session.beginTransaction();
+        session.save(product);
+        session.getTransaction().commit();
+        }
+        catch(Exception e){
+            session.getTransaction().rollback();
+            session.clear();
+        }
     }
 
     @Override
-    public void delete(int id) {
-//        throw new UnsupportedOperationException("Not supported yet.");
+    public void delete(int id) throws Exception{
+        try{
+        logger.info("JdbcUserDao: Deleting product...");
+        session = HibernateUtil.getSessionFactory().getCurrentSession();
+        
+        session.beginTransaction();
+        query = session.createQuery("DELETE Product WHERE id=:id")
+                .setParameter("id", String.valueOf(id));
+        query.executeUpdate();
+        session.getTransaction().commit();
+        }
+        catch(Exception e){
+            
+        }
     }
 
     @Override
-    public void update(int id, String name, String description, int quantity, float price, String supplier) {
-//        throw new UnsupportedOperationException("Not supported yet.");
+    public void update(Product product) throws Exception{
+        logger.info("JdbcProductDao: Updating a product");
+        session = HibernateUtil.getSessionFactory().getCurrentSession();
+        
+        session.beginTransaction();
+        session.update(product);
+
+        session.getTransaction().commit();
+        session.clear();
+
+        throw new Exception("JdbcProductDao: Product already exists in database.");
     }
 
     @Override
-    public Product find(String critere) {
-        return null;
-//      throw new UnsupportedOperationException("Not supported yet.");
-    }
+    public List<Product> find(String key) throws Exception{
+        System.out.print("I'm in JDBC!");
+       try{ logger.info("JdbcUserDao: finding products...");
+        session = HibernateUtil.getSessionFactory().getCurrentSession();
+        
+        session.beginTransaction();
+        query = session.createQuery("FROM Product WHERE name LIKE :key OR description LIKE :key OR quantity LIKE :key OR price LIKE :key OR supplier LIKE :key")
+                .setParameter("key", "%"+key+"%");
+        List<Product> products = query.list();
+        session.getTransaction().commit();
+        return products;}
+       catch(Exception e){
+           return null;
+       }
     
+}
 }
