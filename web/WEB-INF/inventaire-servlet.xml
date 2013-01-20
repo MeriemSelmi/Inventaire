@@ -12,6 +12,7 @@
     <mvc:annotation-driven/>
     <context:component-scan base-package="inventaire.web" />
         
+ <!--****************************COMMON CONFIGURATION*********************************-->     
     <bean id="messageSource"
           class="org.springframework.context.support.ResourceBundleMessageSource">
         <property name="basename" value="messages"/>
@@ -40,7 +41,26 @@
         </property>
     </bean>
     
+    <bean id="WelcomeController" class="inventaire.web.WelcomeController" />
     
+    <bean id="SecurityController" class="inventaire.security.SecurityController" />
+    
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/welcome.htm"/>
+            <mvc:mapping path="/user/*"/>
+            <mvc:mapping path="/product/*"/>
+            <mvc:mapping path="/profile/*"/>
+            <bean class="inventaire.security.SessionInterceptor" />
+        </mvc:interceptor>
+        <mvc:interceptor>
+            <mvc:mapping path="/user/*"/>
+            <bean class="inventaire.security.SecurityInterceptor" />
+        </mvc:interceptor>
+    </mvc:interceptors>
+-->    
+    <!--****************************USERS CONFIGURATION*********************************--> 
+<!--    
     <bean id="AuthenticationFormController" class="inventaire.web.AuthenticationFormController" > 
         <property name="sessionForm" value="true"/>
         <property name="commandName" value="authentication"/>
@@ -52,9 +72,7 @@
         <property name="successView" value="welcome.htm"/>
         <property name="userManager" ref="userManager"/>
     </bean>
-    
-    <bean id="WelcomeController" class="inventaire.web.WelcomeController" />
-    
+       
     <bean id="UserManagementController" class="inventaire.web.UserManagementController" name="/user/usermanagement.htm">
         <property name="methodNameResolver" ref="userResolver" /> 
         <property name="userManager" ref="userManager"/>
@@ -77,15 +95,7 @@
         </property>
     </bean>
     
-    <bean id="SecurityController" class="inventaire.security.SecurityController" />
-    
-    <bean id="ProductManagementController" class="inventaire.web.ProductManagementController" >
-        <property name="methodNameResolver" ref="productResolver" />
-        <property name="productManager" ref="productManager" />
-    </bean>
-    
-    
-    <bean id="userResolver"
+        <bean id="userResolver"
           class="org.springframework.web.servlet.mvc.multiaction.PropertiesMethodNameResolver"
           lazy-init="default">
         <property name="mappings">
@@ -110,6 +120,24 @@
             </props>
         </property>
     </bean>
+-->    
+    <!--****************************PRODUCTS CONFIGURATION*********************************-->
+<!--    
+    <bean id="ProductManagementController" class="inventaire.web.ProductManagementController" >
+        <property name="methodNameResolver" ref="productResolver" />
+        <property name="productManager" ref="productManager" />
+        <property name="validators">          
+            <list>
+                <bean class="inventaire.service.ProductAddValidator"/>
+                <bean class="inventaire.service.ProductUpdateValidator"/>
+                <bean class="inventaire.service.ProductFindValidator"/>
+ 
+            </list>
+        </property>
+    </bean>
+    
+    
+    <bean name="productAddValidate" class="inventaire.service.ProductAddValidator" />
     
     <bean id="productResolver"
           class="org.springframework.web.servlet.mvc.multiaction.PropertiesMethodNameResolver"
@@ -126,18 +154,19 @@
             
     </bean>
     
-    <mvc:interceptors>
-        <mvc:interceptor>
-            <mvc:mapping path="/welcome.htm"/>
-            <mvc:mapping path="/user/*"/>
-            <mvc:mapping path="/product/*"/>
-            <mvc:mapping path="/profile/*"/>
-            <bean class="inventaire.security.SessionInterceptor" />
-        </mvc:interceptor>
-        <mvc:interceptor>
-            <mvc:mapping path="/user/*"/>
-            <bean class="inventaire.security.SecurityInterceptor" />
-        </mvc:interceptor>
-    </mvc:interceptors> 
--->               
+
+        <mvc:interceptors>
+            <mvc:interceptor>
+                <mvc:mapping path="/welcome.htm"/>
+                <mvc:mapping path="/user/*"/>
+                <mvc:mapping path="/product/*"/>
+                <mvc:mapping path="/profile/*"/>
+                <bean class="inventaire.security.SessionInterceptor" />
+            </mvc:interceptor>
+            <mvc:interceptor>
+                <mvc:mapping path="/user/*"/>
+                <bean class="inventaire.security.SecurityInterceptor" />
+            </mvc:interceptor>
+        </mvc:interceptors> 
+    -->               
 </beans>

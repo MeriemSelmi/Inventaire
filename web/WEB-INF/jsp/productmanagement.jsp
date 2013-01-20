@@ -5,6 +5,7 @@
 --%>
 <%@ include file="/WEB-INF/jsp/include.jsp" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 
@@ -41,7 +42,7 @@
                 <form:form method="post" action="productfind.htm" commandName="productfind">
                     <table>
                         <tr>
-                            <td class="champ" align="center">Please enter criterion: &nbsp;&nbsp;&nbsp;&nbsp; <form:input path="key" class="textareas" /></td>
+                            <td class="champ" align="center">Please enter criterion: &nbsp;&nbsp;&nbsp;&nbsp; <form:input path="key" class="textareas" /> <span class="error">${errorFind}</span></td>
                             <td align="center"><input type="submit" value="find" class="button" /></td>
                         </tr>              
                     </table>                   
@@ -72,7 +73,7 @@
                                                          </table>
                                                          <table >
                                                              <tr>
-                                                                 <td align="center"><div class="button" onclick="showForm('${product.id}');" id="updateButton">Update</div></td>
+                                                                 <td align="center"><div class="button" onmouseover="showForm('${product.id}');" id="updateButton">Update</div></td>
                                                                  <td align="center"><a href="productdelete.htm?id=${product.id}" > <div class="button" id="deleteButton">Delete</div> </a></td></tr>
                                                         </table>
                                                     </div>
@@ -86,15 +87,15 @@
                                                         <table>
                                                             <tr><input type="text" hidden="true" name="id" value="${product.id}" /></tr>
                                                             <tr><td>Name:</td>
-                                                                <td><form:input path="name" class="textareas" id="pName"  value="${product.name}" onclick="viderChamps(this)" /> </td></tr>
+                                                                <td><form:input path="name" class="textareas" id="pName"  value="${product.name}" onclick="viderChamps(this)" /> <span class="error"> ${errors.nameupdate} </span></td></tr>
                                                             <tr><td>Description:</td>
-                                                                <td><form:input path="description"  class="textareas" id="pDescription" value="${product.description}" onclick="viderChamps(this)" /></td></tr>
+                                                                <td><form:input path="description"  class="textareas" id="pDescription" value="${product.description}" onclick="viderChamps(this)" /> <span class="error"> ${errors.descriptionupdate} </span> </td></tr>
                                                             <tr><td>Quantity:</td>
-                                                                <td><form:input path="quantity" class="textareas" id="pQuantity" value="${product.quantity}" onclick="viderChamps(this)" /></td></tr>
+                                                                <td><form:input path="quantity" class="textareas" id="pQuantity" value="${product.quantity}" onclick="viderChamps(this)" /> <span class="error"> ${errors.quantityupdate} </span></td></tr>
                                                             <tr><td>Price:</td>
-                                                                <td><form:input path="price" class="textareas" id="pPrice" value="${product.price}" onclick="viderChamps(this)" /></td></tr>
+                                                                <td><form:input path="price" class="textareas" id="pPrice" value="${product.price}" onclick="viderChamps(this)" /> <span class="error"> ${errors.priceupdate} </span></td></tr>
                                                             <tr><td>Supplier:</td>
-                                                                <td><form:input path="supplier" class="textareas" id="pSupplier" value="${product.supplier}" onclick="viderChamps(this)" /></td></tr>
+                                                                <td><form:input path="supplier" class="textareas" id="pSupplier" value="${product.supplier}" onclick="viderChamps(this)" /> <span class="error"> ${errors.supplierupdate} </span></td></tr>
                                                             <tr><td><input type="submit" value="Validate" class="button"/></td></tr>
                                                         </table>
 
@@ -125,16 +126,16 @@
                         <table><tr><td class="noDeco"> <p class="title">Please enter product informations.</p> </td><td class="noDeco"><div align="right" id="hideButton2" onclick="runHideEffect('addForm')"></div></td></tr></table>
                         <form:form method="post" action="productadd.htm" commandName="productadd" >
                         <table>                            
-                            <tr><td class="champ">Name:</td>
-                                <td><form:input path="name" class="textareas"  /> </td></tr>
+                            <tr><td class="champ">Name:   </td>
+                                <td><form:input path="name" class="textareas"  name="name" /> <span class="error">${errors.name} </span></td></tr>
                             <tr><td class="champ">Description:</td>
-                                <td><form:input path="description" class="textareas" /></td></tr>
+                                <td><form:input path="description" class="textareas" name="productDescription" /> <span class="error">${errors.description} </span></td></tr>
                             <tr><td class="champ">Quantity:</td>
-                                <td><form:input path="quantity" class="textareas" /></td></tr>
+                                <td><form:input path="quantity" class="textareas" name="productQuantity" /> <span class="error">${errors.quantity} </span></td></tr>
                             <tr><td class="champ">Price:</td>
-                                <td><form:input path="price" class="textareas" /></td></tr>
+                                <td><form:input path="price" class="textareas" name="productPrice" /> <span class="error">${errors.price} </span></td></tr>
                             <tr><td class="champ">Supplier:</td>
-                                <td><form:input path="supplier" class="textareas" /></td></tr>
+                                <td><form:input path="supplier" class="textareas" name="productSupplier" /> <span class="error">${errors.supplier} </span></td></tr>
                             <tr><td><input type="submit" value="Validate" class="button"/></td></tr>
                         </table>
                         </form:form>
