@@ -15,7 +15,11 @@ public class UserUpdate {
     private String login;
     private String password;
     private String role;
-
+    private String error;
+    
+    public User getUser(){
+        return new User(-1, lastName, firstName, email, telephone, address, login, password, role);
+    }
     
     public String getLastName() {
         return lastName;
@@ -88,8 +92,12 @@ public class UserUpdate {
         this.role = role;
         logger.info("UserUpdate: role set to "+ role);
     }
-    
-    public User getUser(){
-        return new User(-1, lastName, firstName, email, telephone, address, login, password, role);
+
+    public String getError() {
+        return error;
+    }
+
+    public void setError(String error) {
+        this.error = error;
     }
 }
