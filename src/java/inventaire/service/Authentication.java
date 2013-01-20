@@ -3,11 +3,15 @@ package inventaire.service;
 import inventaire.domain.User;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.hibernate.validator.constraints.NotEmpty;
 
 
 public class Authentication {
     protected final Log logger = LogFactory.getLog(getClass());
+    
+    @NotEmpty
     private String login;
+    @NotEmpty
     private String password;
     private String error;
     
@@ -37,7 +41,7 @@ public class Authentication {
         this.error = error;
     }
     
-    
+  
     
     public User getUser(){
         User user = new User();
