@@ -58,7 +58,7 @@
                             <tr>
                                 <td>
                                     <div id="accordion">
-                                        <c:forEach var="product" items='${requestScope.model.products}' >
+                                        <c:forEach var="product" items='${products}' >
 
                                             <p class="nomProduit"><c:out value="${product.name}"></c:out></p>
 
