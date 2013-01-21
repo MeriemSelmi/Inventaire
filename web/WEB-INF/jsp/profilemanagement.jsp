@@ -30,30 +30,36 @@
         </fieldset>
 
         <div id="userupdate">
-            <form:form method="post" action="profileupdate.htm" commandName="userupdate" id="updateform">    
-                <label>Name : </label>
-                <form:input path="lastName"/><br>
+            <form:form method="post" action="profileupdate.htm" commandName="profileupdate" id="updateform">
+                <form:errors path="error"/><br>
+                
+                <form:label path="lastName">Last Name : </form:label>
+                <form:input path="lastName"/>
+                <form:errors path="lastName"/><br>
 
-                <label>First Name : </label>
-                <form:input path="firstName"/><br>
+                <form:label path="firstName">First Name : </form:label>
+                <form:input path="firstName"/>
+                <form:errors path="firstName"/><br>
 
-                <label>Mail : </label>
-                <form:input path="email"/><br>
+                <form:label path="email">Email : </form:label>
+                <form:input path="email"/>
+                <form:errors path="email"/><br>
 
-                <label>Telephone : </label>
-                <form:input path="telephone"/><br>
+                <form:label path="telephone">Telephone : </form:label>
+                <form:input path="telephone"/>
+                <form:errors path="telephone"/><br>
 
-                <label>Address : </label>
-                <form:input path="address"/><br>
+                <form:label path="address">Address : </form:label>
+                <form:input path="address"/>
+                <form:errors path="address"/><br>
 
-                <label>Login : </label>
-                <form:input path="login"/><br>
+                <form:label path="login">Login : </form:label>
+                <form:input path="login"/>
+                <form:errors path="login"/><br>
 
-                <label>Password : </label>
-                <form:input path="password" /><br>
-
-                <label>Role : </label>
-                <form:select path="role" items="${userRoles}"/><br>
+                <form:label path="password">Password : </form:label>
+                <form:password path="password" />
+                <form:errors path="password"/><br>
 
                 <input type="submit" value="update"/>
             </form:form>
