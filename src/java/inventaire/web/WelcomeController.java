@@ -1,33 +1,21 @@
 package inventaire.web;
 
-import inventaire.domain.User;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.Controller;
-import org.springframework.web.servlet.view.RedirectView;
 
-public class WelcomeController implements Controller {
+@Controller
+@RequestMapping("/welcome.htm")
+public class WelcomeController {
 
     protected final Log logger = LogFactory.getLog(getClass());
 
-    @Override
-    public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {
-
-        User user = (User)request.getSession().getAttribute("loggedUser");
-        if (user == null) {
-            return new ModelAndView(new RedirectView("authentication.htm"));
-        } else {
-            if(user.getRole().equals(User.USER_ROLE_ADMINISTRATOR)){
-               logger.info("WelcomeController: returning welcome view");
-               return new ModelAndView("welcome"); 
-            }else{
-               logger.info("WelcomeController: returning welcome view");
-               return new ModelAndView("welcome");
-            }
-            
-        }
+    @RequestMapping(method= RequestMethod.GET)
+    public ModelAndView showWelcome(){
+        logger.info("WelcomeController: returning welcome view");
+        return new ModelAndView("welcome");
     }
 }

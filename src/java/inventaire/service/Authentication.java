@@ -3,13 +3,24 @@ package inventaire.service;
 import inventaire.domain.User;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.hibernate.validator.constraints.NotEmpty;
 
 
 public class Authentication {
     protected final Log logger = LogFactory.getLog(getClass());
+    
+    @NotEmpty
     private String login;
+    @NotEmpty
     private String password;
     private String error;
+    
+    public User getUser(){
+        User user = new User();
+        user.setLogin(login);
+        user.setPassword(password);
+        return user;
+    }
     
     public void setLogin(String login){ 
         this.login = login; 
@@ -36,14 +47,4 @@ public class Authentication {
     public void setError(String error) {
         this.error = error;
     }
-    
-    
-    
-    public User getUser(){
-        User user = new User();
-        user.setLogin(login);
-        user.setPassword(password);
-        return user;
-    }
-
 }

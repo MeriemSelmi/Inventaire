@@ -1,11 +1,6 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package inventaire.repository;
 
 import inventaire.domain.Product;
-import inventaire.domain.User;
 import java.util.List;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -64,7 +59,7 @@ public class JdbcProductDao implements ProductDao{
         try{  
             session.beginTransaction();
             query = session.createQuery("DELETE Product WHERE id=:id")
-                    .setParameter("id", String.valueOf(id));
+                    .setParameter("id", id);
             query.executeUpdate();
             session.getTransaction().commit();
         }

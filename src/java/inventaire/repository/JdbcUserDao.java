@@ -63,7 +63,6 @@ public class JdbcUserDao implements UserDao{
             session.getTransaction().commit();
         }catch(Exception e){
             session.getTransaction().rollback();
-            session.clear();
             throw new Exception("JdbcUserDao: The login already exists in the database");
         }
     }

@@ -1,13 +1,11 @@
 package inventaire.service;
 
-import java.util.List;
-
 import inventaire.domain.Product;
 import inventaire.repository.ProductDao;
+import java.util.List;
 
 public class SimpleProductManager implements ProductManager {
 
-    // private List<Product> products;
     private ProductDao productDao;
 
   
@@ -30,7 +28,6 @@ public class SimpleProductManager implements ProductManager {
     @Override
     public void deleteProduct(int id) throws Exception{
         productDao.delete(id);
-        throw new Exception("JdbcProductDao: Error connecting to database.");
     }
 
     @Override
