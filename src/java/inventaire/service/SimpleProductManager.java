@@ -30,7 +30,7 @@ public class SimpleProductManager implements ProductManager {
     @Override
     public void deleteProduct(int id) throws Exception{
         productDao.delete(id);
-        throw new Exception("JdbcProductDao: Error connecting to database.");
+        
     }
 
     @Override
