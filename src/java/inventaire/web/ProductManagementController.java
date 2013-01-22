@@ -126,17 +126,17 @@ public class ProductManagementController extends MultiActionController {
         }
     }
 
-    @ModelAttribute
+    @ModelAttribute("productfind")
     public ProductFind getProductFind() {
         return new ProductFind();
     }
 
-    @ModelAttribute
+    @ModelAttribute("productupdate")
     public ProductUpdate getProductUpdate() {
         return new ProductUpdate();
     }
 
-    @ModelAttribute
+    @ModelAttribute("productadd")
     public ProductAdd getProductAdd() {
         return new ProductAdd();
     }
