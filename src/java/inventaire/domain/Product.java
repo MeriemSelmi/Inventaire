@@ -19,7 +19,7 @@ import javax.persistence.Table;
 public class Product  implements java.io.Serializable {
 
 
-     private String id;
+     private int id;
      private String name;
      private String description;
      private String quantity;
@@ -28,7 +28,7 @@ public class Product  implements java.io.Serializable {
 
     public Product() {
     }
-    public Product(String id){
+    public Product(int id){
         this.id = id;
         this.name="";
         this.description="";
@@ -37,12 +37,12 @@ public class Product  implements java.io.Serializable {
         this.supplier="";
     }
 	
-    public Product(String id, String name, String description) {
+    public Product(int id, String name, String description) {
         this.id = id;
         this.name = name;
         this.description = description;
     }
-    public Product(String id, String name, String description, String quantity, String price, String supplier) {
+    public Product(int id, String name, String description, String quantity, String price, String supplier) {
        this.id = id;
        this.name = name;
        this.description = description;
@@ -51,7 +51,7 @@ public class Product  implements java.io.Serializable {
        this.supplier = supplier;
     }
         public Product( String name, String description, String quantity, String price, String supplier) {
-       this.id= "-1";
+       this.id= -1;
        this.name = name;
        this.description = description;
        this.quantity = quantity;
@@ -62,11 +62,11 @@ public class Product  implements java.io.Serializable {
      @Id 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="ID", unique=true, nullable=false)
-    public String getId() {
+    public int getId() {
         return this.id;
     }
     
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
     
