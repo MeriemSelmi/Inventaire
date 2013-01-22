@@ -64,7 +64,7 @@ public class JdbcProductDao implements ProductDao{
         try{  
             session.beginTransaction();
             query = session.createQuery("DELETE Product WHERE id=:id")
-                    .setParameter("id", String.valueOf(id));
+                    .setParameter("id", id);
             query.executeUpdate();
             session.getTransaction().commit();
         }
