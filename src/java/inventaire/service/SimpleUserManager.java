@@ -21,24 +21,7 @@ public class SimpleUserManager implements UserManager {
 
     @Override
     public void update(User user) throws Exception {
-        User oldUser = userDao.getUserById(user.getId());
-        setUserEmptyFields(user, oldUser);
         userDao.update(user);
-    }
-
-    private void setUserEmptyFields(User user, User oldUser){
-        String[] fields = {"LastName", "FirstName", "Address", "Email", "Telephone", "Login", "Password", "Role"};
-        try {
-        for (String field : fields) {
-            Method getter = User.class.getMethod("get" + field);
-            Method setter = User.class.getMethod("set" + field, String.class);
-            String oldValue = (String) getter.invoke(oldUser);
-            String newValue = (String) getter.invoke(user);
-            if (newValue.trim().isEmpty()) {
-                setter.invoke(user, oldValue);
-            }
-        }
-        }catch(Exception e){}
     }
 
     @Override

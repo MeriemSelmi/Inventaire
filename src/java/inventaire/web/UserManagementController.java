@@ -47,7 +47,7 @@ public class UserManagementController {
             userManager.update(user);
             return new ModelAndView(new RedirectView("/user/usermanagement.htm", true));
         } catch (Exception e) {
-            result.rejectValue("error", "error.update.failed");
+            result.rejectValue("login", "error.update.failed");
             return manageUsers();
         }
     }
@@ -67,7 +67,7 @@ public class UserManagementController {
             userManager.add(user);
             return new ModelAndView(new RedirectView("/user/usermanagement.htm", true));
         } catch (Exception e) {
-            result.rejectValue("error", "error.update.failed");
+            result.rejectValue("login", "error.update.failed");
             return manageUsers();
         }
     }

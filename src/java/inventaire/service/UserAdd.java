@@ -1,19 +1,29 @@
 package inventaire.service;
 
 import inventaire.domain.User;
+import javax.validation.constraints.Pattern;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotEmpty;
 
 
 public class UserAdd {
     protected final Log logger = LogFactory.getLog(getClass());
+    @NotEmpty
     private String lastName;
+    @NotEmpty
     private String firstName;
+    @Email
     private String email;
+    @Pattern(regexp="^[+]?[0-9]{8,}$")
     private String telephone;
     private String address;
+    @NotEmpty
     private String login;
+    @NotEmpty
     private String password;
+    @NotEmpty
     private String role;
     private String error;
     
