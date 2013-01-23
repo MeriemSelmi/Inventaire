@@ -1,9 +1,7 @@
 body{
     width: 700px;
     margin: auto;
-
 }
-
 
 header, footer{
     padding: 5px; 
@@ -53,12 +51,137 @@ form input.sansLabel {
     margin-left: 200px;
 }
 
-.error {
-    color: #f82727;
-    font-size: 20px;
-}
-
+/* From Product Style*/
 table {
     width: 100%;
 }
 
+root { 
+    display: block;
+}
+
+#global{
+    width:100%;
+    margin-bottom:100px;
+    margin-top:10px;
+    
+}
+
+td{
+    background: #fcfcfc;
+    border-radius: 18px;
+    padding: 10px;    
+}
+
+.error{
+    color: red;
+    font-family: Century Gothic;
+}
+
+.productDiv{
+    font-family: Century Gothic;    
+    border-color: #a8dc6f;
+}
+
+.champ{
+    font-family: Century Gothic;
+    font-size: 20px;
+    color: #666666;
+}
+
+.text{
+    font-family: Century Gothic;
+    font-size: 20px;
+    color: #505051;
+}
+
+.info{
+    border-style: double;
+    border-color: #dddddd;
+    border-width: 1px;
+}   
+
+.welcome{   
+    font-size: 30px;
+    font-family: century gothic;
+    border-width: 1px;
+    border-style: double;
+    border-color: #c6baff;
+    border-radius: 10px;
+    color: #8a71ff;    
+}
+
+.textareas{
+    font-family: Century Gothic;
+    border-radius: 3px;   
+}
+
+.button {
+	-moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
+	-webkit-box-shadow:inset 0px 1px 0px 0px #ffffff;
+	box-shadow:inset 0px 1px 0px 0px #ffffff;
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #e0e0e0), color-stop(1, #fffcff) );
+	background:-moz-linear-gradient( center top, #e0e0e0 5%, #fffcff 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#e0e0e0', endColorstr='#fffcff');
+	background-color:#e0e0e0;
+	-moz-border-radius:6px;
+	-webkit-border-radius:6px;
+	border-radius:6px;
+	border:1px solid #dcdcdc;
+	display:inline-block;
+	color:#524452;
+	font-family:century gothic;
+	font-size:15px;
+	font-weight:bold;
+	padding:6px 24px;
+	text-decoration:none;
+	text-shadow:1px 1px 0px #ffffff;
+}
+
+.button:hover {
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #fffcff), color-stop(1, #e0e0e0) );
+	background:-moz-linear-gradient( center top, #fffcff 5%, #e0e0e0 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#fffcff', endColorstr='#e0e0e0');
+	background-color:#fffcff;
+}
+
+.button:active {
+	position:relative;
+	top:1px;
+}
+
+.title{
+    font-family: century gothic;
+    color: #999;
+    font-size: 23px;    
+}
+
+#pName,#pDescription,#pQuantity,#pPrice,#pSupplier{      /*how can we generalise this to products and users ?*/
+    color:lightgrey;
+    font-family: century gothic;
+}
+
+#deleteButton,#updateButton,#addButton,a,#hideButton1,#hideButton2{
+    cursor: pointer; 
+}
+
+#hideButton1,#hideButton2{
+  background-image: url(up.png);
+  background-repeat: no-repeat;
+  width:40px;
+  height:40px;
+  padding: 0;
+}
+
+.noDeco{
+    background: white;   
+}
+
+/* hedhi naffs'ha el .nomProduit elli fil productmanagement */
+#accordion p{
+            color: #4927e7;
+            text-decoration: none;
+            font-weight: 300;
+            font-size: 20px;
+            font-family: century gothic;
+}

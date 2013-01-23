@@ -6,7 +6,7 @@ import org.apache.commons.logging.LogFactory;
 public class UserFind {
     
     protected final Log logger = LogFactory.getLog(getClass());
-    private String keyword= "find user";
+    private String keyword;
 
     public String getKeyword() {
         return keyword;
