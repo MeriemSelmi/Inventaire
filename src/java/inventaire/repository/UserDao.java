@@ -14,6 +14,6 @@ public interface UserDao {
     public User getUserById(int id);
     public void update(User user) throws Exception;
     public void add(User user) throws Exception;
-    public void delete(User user) throws Exception;
+    public void delete(User user);
     public List<User> findUsers(String keyword) throws Exception;
 }

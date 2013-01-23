@@ -84,7 +84,7 @@ public class JdbcUserDao implements UserDao{
     }
 
     @Override
-    public void delete(User user) throws Exception{
+    public void delete(User user){
         logger.info("JdbcUserDao: Deleting user...");
         session = HibernateUtil.getSessionFactory().getCurrentSession();
         

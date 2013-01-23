@@ -14,26 +14,17 @@
         <fieldset>
             <legend>Actions</legend>
             <a id="<c:out value='useradd'/>">Add user</a>
+            
             <form:form method="post" action="userfind.htm" commandName="userfind">    
                 <form:input path="keyword" title="find user"/><input type="submit" value="Go"/>
-                <form:errors path="keyword"/>${keyword}
+                <form:errors path="keyword"/>
             </form:form>
-<!--
-            <spring:hasBindErrors name="userfind">
-                <div>
-                    <ul>
-                        <c:forEach var="error" items="${errors.allErrors}">
-                            <li>${error.defaultMessage}</li>
-                        </c:forEach>
-                    </ul>
-                </div>
-            </spring:hasBindErrors>    
--->
             <div>
                 <c:forEach var="usersFound" items="${requestScope.usersFound}">
                     <a href="">${usersFound.firstName} ${usersFound.lastName}</a><br>
                 </c:forEach>
             </div>
+                
         </fieldset>
 
         <fieldset>
@@ -61,57 +52,75 @@
 
         <div id="useradd">
             <form:form method="post" action="useradd.htm" commandName="useradd">    
-                <label>Name : </label>
-                <form:input path="lastName"/><br>
+                <form:errors path="error"/><br>
+                
+                <form:label path="lastName">Last Name : </form:label>
+                <form:input path="lastName"/>
+                <form:errors path="lastName"/><br>
 
-                <label>First Name : </label>
-                <form:input path="firstName"/><br>
+                <form:label path="firstName">First Name : </form:label>
+                <form:input path="firstName"/>
+                <form:errors path="firstName"/><br>
 
-                <label>Mail : </label>
-                <form:input path="email"/><br>
+                <form:label path="email">Email : </form:label>
+                <form:input path="email"/>
+                <form:errors path="email"/><br>
 
-                <label>Telephone : </label>
-                <form:input path="telephone"/><br>
+                <form:label path="telephone">Telephone : </form:label>
+                <form:input path="telephone"/>
+                <form:errors path="telephone"/><br>
 
-                <label>Address : </label>
-                <form:input path="address"/><br>
+                <form:label path="address">Address : </form:label>
+                <form:input path="address"/>
+                <form:errors path="address"/><br>
 
-                <label>Login : </label>
-                <form:input path="login"/><br>
+                <form:label path="login">Login : </form:label>
+                <form:input path="login"/>
+                <form:errors path="login"/><br>
 
-                <label>Password : </label>
-                <form:input path="password" /><br>
+                <form:label path="password">Password : </form:label>
+                <form:password path="password" />
+                <form:errors path="password"/><br>
 
-                <label>Role : </label>
+                <form:label path="role">Role : </form:label>
                 <form:select path="role" items="${userRoles}"/><br>
                 <input type="submit" value="add"/>
             </form:form>
         </div>
 
         <div id="userupdate">
-            <form:form method="post" action="userupdate.htm" commandName="userupdate" id="updateform">    
-                <label>Name : </label>
-                <form:input path="lastName"/><br>
+            <form:form method="post" action="userupdate.htm" commandName="userupdate" id="updateform">
+                <form:errors path="error"/><br>
+                
+                <form:label path="lastName">Last Name : </form:label>
+                <form:input path="lastName"/>
+                <form:errors path="lastName"/><br>
 
-                <label>First Name : </label>
-                <form:input path="firstName"/><br>
+                <form:label path="firstName">First Name : </form:label>
+                <form:input path="firstName"/>
+                <form:errors path="firstName"/><br>
 
-                <label>Mail : </label>
-                <form:input path="email"/><br>
+                <form:label path="email">Email : </form:label>
+                <form:input path="email"/>
+                <form:errors path="email"/><br>
 
-                <label>Telephone : </label>
-                <form:input path="telephone"/><br>
+                <form:label path="telephone">Telephone : </form:label>
+                <form:input path="telephone"/>
+                <form:errors path="telephone"/><br>
 
-                <label>Address : </label>
-                <form:input path="address"/><br>
+                <form:label path="address">Address : </form:label>
+                <form:input path="address"/>
+                <form:errors path="address"/><br>
 
-                <label>Login : </label>
-                <form:input path="login"/><br>
+                <form:label path="login">Login : </form:label>
+                <form:input path="login"/>
+                <form:errors path="login"/><br>
 
-                <label>Password : </label>
-                <form:input path="password" /><br>
+                <form:label path="password">Password : </form:label>
+                <form:password path="password" />
+                <form:errors path="password"/><br>
 
-                <label>Role : </label>
+                <form:label path="role">Role : </form:label>
                 <form:select path="role" items="${userRoles}"/><br>
 
                 <input type="submit" value="update"/>

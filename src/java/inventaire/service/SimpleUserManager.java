@@ -47,10 +47,10 @@ public class SimpleUserManager implements UserManager {
     }
 
     @Override
-    public void delete(User user) throws Exception {
+    public void delete(User user) {
         userDao.delete(user);
     }
-
+    
     @Override
     public List<User> findUsers(String keyword) throws Exception {
         return userDao.findUsers(keyword);

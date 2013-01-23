@@ -5,141 +5,122 @@ import inventaire.service.UserAdd;
 import inventaire.service.UserFind;
 import inventaire.service.UserManager;
 import inventaire.service.UserUpdate;
-import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.springframework.validation.BindException;
-import org.springframework.web.bind.ServletRequestBindingException;
+import javax.validation.Valid;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
-import org.springframework.web.servlet.view.InternalResourceView;
 import org.springframework.web.servlet.view.RedirectView;
 
-/**
- *
- * @author Meriem
- */
-public class UserManagementController extends MultiActionController {
+@Controller
+@RequestMapping("/user")
+public class UserManagementController {
 
-    protected final Log logger = LogFactory.getLog(getClass());
+    @Autowired
     private UserManager userManager;
-    private Map<String, Object> services;
 
-    public ModelAndView manageUsers(HttpServletRequest request, HttpServletResponse response)
-            throws Exception {
-
-        Map<String, Object> model = new HashMap<String, Object>();
-
-        List<User> users = listUsers();
-        model.put("users", users);
-
-        services = new HashMap<String, Object>();
-        services.put("userupdate", new UserUpdate());
-        services.put("useradd", new UserAdd());
-        services.put("userfind", new UserFind());
-        model.put("userRoles", User.USER_ROLES);
-
-        logger.info("UserManagementController: returning the user management view");
-        return new ModelAndView("usermanagement", model).addAllObjects(services);
-
+    @RequestMapping(value = "usermanagement.htm", method = RequestMethod.GET)
+    public ModelAndView manageUsers() {
+        return new ModelAndView("usermanagement");
     }
 
-    private List<User> listUsers()
-            throws Exception {
-        logger.info("UserManagementController: getting all users in the database");
-        List<User> users = userManager.getUsers();
-        return users;
-    }
+    @RequestMapping(value = "userupdate.htm", method = RequestMethod.POST)
+    public ModelAndView updateUser(
+            HttpServletRequest request, @ModelAttribute("userupdate") @Valid UserUpdate userUpdate,
+            BindingResult result) {
 
-    public ModelAndView updateUser(HttpServletRequest request, HttpServletResponse response, UserUpdate userUpdate)
-            throws Exception {
+        if (result.hasErrors()) {
+            return manageUsers();
+        }
 
         User user = userUpdate.getUser();
         user.setId(Integer.parseInt(request.getParameter("id")));
 
-        logger.info("UserManagementController: trying to update user");
         try {
             userManager.update(user);
+            return new ModelAndView(new RedirectView("/user/usermanagement.htm", true));
         } catch (Exception e) {
-            //login duplicated
-            return new ModelAndView(new InternalResourceView("usermanagement.htm"));
+            result.rejectValue("error", "error.update.failed");
+            return manageUsers();
         }
-
-        return new ModelAndView(new RedirectView("usermanagement.htm"));
     }
 
-    public ModelAndView addUser(HttpServletRequest request, HttpServletResponse response, UserAdd userAdd)
-            throws Exception {
+    @RequestMapping(value = "useradd.htm", method = RequestMethod.POST)
+    public ModelAndView addUser(
+            HttpServletRequest request, @ModelAttribute("useradd") @Valid UserAdd userAdd,
+            BindingResult result) {
 
         User user = userAdd.getUser();
 
-        logger.info("UserManagementController: trying to add user");
         try {
             userManager.add(user);
+            return new ModelAndView(new RedirectView("/user/usermanagement.htm", true));
         } catch (Exception e) {
-            return new ModelAndView(new InternalResourceView("usermanagement.htm"));
-            //login duplicated
+            result.rejectValue("error", "error.update.failed");
+            return manageUsers();
         }
-
-        return new ModelAndView(new RedirectView("usermanagement.htm"));
     }
 
-    public ModelAndView deleteUser(HttpServletRequest request, HttpServletResponse response)
-            throws Exception {
+    @RequestMapping(value = "userdelete.htm", method = RequestMethod.GET)
+    public ModelAndView deleteUser(HttpServletRequest request) {
 
         User user = new User();
         user.setId(Integer.parseInt(request.getParameter("id")));
-
-        logger.info("UserManagementController: trying to delete user");
         userManager.delete(user);
-
-        return new ModelAndView(new RedirectView("usermanagement.htm"));
+        return new ModelAndView(new RedirectView("/user/usermanagement.htm", true));
     }
 
-    public ModelAndView findUsers(HttpServletRequest request, HttpServletResponse response, UserFind userfind) {
+    @RequestMapping(value = "userfind.htm", method = RequestMethod.POST)
+    public ModelAndView findUsers(
+            HttpServletRequest request, @ModelAttribute("userfind") @Valid UserFind userFind,
+            BindingResult result) {
 
-        String keyword = userfind.getKeyword();
+        String keyword = userFind.getKeyword();
         List<User> usersFound;
-        logger.info("UserManagementController: getting all users in the database corresponding to " + keyword);
 
         try {
             usersFound = userManager.findUsers(keyword);
-            logger.info("UserManagementController: returning the user management view");
-            request.setAttribute("usersFound", usersFound);
-        } catch (Exception ex) {
-            //no users found
-            return new ModelAndView(new InternalResourceView("usermanagement.htm"));
+            return manageUsers().addObject("usersFound", usersFound);
+        } catch (Exception e) {
+            result.rejectValue("keyword", "error.find.failed");
+            return manageUsers();
         }
-
-        return new ModelAndView(new InternalResourceView("usermanagement.htm"));
     }
 
-    public ModelAndView hanldeBindException(HttpServletRequest request, HttpServletResponse response, ServletRequestBindingException bindingException) {
-        BindException bindException = (BindException) bindingException.getRootCause();
-/*
-        for (Object object : bindException.getAllErrors()) {
-            if (object instanceof FieldError) {
-                FieldError fieldError = (FieldError) object;
+    @ModelAttribute("userRoles")
+    public Map<String, String> getUserRoles() {
+        return User.USER_ROLES;
+    }
 
-                System.out.println(fieldError.getField());
-            }
+    @ModelAttribute("userfind")
+    public UserFind getUserFind() {
+        return new UserFind();
+    }
 
-            if (object instanceof ObjectError) {
-                ObjectError objectError = (ObjectError) object;
+    @ModelAttribute("userupdate")
+    public UserUpdate getUserUpdate() {
+        return new UserUpdate();
+    }
 
-                System.out.println(objectError.getCode());
-            }
+    @ModelAttribute("useradd")
+    public UserAdd getUserAdd() {
+        return new UserAdd();
+    }
+
+    @ModelAttribute("users")
+    private List<User> listUsers() {
+        List<User> users = new LinkedList<User>();
+        try {
+            users = userManager.getUsers();
+        } catch (Exception e) {
         }
-    */
-        return new ModelAndView(new RedirectView("/user/usermanagement.htm", true)).addAllObjects(bindException.getModel()); 
+        return users;
     }
-
-    public void setUserManager(UserManager userManager) {
-        this.userManager = userManager;
-    }
-    
 }
