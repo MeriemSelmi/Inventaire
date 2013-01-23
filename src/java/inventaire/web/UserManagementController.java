@@ -56,7 +56,11 @@ public class UserManagementController {
     public ModelAndView addUser(
             HttpServletRequest request, @ModelAttribute("useradd") @Valid UserAdd userAdd,
             BindingResult result) {
-
+        
+        if (result.hasErrors()) {
+            return manageUsers();
+        }
+        
         User user = userAdd.getUser();
 
         try {
@@ -81,7 +85,11 @@ public class UserManagementController {
     public ModelAndView findUsers(
             HttpServletRequest request, @ModelAttribute("userfind") @Valid UserFind userFind,
             BindingResult result) {
-
+        
+        if (result.hasErrors()) {
+            return manageUsers();
+        }
+        
         String keyword = userFind.getKeyword();
         List<User> usersFound;
 

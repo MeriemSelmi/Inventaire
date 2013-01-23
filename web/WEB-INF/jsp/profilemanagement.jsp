@@ -1,12 +1,13 @@
 <%@ include file="/WEB-INF/jsp/include.jsp" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<!DOCTYPE html>
 
 <html>
 
     <head>
         <link type="text/css" rel="stylesheet" href="<c:url value="/inc/style.css"/>" />
         <link type="text/css" rel="stylesheet" href="<c:url value="/inc/jquery-ui.css"/>" />
-        <title><fmt:message key="title"/></title>
+        <title><fmt:message key="title"/> | <fmt:message key="title.profile"/></title>
     </head>
 
     <body>

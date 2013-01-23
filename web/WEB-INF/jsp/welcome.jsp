@@ -1,9 +1,10 @@
 <%@ include file="/WEB-INF/jsp/include.jsp" %>
+<!DOCTYPE html>
 
 <html>
     <head>
         <link type="text/css" rel="stylesheet" href="inc/style.css" />
-        <title><fmt:message key="title"/></title>
+        <title><fmt:message key="title"/> | <fmt:message key="title.welcome"/></title>
     </head>
     <body>
         <%@ include file="/WEB-INF/jsp/header.jsp" %>
