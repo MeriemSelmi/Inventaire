@@ -26,6 +26,21 @@
         <property name="prefix" value="/WEB-INF/jsp/"></property>
         <property name="suffix" value=".jsp"></property>
     </bean>
+    
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/welcome.htm"/>
+            <mvc:mapping path="/user/*"/>
+            <mvc:mapping path="/product/*"/>
+            <mvc:mapping path="/profile/*"/>
+            <bean class="inventaire.security.SessionInterceptor" />
+        </mvc:interceptor>
+        <mvc:interceptor>
+            <mvc:mapping path="/user/*"/>
+            <bean class="inventaire.security.SecurityInterceptor" />
+        </mvc:interceptor>
+    </mvc:interceptors>
+    
 <!--    
     <bean id="urlHandler"
           class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping" >
@@ -45,19 +60,6 @@
     
     <bean id="SecurityController" class="inventaire.security.SecurityController" />
     
-    <mvc:interceptors>
-        <mvc:interceptor>
-            <mvc:mapping path="/welcome.htm"/>
-            <mvc:mapping path="/user/*"/>
-            <mvc:mapping path="/product/*"/>
-            <mvc:mapping path="/profile/*"/>
-            <bean class="inventaire.security.SessionInterceptor" />
-        </mvc:interceptor>
-        <mvc:interceptor>
-            <mvc:mapping path="/user/*"/>
-            <bean class="inventaire.security.SecurityInterceptor" />
-        </mvc:interceptor>
-    </mvc:interceptors>
 -->    
     <!--****************************USERS CONFIGURATION*********************************--> 
 <!--    

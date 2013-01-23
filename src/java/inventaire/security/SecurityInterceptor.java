@@ -12,7 +12,7 @@ public class SecurityInterceptor extends HandlerInterceptorAdapter{
         String role = ((User) request.getSession().getAttribute("loggedUser")).getRole();
         if(role.equals(User.USER_ROLE_ADMINISTRATOR))
             return true;
-        response.sendRedirect("../security.htm");
+        response.sendRedirect("/Inventaire/authentication.htm");
         return false;
     }
 
