@@ -12,11 +12,6 @@
  <!--****************************COMMON CONFIGURATION*********************************-->     
     <mvc:annotation-driven/>
     <context:component-scan base-package="inventaire.web" />
-    
-    <bean id="messageSource"
-          class="org.springframework.context.support.ResourceBundleMessageSource">
-        <property name="basename" value="messages"/>
-    </bean>
 
     <bean id="viewResolver"
           class="org.springframework.web.servlet.view.InternalResourceViewResolver">
@@ -25,8 +20,8 @@
         </property>
         <property name="prefix" value="/WEB-INF/jsp/"></property>
         <property name="suffix" value=".jsp"></property>
-    </bean>
-    
+    </bean>  
+        
     <mvc:interceptors>
         <mvc:interceptor>
             <mvc:mapping path="/welcome.htm"/>
@@ -39,6 +34,25 @@
             <mvc:mapping path="/user/*"/>
             <bean class="inventaire.security.SecurityInterceptor" />
         </mvc:interceptor>
+    </mvc:interceptors>
+    
+    <!--****************************I18N CONFIGURATION*********************************--> 
+    <bean id="messageSource"
+        class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+        <property name="basename" value="classpath:messages" />
+        <property name="defaultEncoding" value="UTF-8" />
+    </bean>
+
+    <bean id="localeResolver"
+          class="org.springframework.web.servlet.i18n.CookieLocaleResolver">
+        <property name="defaultLocale" value="en"/>
+    </bean>
+    
+    <mvc:interceptors>
+        <bean id="localeChangeInterceptor"
+              class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+            <property name="paramName" value="language"/>
+        </bean>
     </mvc:interceptors>
     
 <!--    
