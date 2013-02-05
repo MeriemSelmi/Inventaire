@@ -52,7 +52,7 @@ public class ProductManagementController extends MultiActionController {
         } catch (Exception e) {
             logger.info("ProductManagementController: returning the exception content");
             req.setAttribute("exception", e);
-            return new ModelAndView(new RedirectView("productmanagement.htm"));
+            return new ModelAndView(new RedirectView("productmanagement.htm",true));
         }
 
     }
@@ -66,10 +66,10 @@ public class ProductManagementController extends MultiActionController {
         }
         try {
             productManager.addProduct(product);
-            return new ModelAndView(new RedirectView("productmanagement.htm"));
+            return new ModelAndView(new RedirectView("productmanagement.htm",true));
         } catch (Exception e) {
             req.setAttribute("exception", e);
-            return new ModelAndView(new RedirectView("productmanagement.htm"));
+            return new ModelAndView(new RedirectView("productmanagement.htm",true));
         }
     }
 
@@ -86,23 +86,23 @@ public class ProductManagementController extends MultiActionController {
         logger.info("ProductManagementController: trying to update product");
         try {
             productManager.UpdateProduct(product);
-            return new ModelAndView(new RedirectView("productmanagement.htm"));
+            return new ModelAndView(new RedirectView("productmanagement.htm",true));
         } catch (Exception e) {
             req.setAttribute("exception", e);
-            return new ModelAndView("productmanagement.htm");
+            return new ModelAndView(new RedirectView("productmanagement.htm",true));
         }
     }
 
-    @RequestMapping(value = "productdelete", method = RequestMethod.POST)
-    public ModelAndView deleteProduct(HttpServletRequest req, HttpServletResponse res, BindingResult result) throws Exception {
+    @RequestMapping(value = "productdelete", method = RequestMethod.GET)
+    public ModelAndView deleteProduct(HttpServletRequest req, HttpServletResponse res) throws Exception {
         logger.info("UserManagementController: trying to delete product");
         try {
             int id = Integer.parseInt(req.getParameter("id"));
             productManager.deleteProduct(id);
-            return new ModelAndView("productmanagement.htm");
+            return new ModelAndView(new RedirectView("productmanagement.htm",true));
         } catch (Exception e) {
             req.setAttribute("exception", e);
-            return new ModelAndView("productmanagement.htm");
+            return new ModelAndView(new RedirectView("productmanagement.htm",true));
         }
     }
 
