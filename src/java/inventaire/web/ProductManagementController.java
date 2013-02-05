@@ -57,7 +57,7 @@ public class ProductManagementController extends MultiActionController {
 
     }
 
-    @RequestMapping(value = "productadd.htm", method = RequestMethod.POST)
+    @RequestMapping(value = "productadd.htm")
     public ModelAndView addProduct(HttpServletRequest req, @ModelAttribute("productadd") @Valid ProductAdd productAdd, BindingResult result) throws Exception {
         Product product = productAdd.getProduct();
         if (result.hasErrors()) {
@@ -76,13 +76,17 @@ public class ProductManagementController extends MultiActionController {
         }
     }
 
-    @RequestMapping(value = "productupdate", method = RequestMethod.POST)
+    @RequestMapping(value = "productupdate")
     public ModelAndView updateProduct(HttpServletRequest req, HttpServletResponse res, @ModelAttribute("productupdate") @Valid ProductUpdate productUpdate, BindingResult result) throws Exception {
         Product product = productUpdate.getProduct();
 
         if (result.hasErrors()) {
             System.out.println("Error Handling : ");
-            return new ModelAndView("productmanagement");
+             Map<String, Object> model = new HashMap<String, Object>();
+            List<Product> products = this.listProducts();
+            model.put("products", products);
+            model.put("open","yes");
+            return new ModelAndView("productmanagement","model",model).addAllObjects(model);
         }
 
         product.setId(Integer.parseInt(req.getParameter("id")));
@@ -113,7 +117,7 @@ public class ProductManagementController extends MultiActionController {
     public ModelAndView findProducts(HttpServletRequest req, HttpServletResponse res, @ModelAttribute("productfind") @Valid ProductFind productFind, BindingResult result) throws Exception {
 
         if (result.hasErrors()) {
-            return new ModelAndView("productmanagement", "errorFind", result.getFieldError().getDefaultMessage());
+            return new ModelAndView(new RedirectView("productmanagement.htm"));
         }
 
         String key = productFind.getKey();

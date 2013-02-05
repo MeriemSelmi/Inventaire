@@ -4,11 +4,14 @@
  */
 package inventaire.service;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 /**
  *
  * @author Balkis
  */
 public class ProductFind {
+
     private String key;
 
     public String getKey() {
