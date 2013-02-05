@@ -58,11 +58,14 @@ public class ProductManagementController extends MultiActionController {
     }
 
     @RequestMapping(value = "productadd.htm", method = RequestMethod.POST)
-    public ModelAndView addProduct(HttpServletRequest req, @ModelAttribute("productadd") @Valid ProductAdd productAdd, BindingResult result) {
+    public ModelAndView addProduct(HttpServletRequest req, @ModelAttribute("productadd") @Valid ProductAdd productAdd, BindingResult result) throws Exception {
         Product product = productAdd.getProduct();
         if (result.hasErrors()) {
             System.out.println("Error Handling : There's an error!!! ");
-            return new ModelAndView("productmanagement");
+            Map<String, Object> model = new HashMap<String, Object>();
+            List<Product> products = this.listProducts();
+            model.put("products", products);
+            return new ModelAndView("productmanagement","model",model).addAllObjects(model);
         }
         try {
             productManager.addProduct(product);
