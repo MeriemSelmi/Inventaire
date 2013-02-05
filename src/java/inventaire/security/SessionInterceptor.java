@@ -15,7 +15,7 @@ public class SessionInterceptor extends HandlerInterceptorAdapter{
         User user = (User) request.getSession().getAttribute("loggedUser");
         if(user!=null)
             return true;
-        response.sendRedirect("/Inventaire/authentication.htm");
+        response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + "/authentication.htm"));
         return false;
     }
 }
