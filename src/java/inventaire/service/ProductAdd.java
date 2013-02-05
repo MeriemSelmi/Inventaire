@@ -6,24 +6,27 @@ package inventaire.service;
 
 import inventaire.domain.Product;
 import java.util.Map;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import org.hibernate.validator.constraints.NotEmpty;
 
 /**
  *
  * @author Balkis
  */
 public class ProductAdd {
+    @NotEmpty
     private String name;
+    @NotEmpty(message="{product.label.name.error}")
     private String description;
+    @NotEmpty(message="{product.label.name.error}")
     private String quantity;
+    @NotEmpty(message="{product.label.name.error}")
+    @Min(1)
     private String price;
+    @NotEmpty(message="{product.label.name.error}")
     private String supplier;
-    private Map<String, String> errors;
-    
-    public Map<String,String> addError(String msg){
-        errors.put("erreur", msg);
-        
-        return errors;
-    }
+
 
     public String getName() {
         return name;
