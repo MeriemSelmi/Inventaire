@@ -5,16 +5,24 @@
 package inventaire.service;
 
 import inventaire.domain.Product;
+import javax.validation.constraints.Min;
+import org.hibernate.validator.constraints.NotEmpty;
 
 /**
  *
  * @author Balkis
  */
 public class ProductUpdate {
+    @NotEmpty
     private String name;
+    @NotEmpty
     private String description;
+    @NotEmpty
     private String quantity;
+    @NotEmpty
+    @Min(1)
     private String price;
+    @NotEmpty
     private String supplier;
 
     public String getName() {

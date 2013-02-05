@@ -43,9 +43,9 @@
                 <form:form method="post" action="productfind.htm" commandName="productfind">
                     <table>
                         <tr>
-                            <td class="champ" align="center"><spring:message code="product.label.find" /> &nbsp;&nbsp;&nbsp;&nbsp; <form:input path="key" class="textareas" /> <span class="error">${errorFind}</span></td>
+                            <td class="champ" align="center"><spring:message code="product.label.find" /> &nbsp;&nbsp;&nbsp;&nbsp; <form:input path="key" class="textareas" /></td>
                             <td align="center"><input type="submit" value="<spring:message code="product.button.find" />" class="button" /></td>
-                            <td><form:errors path="key" cssClass="error" /></td>
+                            <td class="noDeco"><form:errors path="key" cssClass="error" /></td>
                         </tr>              
                     </table>                   
                 </form:form>
@@ -146,6 +146,7 @@
                     </div>
                 </td></tr>
         </table>
+                    <%@ include file="/WEB-INF/jsp/footer.jsp" %>
             <!--***********************************************************************************************************-->
         <script src="<c:url value="/inc/jquery.js"/>"></script>
         <script src="<c:url value="/inc/jquery-ui.js"/>"></script>
