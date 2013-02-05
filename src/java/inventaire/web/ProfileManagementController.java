@@ -48,7 +48,7 @@ public class ProfileManagementController {
             request.getSession().setAttribute("loggedUser", user);
             return new ModelAndView(new RedirectView("/profile/profilemanagement.htm", true));
         } catch (Exception e) {
-            result.rejectValue("error", "error.update.failed");
+            result.rejectValue("error", "error.user.update");
             return manageProfile(new ModelMap());
         }
     }

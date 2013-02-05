@@ -46,7 +46,7 @@ public class AuthenticationController {
             return new ModelAndView(new RedirectView("/welcome.htm", true));
 
         } catch (Exception e) {
-            result.rejectValue("error", "error.authentication.failed");
+            result.rejectValue("error", "error.user.authentication");
             logger.info("AuthenticationController: authentication failed.");
             return showForm(new ModelMap());
         }

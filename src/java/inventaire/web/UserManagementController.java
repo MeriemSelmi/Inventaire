@@ -47,7 +47,7 @@ public class UserManagementController {
             userManager.update(user);
             return new ModelAndView(new RedirectView("/user/usermanagement.htm", true));
         } catch (Exception e) {
-            result.rejectValue("login", "error.update.failed");
+            result.rejectValue("login", "error.user.update");
             return manageUsers();
         }
     }
@@ -67,7 +67,7 @@ public class UserManagementController {
             userManager.add(user);
             return new ModelAndView(new RedirectView("/user/usermanagement.htm", true));
         } catch (Exception e) {
-            result.rejectValue("login", "error.update.failed");
+            result.rejectValue("login", "error.user.update");
             return manageUsers();
         }
     }
@@ -97,7 +97,7 @@ public class UserManagementController {
             usersFound = userManager.findUsers(keyword);
             return manageUsers().addObject("usersFound", usersFound);
         } catch (Exception e) {
-            result.rejectValue("keyword", "error.find.failed");
+            result.rejectValue("keyword", "error.user.find");
             return manageUsers();
         }
     }
