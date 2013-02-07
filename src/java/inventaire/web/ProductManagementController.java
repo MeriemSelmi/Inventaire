@@ -65,6 +65,7 @@ public class ProductManagementController extends MultiActionController {
             Map<String, Object> model = new HashMap<String, Object>();
             List<Product> products = this.listProducts();
             model.put("products", products);
+            req.setAttribute("openAddForm","open");
             req.setAttribute("errorProduct",product.getId());
             return new ModelAndView("productmanagement","model",model).addAllObjects(model);
         }
@@ -86,7 +87,9 @@ public class ProductManagementController extends MultiActionController {
              Map<String, Object> model = new HashMap<String, Object>();
             List<Product> products = this.listProducts();
             model.put("products", products);
+            req.setAttribute("nameErrorProduct", product.getName());
             req.setAttribute("errorProduct",product.getId());
+            
             return new ModelAndView("productmanagement","model",model).addAllObjects(model);
         }
 
