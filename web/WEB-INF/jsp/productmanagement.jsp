@@ -41,8 +41,8 @@
                 <form:form method="post" action="productfind.htm" commandName="productfind">
                     <table>
                         <tr>
-                            <td class="champ" align="center"><fmt:message key="product.label.find" /> &nbsp;&nbsp;&nbsp;&nbsp; <form:input path="key" class="textareas" /></td>
-                            <td align="center"><input type="submit" value="<fmt:message key="product.button.find" />" class="button" /></td>
+                            <td class="champ" align="center"><fmt:message key="title.find" /> &nbsp;&nbsp;&nbsp;&nbsp; <form:input path="key" class="textareas" /></td>
+                            <td align="center"><input type="submit" value="<fmt:message key="button.find" />" class="button" /></td>
                             <td class="noDeco"><form:errors path="key" cssClass="error" /></td>
                         </tr>              
                     </table>                   
@@ -80,15 +80,15 @@
                                                          
                                                          <table >
                                                              <tr>
-                                                                 <td align="center"><div class="button" onclick="showForm('${product.id}');" id="updateButton"><fmt:message key="product.button.update" /></div></td>
-                                                                 <td align="center"><a href="productdelete.htm?id=${product.id}" > <div class="button" id="deleteButton"><fmt:message key="product.button.delete" /></div> </a></td></tr>
+                                                                 <td align="center"><div class="button" onclick="showForm('${product.id}');" id="updateButton"><fmt:message key="button.update" /></div></td>
+                                                                 <td align="center"><a href="productdelete.htm?id=${product.id}" > <div class="button" id="deleteButton"><fmt:message key="button.delete" /></div> </a></td></tr>
                                                         </table>
                                                     </div>
 
 
 
                                                 <div id="${product.id}" class="ui-widget-content ui-corner-all" hidden="hidden" >
-                                                    <table><tr><td class="noDeco"> <p class="title"><fmt:message key="product.update.title" /></p> </td><td class="noDeco"><div align="right" id="hideButton1" onclick="runHideEffect('${product.id}')"></div></td></tr></table>
+                                                    <table><tr><td class="noDeco"> <p class="title"><fmt:message key="title.update" /></p> </td><td class="noDeco"><div align="right" id="hideButton1" onclick="runHideEffect('${product.id}')"></div></td></tr></table>
 
                                                     <form:form method="post" action="productupdate.htm" commandName="productupdate" acceptCharset="UTF-8" >
                                                         <table>
@@ -103,7 +103,7 @@
                                                                 <td><form:input path="price" class="textareas" id="pPrice" value="${product.price}" onclick="viderChamps(this)" /></td><td class="noDeco"><c:if test="${product.id==errorProduct}" > <form:errors path="price" cssClass="error"/> </c:if></td></tr>
                                                             <tr><td><fmt:message key="product.label.supplier" /></td>
                                                                 <td><form:input path="supplier" class="textareas" id="pSupplier" value="${product.supplier}" onclick="viderChamps(this)" /></td><td class="noDeco"><c:if test="${product.id==errorProduct}" > <form:errors path="supplier" cssClass="error" /></c:if></td></tr>
-                                                            <tr><td><input type="submit" value="<fmt:message key="product.button.validate" />" class="button"/></td></tr>
+                                                            <tr><td><input type="submit" value="<fmt:message key="button.validate" />" class="button"/></td></tr>
                                                         </table>
 
 
@@ -128,11 +128,11 @@
             <!--************************************ADD PRODUCT SPACE*************************************************-->
             <tr><td align="center">
                     
-                    <div class="button" id="addButton" onclick="showForm('addForm')"><fmt:message key="product.button.add" /></div> </br></br>
+                    <div class="button" id="addButton" onclick="showForm('addForm')"><fmt:message key="button.add" /></div> </br></br>
             
                     <div id="addForm" class="ui-widget-content ui-corner-all" hidden="true" >
                         <input type="hidden" value="${openAddForm}" id="addError" />
-                        <table><tr><td class="noDeco"> <p class="title">Please enter product informations.</p> </td><td class="noDeco"><div align="right" id="hideButton2" onclick="runHideEffect('addForm')"></div></td></tr></table>
+                        <table><tr><td class="noDeco"> <p class="title"><fmt:message key="title.add"/></p> </td><td class="noDeco"><div align="right" id="hideButton2" onclick="runHideEffect('addForm')"></div></td></tr></table>
                         <form:form method="post" action="productadd.htm" commandName="productadd" >
                         <table>                            
                             <tr><td class="champ"><fmt:message key="product.label.name" />   </td>
@@ -145,7 +145,7 @@
                                 <td><form:input path="price" class="textareas" name="productPrice" /></td><td class="noDeco"><form:errors path="price" cssClass="error" /></td></tr>
                             <tr><td class="champ"><fmt:message key="product.label.supplier" /></td>
                                 <td><form:input path="supplier" class="textareas" name="productSupplier" /></td><td class="noDeco"><form:errors path="supplier" cssClass="error" /></td></tr>
-                            <tr><td><input type="submit" value="<fmt:message key="product.button.validate" />" class="button"/></td></tr>
+                            <tr><td><input type="submit" value="<fmt:message key="button.validate" />" class="button"/></td></tr>
                         </table>
                         </form:form>
                        
