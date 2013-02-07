@@ -8,26 +8,28 @@ var icons = {
 
     
 $(function() {
+      
     $('#productSection').hide();
     
     $( "#accordion" ).accordion({
-      active: false, 
+      active:false,
       icons: icons,
       collapsible:true,      
       heightStyle: "content"
     
     });
+    
    var s = $('#errorP').val();
    var id = '#'+s;
    $(id).show();
    
    var s = $('#errorId').val();
    var id = '#'+s;
-   $(id).show()
+   $(id).show();
 
    var open = $('#addError').val();
    if(open=="open"){
-        $('#addForm').show();
+   $('#addForm').show();
        
    }
   });
