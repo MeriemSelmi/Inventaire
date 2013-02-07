@@ -89,15 +89,15 @@
                                                         <table>
                                                             <tr><input type="text" hidden="true" name="id" value="${product.id}" /></tr>
                                                             <tr><td><spring:message code="product.label.name" /></td>
-                                                                <td><form:input path="name" class="textareas" id="pName"  value="${product.name}" onclick="viderChamps(this)" /> </td><td class="noDeco"><form:errors path="name" cssClass="error"/></td></tr>
+                                                                <td><form:input path="name" class="textareas" id="pName"  value="${product.name}" onclick="viderChamps(this)" /> </td><td class="noDeco"><c:if test="${product.id==errorProduct}" > <form:errors path="name" cssClass="error"/> </c:if></td></tr>
                                                             <tr><td><spring:message code="product.label.description" /></td>
-                                                                <td><form:input path="description"  class="textareas" id="pDescription" value="${product.description}" onclick="viderChamps(this)" /></td><td class="noDeco"> <form:errors path="description" cssClass="error" />  </td></tr>
+                                                                <td><form:input path="description"  class="textareas" id="pDescription" value="${product.description}" onclick="viderChamps(this)" /></td><td class="noDeco"><c:if test="${product.id==errorProduct}" > <form:errors path="description" cssClass="error" /> </c:if> </td></tr>
                                                             <tr><td><spring:message code="product.label.quantity" /></td>
-                                                                <td><form:input path="quantity" class="textareas" id="pQuantity" value="${product.quantity}" onclick="viderChamps(this)" /> </td><td class="noDeco"> <form:errors path="quantity" cssClass="error"/> </td></tr>
+                                                                <td><form:input path="quantity" class="textareas" id="pQuantity" value="${product.quantity}" onclick="viderChamps(this)" /> </td><td class="noDeco"><c:if test="${product.id==errorProduct}" > <form:errors path="quantity" cssClass="error"/></c:if> </td></tr>
                                                             <tr><td><spring:message code="product.label.price" /></td>
-                                                                <td><form:input path="price" class="textareas" id="pPrice" value="${product.price}" onclick="viderChamps(this)" /></td><td class="noDeco"> <form:errors path="price" cssClass="error"/> </td></tr>
+                                                                <td><form:input path="price" class="textareas" id="pPrice" value="${product.price}" onclick="viderChamps(this)" /></td><td class="noDeco"><c:if test="${product.id==errorProduct}" > <form:errors path="price" cssClass="error"/> </c:if></td></tr>
                                                             <tr><td><spring:message code="product.label.supplier" /></td>
-                                                                <td><form:input path="supplier" class="textareas" id="pSupplier" value="${product.supplier}" onclick="viderChamps(this)" /></td><td class="noDeco"> <form:errors path="supplier" cssClass="error" /></td></tr>
+                                                                <td><form:input path="supplier" class="textareas" id="pSupplier" value="${product.supplier}" onclick="viderChamps(this)" /></td><td class="noDeco"><c:if test="${product.id==errorProduct}" > <form:errors path="supplier" cssClass="error" /></c:if></td></tr>
                                                             <tr><td><input type="submit" value="<spring:message code="product.button.validate" />" class="button"/></td></tr>
                                                         </table>
 

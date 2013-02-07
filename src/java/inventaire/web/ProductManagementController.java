@@ -65,6 +65,7 @@ public class ProductManagementController extends MultiActionController {
             Map<String, Object> model = new HashMap<String, Object>();
             List<Product> products = this.listProducts();
             model.put("products", products);
+            req.setAttribute("errorProduct",product.getId());
             return new ModelAndView("productmanagement","model",model).addAllObjects(model);
         }
         try {
@@ -79,17 +80,17 @@ public class ProductManagementController extends MultiActionController {
     @RequestMapping(value = "productupdate")
     public ModelAndView updateProduct(HttpServletRequest req, HttpServletResponse res, @ModelAttribute("productupdate") @Valid ProductUpdate productUpdate, BindingResult result) throws Exception {
         Product product = productUpdate.getProduct();
-
+        product.setId(Integer.parseInt(req.getParameter("id")));
         if (result.hasErrors()) {
             System.out.println("Error Handling : ");
              Map<String, Object> model = new HashMap<String, Object>();
             List<Product> products = this.listProducts();
             model.put("products", products);
-            model.put("open","yes");
+            req.setAttribute("errorProduct",product.getId());
             return new ModelAndView("productmanagement","model",model).addAllObjects(model);
         }
 
-        product.setId(Integer.parseInt(req.getParameter("id")));
+        
         logger.info("ProductManagementController: trying to update product");
         try {
             productManager.UpdateProduct(product);
