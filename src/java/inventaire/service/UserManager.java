@@ -12,5 +12,5 @@ public interface UserManager extends Serializable {
     public void update(User user) throws Exception;
     public void add(User user) throws Exception;
     public void delete(User user);
-    public List<User> findUsers(String keyword) throws Exception;
+    public List<User> findUsers(String keyword);
 }

@@ -2,8 +2,10 @@ package inventaire.service;
 
 import inventaire.domain.User;
 import inventaire.repository.UserDao;
-import java.lang.reflect.Method;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class SimpleUserManager implements UserManager {
 
@@ -35,8 +37,13 @@ public class SimpleUserManager implements UserManager {
     }
     
     @Override
-    public List<User> findUsers(String keyword) throws Exception {
-        return userDao.findUsers(keyword);
+    public List<User> findUsers(String keyword) {
+        List<User> users = new LinkedList<User>();
+        try {
+            users= userDao.findUsers(keyword);
+        } catch (Exception e) {
+        }
+        return users;
     }
 
     public void setUserDao(UserDao userDao) throws Exception {

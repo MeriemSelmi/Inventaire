@@ -92,14 +92,8 @@ public class UserManagementController {
         
         String keyword = userFind.getKeyword();
         List<User> usersFound;
-
-        try {
-            usersFound = userManager.findUsers(keyword);
-            return manageUsers().addObject("usersFound", usersFound);
-        } catch (Exception e) {
-            result.rejectValue("keyword", "error.user.find");
-            return manageUsers();
-        }
+        usersFound = userManager.findUsers(keyword);
+        return manageUsers().addObject("users", usersFound);
     }
 
     @ModelAttribute("userRoles")
