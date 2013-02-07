@@ -18,7 +18,7 @@
     <body>
         <%@ include file="/WEB-INF/jsp/header.jsp" %>
         <table id="global">
-            <caption><div class="welcome"><fmt:message key="user.page.title"/></div></caption>
+            <caption><a href="/Inventory/user/usermanagement.htm" style="text-decoration: none;"><div class="welcome"><fmt:message key="user.page.title"/></div></a></caption>
             <!--**********************************SEARCH TOOL*************************************************-->
             <caption align="center">
                 <form:form method="post" action="userfind.htm" commandName="userfind">
@@ -43,7 +43,9 @@
 
                                             <p><c:out value="${user.firstName} ${user.lastName}"></c:out></p>
 
-                                                <div class="productDiv">
+                                                <div class="productDiv" id="${user.login}">
+                                                <input type="hidden" value="${loginErrorUser}" id="errorP" />
+                                                <input type="hidden" value="${errorUser}" id="errorId" />
                                                     <div>
                                                         <table class="productInfoTable">
                                                         <tr><td class="champ"><fmt:message key="user.label.id"/> :</td><td class="text">${user.id}</td></tr>  
@@ -65,29 +67,30 @@
 
                                                     <form:form method="post" action="userupdate.htm" commandName="userupdate" acceptCharset="UTF-8" >
                                                         <form:errors path="error"/>
+                                                        <input type="hidden" name="updateLogin" value="${user.login}" />  
                                                         <table>
                                                             <tr><input type="text" hidden="true" name="id" value="${user.id}" /></tr>
                                                             <tr><td><form:label path="firstName"><fmt:message key="user.label.firstName"/> : </form:label></td>
-                                                                <td><form:input path="firstName" class="textareas"  value="${user.firstName}" onclick="viderChamps(this)" /> 
-                                                                    <form:errors path="firstName"/></td></tr>
+                                                                <td><form:input path="firstName" class="updateTextareas"  value="${user.firstName}" onclick="viderChamps(this)" /> 
+                                                                </td><td class="noDeco"><c:if test="${user.id==errorUser}" ><form:errors path="firstName" cssClass="error"/></c:if></td></tr>
                                                             <tr><td><form:label path="lastName"><fmt:message key="user.label.lastName"/> : </form:label></td>
-                                                                <td><form:input path="lastName" class="textareas"  value="${user.lastName}" onclick="viderChamps(this)" /> 
-                                                                    <form:errors path="lastName"/></td></tr>
+                                                                <td><form:input path="lastName" class="updateTextareas"  value="${user.lastName}" onclick="viderChamps(this)" /> 
+                                                                </td><td class="noDeco"><c:if test="${user.id==errorUser}" ><form:errors path="lastName" cssClass="error"/></c:if></td></tr>
                                                             <tr><td><form:label path="email"><fmt:message key="user.label.email"/> : </form:label></td>
-                                                                <td><form:input path="email" class="textareas"  value="${user.email}" onclick="viderChamps(this)" /> 
-                                                                    <form:errors path="email"/></td></tr>
+                                                                <td><form:input path="email" class="updateTextareas"  value="${user.email}" onclick="viderChamps(this)" /> 
+                                                                </td><td class="noDeco"><c:if test="${user.id==errorUser}" ><form:errors path="email" cssClass="error"/></c:if></td></tr>
                                                             <tr><td><form:label path="telephone"><fmt:message key="user.label.telephone"/> : </form:label></td>
-                                                                <td><form:input path="telephone" class="textareas"  value="${user.telephone}" onclick="viderChamps(this)" /> 
-                                                                    <form:errors path="telephone"/></td></tr>
+                                                                <td><form:input path="telephone" class="updateTextareas"  value="${user.telephone}" onclick="viderChamps(this)" /> 
+                                                                </td><td class="noDeco"><c:if test="${user.id==errorUser}" ><form:errors path="telephone" cssClass="error"/></c:if></td></tr>
                                                             <tr><td><form:label path="address"><fmt:message key="user.label.address"/> : </form:label></td>
-                                                                <td><form:input path="address" class="textareas"  value="${user.address}" onclick="viderChamps(this)" /> 
-                                                                    <form:errors path="address"/></td></tr>
+                                                                <td><form:input path="address" class="updateTextareas"  value="${user.address}" onclick="viderChamps(this)" /> 
+                                                                </td><td class="noDeco"><c:if test="${user.id==errorUser}" ><form:errors path="address" cssClass="error"/></c:if></td></tr>
                                                             <tr><td><form:label path="login"><fmt:message key="user.label.login"/> : </form:label></td>
-                                                                <td><form:input path="login" class="textareas"  value="${user.login}" onclick="viderChamps(this)" /> 
-                                                                    <form:errors path="login"/></td></tr>
+                                                                <td><form:input path="login" class="updateTextareas"  value="${user.login}" onclick="viderChamps(this)" /> 
+                                                                </td><td class="noDeco"><c:if test="${user.id==errorUser}" ><form:errors path="login" cssClass="error"/></c:if></td></tr>
                                                             <tr><td><form:label path="password"><fmt:message key="user.label.password"/> : </form:label></td>
-                                                                <td><form:password path="password" class="textareas"  value="${user.password}" onclick="viderChamps(this)" /> 
-                                                                    <form:errors path="password"/></td></tr>
+                                                                <td><form:password path="password" class="updateTextareas"  value="${user.password}" onclick="viderChamps(this)" /> 
+                                                                </td><td class="noDeco"><c:if test="${user.id==errorUser}" ><form:errors path="password" cssClass="error"/></c:if></td></tr>
                                                             <tr><td><form:label path="role"><fmt:message key="user.label.role"/> : </form:label></td>
                                                                     <td> 
                                                                     <form:select path="role">
@@ -99,7 +102,7 @@
                                                                             <form:option value="Storekeeper"/>
                                                                         </c:if>
                                                                     </form:select>
-                                                                    <form:errors path="role"/></td></tr>
+                                                                    </td><td class="noDeco"><c:if test="${user.id==errorUser}" ><form:errors path="role" cssClass="error"/> </c:if></td></tr>
                                                             <tr><td><input type="submit" value="<fmt:message key="button.validate"/>" class="button"/></td></tr>
                                                         </table>
                                                     </form:form>

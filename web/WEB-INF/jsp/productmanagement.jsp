@@ -13,7 +13,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link type="text/css" rel="stylesheet" href="<c:url value="/inc/style.css"/>" />
-        <link type="text/css" rel="stylesheet" href="<c:url value="/inc/ProductStyle.css"/>" />
+
         <link type="text/css" rel="stylesheet" href="<c:url value="/inc/jquery-ui.css"/>" />
         <title><fmt:message key="title"/> | <fmt:message key="title.products"/></title>
     </head>
@@ -90,19 +90,19 @@
                                                 <div id="${product.id}" class="ui-widget-content ui-corner-all" hidden="hidden" >
                                                     <table><tr><td class="noDeco"> <p class="title"><fmt:message key="title.update" /></p> </td><td class="noDeco"><div align="right" id="hideButton1" onclick="runHideEffect('${product.id}')"></div></td></tr></table>
                                                     <form:form method="post" action="productupdate.htm" commandName="productupdate" acceptCharset="UTF-8" >
-                                                        <input type="hidden" name="updateName" value="${product.name}" />  
+                                                        <input type="hidden" name="updateMail" value="${product.name}" />  
                                                         <table>
                                                             <tr><input type="text" hidden="true" name="id" value="${product.id}" /></tr>
                                                             <tr><td><fmt:message key="product.label.name" /></td>
-                                                                <td><form:input path="name" class="textareas" id="pName"  value="${product.name}" onclick="viderChamps(this)" /> </td><td class="noDeco"><c:if test="${product.id==errorProduct}" > <form:errors path="name" cssClass="error"/> </c:if></td></tr>
+                                                                <td><form:input path="name"  Class="updateTextareas"  value="${product.name}" onclick="viderChamps(this)" /> </td><td class="noDeco"><c:if test="${product.id==errorProduct}" > <form:errors path="name" cssClass="error"/> </c:if></td></tr>
                                                             <tr><td><fmt:message key="product.label.description" /></td>
-                                                                <td><form:input path="description"  class="textareas" id="pDescription" value="${product.description}" onclick="viderChamps(this)" /></td><td class="noDeco"><c:if test="${product.id==errorProduct}" > <form:errors path="description" cssClass="error" /> </c:if> </td></tr>
+                                                                <td><form:input path="description"  class="updateTextareas"  value="${product.description}" onclick="viderChamps(this)" /></td><td class="noDeco"><c:if test="${product.id==errorProduct}" > <form:errors path="description" cssClass="error" /> </c:if> </td></tr>
                                                             <tr><td><fmt:message key="product.label.quantity" /></td>
-                                                                <td><form:input path="quantity" class="textareas" id="pQuantity" value="${product.quantity}" onclick="viderChamps(this)" /> </td><td class="noDeco"><c:if test="${product.id==errorProduct}" > <form:errors path="quantity" cssClass="error"/></c:if> </td></tr>
+                                                                <td><form:input path="quantity" class="updateTextareas"  value="${product.quantity}" onclick="viderChamps(this)" /> </td><td class="noDeco"><c:if test="${product.id==errorProduct}" > <form:errors path="quantity" cssClass="error"/></c:if> </td></tr>
                                                             <tr><td><fmt:message key="product.label.price" /></td>
-                                                                <td><form:input path="price" class="textareas" id="pPrice" value="${product.price}" onclick="viderChamps(this)" /></td><td class="noDeco"><c:if test="${product.id==errorProduct}" > <form:errors path="price" cssClass="error"/> </c:if></td></tr>
+                                                                <td><form:input path="price" class="updateTextareas" value="${product.price}" onclick="viderChamps(this)" /></td><td class="noDeco"><c:if test="${product.id==errorProduct}" > <form:errors path="price" cssClass="error"/> </c:if></td></tr>
                                                             <tr><td><fmt:message key="product.label.supplier" /></td>
-                                                                <td><form:input path="supplier" class="textareas" id="pSupplier" value="${product.supplier}" onclick="viderChamps(this)" /></td><td class="noDeco"><c:if test="${product.id==errorProduct}" > <form:errors path="supplier" cssClass="error" /></c:if></td></tr>
+                                                                <td><form:input path="supplier" class="updateTextareas"  value="${product.supplier}" onclick="viderChamps(this)" /></td><td class="noDeco"><c:if test="${product.id==errorProduct}" > <form:errors path="supplier" cssClass="error" /></c:if></td></tr>
                                                             <tr><td><input type="submit" value="<fmt:message key="button.validate" />" class="button"/></td></tr>
                                                         </table>
 
@@ -159,7 +159,7 @@
         <!--***********************************************************************************************************-->
         <script src="<c:url value="/inc/jquery.js"/>"></script>
         <script src="<c:url value="/inc/jquery-ui.js"/>"></script>
-        <script src="<c:url value="/inc/product-script.js"/>"></script>
+        <script src="<c:url value="/inc/script.js"/>"></script>
 
     </body>
 </html>

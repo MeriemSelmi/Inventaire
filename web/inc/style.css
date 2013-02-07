@@ -112,10 +112,7 @@ td{
     color: #8a71ff;    
 }
 
-.textareas{
-    font-family: Century Gothic;
-    border-radius: 3px;   
-}
+
 
 .button {
 	-moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
@@ -157,10 +154,12 @@ td{
     font-size: 23px;    
 }
 
-#pName,#pDescription,#pQuantity,#pPrice,#pSupplier{      /*how can we generalise this to products and users ?*/
+.updateTextareas{      
     color:lightgrey;
     font-family: century gothic;
 }
+
+
 
 #deleteButton,#updateButton,#addButton,a,#hideButton1,#hideButton2{
     cursor: pointer; 

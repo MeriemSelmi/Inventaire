@@ -82,7 +82,7 @@ public class ProductManagementController extends MultiActionController {
     public ModelAndView updateProduct(HttpServletRequest req, HttpServletResponse res, @ModelAttribute("productupdate") @Valid ProductUpdate productUpdate, BindingResult result) throws Exception {
         Product product = productUpdate.getProduct();
         String OriginalNameProduct = req.getParameter("updateName");
-        System.out.println("Le nom du produit : "+OriginalNameProduct +"!!!!!!!!!!!!!!!!!!!!!!");
+        
         product.setId(Integer.parseInt(req.getParameter("id")));
         if (result.hasErrors()) {
             System.out.println("Error Handling : ");

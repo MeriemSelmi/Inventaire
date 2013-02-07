@@ -36,11 +36,18 @@ public class UserManagementController {
             HttpServletRequest request, @ModelAttribute("userupdate") @Valid UserUpdate userUpdate,
             BindingResult result) {
 
+        User user = userUpdate.getUser();
+        user.setId(Integer.parseInt(request.getParameter("id")));
+        String OriginalLoginUser = request.getParameter("updateLogin");
         if (result.hasErrors()) {
+            request.setAttribute("loginErrorUser", OriginalLoginUser);
+            request.setAttribute("errorUser",user.getId());
+            
             return manageUsers();
+            
         }
 
-        User user = userUpdate.getUser();
+        
         user.setId(Integer.parseInt(request.getParameter("id")));
 
         try {

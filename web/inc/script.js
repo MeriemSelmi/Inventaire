@@ -3,20 +3,40 @@ var icons = {
     activeHeader: "ui-icon-star"
 };
     
-var cfg = ($.hoverintent = {
+/*var cfg = ($.hoverintent = {
     sensitivity: 7,
     interval: 100
-});
+});*/
 
 $(function() {
+    
     $( "#accordion" ).accordion({
-        icons: icons,
-        collapsible:true,      
-        heightStyle: "content",
-        event: "click hoverintent"
-    });  
+      active:false,
+      icons: icons,
+      collapsible:true,      
+      heightStyle: "content"
+    
+    });
+    
+    
+   var s = $('#errorP').val();
+   var id = '#'+s;
+   $(id).show();
+   
+   var s = $('#errorId').val();
+   var id = '#'+s;
+   $(id).show();
+
+   var open = $('#addError').val();
+   if(open=="open"){
+   $('#addForm').show();
+       
+   }
+   
+   $('#matt@damon.com').show();
+    
+
 });
-  
 function showForm(n){
     runShowEffect(n);
     return false;  

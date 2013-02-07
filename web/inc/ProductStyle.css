@@ -116,10 +116,7 @@ td{
     font-size: 23px;    
 }
 
-#pName,#pDescription,#pQuantity,#pPrice,#pSupplier{
-    color:lightgrey;
-    font-family: century gothic;
-}
+
 
 #deleteButton,#updateButton,#addButton,a,#hideButton1,#hideButton2{
     
