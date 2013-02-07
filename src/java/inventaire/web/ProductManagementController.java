@@ -81,13 +81,15 @@ public class ProductManagementController extends MultiActionController {
     @RequestMapping(value = "productupdate")
     public ModelAndView updateProduct(HttpServletRequest req, HttpServletResponse res, @ModelAttribute("productupdate") @Valid ProductUpdate productUpdate, BindingResult result) throws Exception {
         Product product = productUpdate.getProduct();
+        String OriginalNameProduct = req.getParameter("updateName");
+        System.out.println("Le nom du produit : "+OriginalNameProduct +"!!!!!!!!!!!!!!!!!!!!!!");
         product.setId(Integer.parseInt(req.getParameter("id")));
         if (result.hasErrors()) {
             System.out.println("Error Handling : ");
              Map<String, Object> model = new HashMap<String, Object>();
             List<Product> products = this.listProducts();
             model.put("products", products);
-            req.setAttribute("nameErrorProduct", product.getName());
+            req.setAttribute("nameErrorProduct", OriginalNameProduct);
             req.setAttribute("errorProduct",product.getId());
             
             return new ModelAndView("productmanagement","model",model).addAllObjects(model);

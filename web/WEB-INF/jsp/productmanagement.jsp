@@ -37,7 +37,7 @@
     <body>
         <%@ include file="/WEB-INF/jsp/header.jsp" %>
         <table id="global">
-            <caption><div class="welcome"><spring:message code="product.page.title"/></div></caption>
+            <caption><a href="/Inventory/product/productmanagement.htm" style="text-decoration: none;"><div class="welcome"><spring:message code="product.page.title"/></div></a></caption>
             <!--**********************************SEARCH TOOL*************************************************-->
             <caption align="center">
                 <form:form method="post" action="productfind.htm" commandName="productfind">
@@ -62,7 +62,7 @@
                                     <div id="accordion">
                                         <c:forEach var="product" items='${products}' >
                                             
-                                            <p class="nomProduit" ><c:out value="${product.name}"></c:out></p>
+                                           <p class="nomProduit" ><c:out value="${product.name}"></c:out></p> 
                                             
                                             <div class="productDiv" id="${product.name}"   >
                                                 <input type="hidden" value="${nameErrorProduct}" id="errorP" />
@@ -91,8 +91,9 @@
 
                                                 <div id="${product.id}" class="ui-widget-content ui-corner-all" hidden="hidden" >
                                                     <table><tr><td class="noDeco"> <p class="title"><spring:message code="product.update.title" /></p> </td><td class="noDeco"><div align="right" id="hideButton1" onclick="runHideEffect('${product.id}')"></div></td></tr></table>
-
+                                                       
                                                     <form:form method="post" action="productupdate.htm" commandName="productupdate" acceptCharset="UTF-8" >
+                                                        <input type="hidden" name="updateName" value="${product.name}" />  
                                                         <table>
                                                             <tr><input type="text" hidden="true" name="id" value="${product.id}" /></tr>
                                                             <tr><td><spring:message code="product.label.name" /></td>
