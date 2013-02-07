@@ -2,7 +2,6 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <html>
-
     <head>
         <link type="text/css" rel="stylesheet" href="inc/style.css" />
         <title><fmt:message key="title"/></title>
@@ -21,11 +20,11 @@
             <form:form method="post" commandName="authentication"> 
                 <form:errors path="error" cssClass="error" /> <br>
                 
-                <label>Login : </label>
+                <label><fmt:message key="user.label.login"/> </label>
                 <form:input path="login"/>
                 <form:errors path="login" cssClass="error"/><br>
 
-                <label>Password : </label>
+                <label><fmt:message key="user.label.password"/> </label>
                 <form:input path="password"/>
                 <form:errors path="password" cssClass="error"/><br>
 
