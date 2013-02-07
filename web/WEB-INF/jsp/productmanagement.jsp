@@ -61,11 +61,16 @@
                                 <td>
                                     <div id="accordion">
                                         <c:forEach var="product" items='${products}' >
-
-                                            <p class="nomProduit"><c:out value="${product.name}"></c:out></p>
-
-                                                <div class="productDiv">
-                                                    <div >
+                                            
+                                            <p class="nomProduit" ><c:out value="${product.name}"></c:out></p>
+                                            
+                                            <div class="productDiv" id="${product.name}"   >
+                                                <input type="hidden" value="${nameErrorProduct}" id="errorP" />
+                                                <input type="hidden" value="${errorProduct}" id="errorId" />
+                                                
+                                                    <div  >
+                                                        
+                                                        
                                                         <table class="productInfoTable">
                                                             <tr><td class="champ"><spring:message code="product.label.name" /></td><td class="text">${product.name}</td></tr>  
                                                             <tr><td class="champ"><spring:message code="product.label.description" /></td><td class="text">${product.description} </td></tr>
@@ -73,6 +78,8 @@
                                                             <tr><td class="champ"><spring:message code="product.label.quantity" /></td> <td class="text">${product.quantity}</td></tr>
                                                             <tr><td class="champ"><spring:message code="product.label.supplier" /></td> <td class="text">${product.supplier}</td></tr>
                                                          </table>
+                                                            
+                                                         
                                                          <table >
                                                              <tr>
                                                                  <td align="center"><div class="button" onclick="showForm('${product.id}');" id="updateButton"><spring:message code="product.button.update" /></div></td>
@@ -82,7 +89,7 @@
 
 
 
-                                                <div id="${product.id}" class="ui-widget-content ui-corner-all" hidden="hidden">
+                                                <div id="${product.id}" class="ui-widget-content ui-corner-all" hidden="hidden" >
                                                     <table><tr><td class="noDeco"> <p class="title"><spring:message code="product.update.title" /></p> </td><td class="noDeco"><div align="right" id="hideButton1" onclick="runHideEffect('${product.id}')"></div></td></tr></table>
 
                                                     <form:form method="post" action="productupdate.htm" commandName="productupdate" acceptCharset="UTF-8" >
@@ -110,6 +117,7 @@
 
 
                                             </div>
+                                          
                                         </c:forEach>   
                                     </div>
                                 </td>
@@ -125,6 +133,7 @@
                     <div class="button" id="addButton" onclick="showForm('addForm')"><spring:message code="product.button.add" /></div> </br></br>
             
                     <div id="addForm" class="ui-widget-content ui-corner-all" hidden="true" >
+                        <input type="hidden" value="${openAddForm}" id="addError" />
                         <table><tr><td class="noDeco"> <p class="title">Please enter product informations.</p> </td><td class="noDeco"><div align="right" id="hideButton2" onclick="runHideEffect('addForm')"></div></td></tr></table>
                         <form:form method="post" action="productadd.htm" commandName="productadd" >
                         <table>                            
@@ -146,6 +155,8 @@
                     </div>
                 </td></tr>
         </table>
+                    
+                    
                     <%@ include file="/WEB-INF/jsp/footer.jsp" %>
             <!--***********************************************************************************************************-->
         <script src="<c:url value="/inc/jquery.js"/>"></script>

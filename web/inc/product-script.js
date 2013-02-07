@@ -5,15 +5,33 @@ var icons = {
       activeHeader: "ui-icon-star"
     };
     
+
     
 $(function() {
+    $('#productSection').hide();
+    
     $( "#accordion" ).accordion({
-        icons: icons,
+      active: false, 
+      icons: icons,
       collapsible:true,      
-      heightStyle: "content",
-      event: "click hoverintent"
-    });  
+      heightStyle: "content"
+    
+    });
+   var s = $('#errorP').val();
+   var id = '#'+s;
+   $(id).show();
+   
+   var s = $('#errorId').val();
+   var id = '#'+s;
+   $(id).show()
+
+   var open = $('#addError').val();
+   if(open=="open"){
+        $('#addForm').show();
+       
+   }
   });
+
   
   function showForm(n){
 
