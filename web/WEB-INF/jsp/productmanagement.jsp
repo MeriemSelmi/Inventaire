@@ -21,13 +21,18 @@
     
     <style>
         .nomProduit{
-            color: #4927e7;
+            color: #5c36ed;
             text-decoration: none;
             font-weight: 300;
             font-size: 20px;
             font-family: century gothic;
         }
 
+        .title{
+    color:#4927e7;
+    font-size:20px;
+    
+}
         
     </style>
     
@@ -35,15 +40,15 @@
     <body>
         <%@ include file="/WEB-INF/jsp/header.jsp" %>
         <table id="global">
-            <caption><a href="/Inventory/product/productmanagement.htm" style="text-decoration: none;"><div class="welcome"><fmr:message key="product.page.title"/></div></a></caption>
+            <caption><a href="/Inventory/product/productmanagement.htm" style="text-decoration: none;"><div class="welcome"><fmt:message key="product.page.title"/></div></a></caption>
             <!--**********************************SEARCH TOOL*************************************************-->
             <caption align="center">
                 <form:form method="post" action="productfind.htm" commandName="productfind">
                     <table>
                         <tr>
                             <td class="champ" align="center"><fmt:message key="title.find" /> &nbsp;&nbsp;&nbsp;&nbsp; <form:input path="key" class="textareas" /></td>
-                            <td align="center"><input type="submit" value="<fmt:message key="button.find" />" class="button" /></td>
-                            <td class="noDeco"><form:errors path="key" cssClass="error" /></td>
+                            <td align="center"><input type="submit" value="<fmt:message key="button.find" />" class="button" />
+                            <form:errors path="key" cssClass="error" /></td>
                         </tr>              
                     </table>                   
                 </form:form>
@@ -53,7 +58,7 @@
             <!--**********************************PRODUCT LIST***************************************************-->
             <tr>
                 <td>
-                    <div class="listProduct" >                                              
+                    <div>                                              
                         <table width="70%">
                             <tr>
                                 <td>
@@ -63,8 +68,8 @@
                                            <p class="nomProduit" ><c:out value="${product.name}"></c:out></p> 
                                             
                                             <div class="productDiv" id="${product.name}"   >
-                                                <input type="text" value="${nameErrorProduct}" id="errorP" />
-                                                <input type="text" value="${errorProduct}" id="errorId" />
+                                                <input type="hidden" value="${nameErrorProduct}" id="errorP" />
+                                                <input type="hidden" value="${errorProduct}" id="errorId" />
                                                 
                                                     <div  >
                                                         
@@ -90,7 +95,7 @@
                                                 <div id="${product.id}" class="ui-widget-content ui-corner-all" hidden="hidden" >
                                                     <table><tr><td class="noDeco"> <p class="title"><fmt:message key="title.update" /></p> </td><td class="noDeco"><div align="right" id="hideButton1" onclick="runHideEffect('${product.id}')"></div></td></tr></table>
                                                     <form:form method="post" action="productupdate.htm" commandName="productupdate" acceptCharset="UTF-8" >
-                                                        <input type="text" name="updateName" value="${product.name}" />  
+                                                        <input type="hidden" name="updateName" value="${product.name}" />  
                                                         <table>
                                                             <tr><input type="text" hidden="true" name="id" value="${product.id}" /></tr>
                                                             <tr><td><fmt:message key="product.label.name" /></td>

@@ -8,16 +8,20 @@
     </head>
     <body>
         <%@ include file="/WEB-INF/jsp/header.jsp" %>
-         <legend id="auth-title"><fmt:message key="title.welcome"/></legend>
+         
         
         <div id="welcom-box">
-           
-            <a href="<c:url value="/product/productmanagement.htm"/>"><fmt:message key="product.page.title"/></a><br>
-            <a href="<c:url value="/profile/profilemanagement.htm"/>"><fmt:message key="profile.page.title"/></a><br>
+           <legend id="welcome-title"><fmt:message key="title.welcome"/></legend>
+           <div class="links">
+               <ul type="none">
+                   <li> <a href="<c:url value="/product/productmanagement.htm"/>"><fmt:message key="product.page.title"/></a></li>
+                   <li> <a href="<c:url value="/profile/profilemanagement.htm"/>"><fmt:message key="profile.page.title"/></a><br></li>
             
-            <c:if test="${loggedUser.role=='Administrator'}">
+                   <li><c:if test="${loggedUser.role=='Administrator'}">
                 <a href="<c:url value="/user/usermanagement.htm"/>"><fmt:message key="user.page.title"/></a>
-            </c:if>
+                       </c:if></li>
+               </ul>
+           </div>
         </div>
     </body>
 </html>
