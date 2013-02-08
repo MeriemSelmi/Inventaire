@@ -1,13 +1,7 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package inventaire.service;
 
 import inventaire.domain.Product;
-import java.util.Map;
 import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.NotEmpty;
 
 /**

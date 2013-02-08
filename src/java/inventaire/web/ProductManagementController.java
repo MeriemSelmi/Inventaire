@@ -5,11 +5,8 @@ import inventaire.service.ProductAdd;
 import inventaire.service.ProductFind;
 import inventaire.service.ProductManager;
 import inventaire.service.ProductUpdate;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -20,7 +17,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
 import org.springframework.web.servlet.view.RedirectView;
 
 /**
@@ -29,32 +25,16 @@ import org.springframework.web.servlet.view.RedirectView;
  */
 @Controller
 @RequestMapping("/product")
-public class ProductManagementController extends MultiActionController {
+public class ProductManagementController {
 
     protected final Log logger = LogFactory.getLog(getClass());
     @Autowired
     private ProductManager productManager;
 
-    private List<Product> listProducts() throws Exception {
-        List<Product> products = productManager.listProducts();
-        return products;
-    }
-
     @RequestMapping(value = "productmanagement.htm", method = RequestMethod.GET)
-    public ModelAndView manageProducts(HttpServletRequest req, HttpServletResponse res) throws Exception {
+    public ModelAndView manageProducts() throws Exception {
         logger.info("ProductManagementController: returning list products view");
-        Map<String, Object> model = new HashMap<String, Object>();
-        try {
-            List<Product> products = this.listProducts();
-            model.put("products", products);
-            logger.info("ProductManagementController: returning the product management view");
-            return new ModelAndView("productmanagement", "model", model).addAllObjects(model);
-        } catch (Exception e) {
-            logger.info("ProductManagementController: returning the exception content");
-            req.setAttribute("exception", e);
-            return new ModelAndView(new RedirectView("productmanagement.htm",true));
-        }
-
+        return new ModelAndView("productmanagement");
     }
 
     @RequestMapping(value = "productadd.htm")
@@ -62,65 +42,57 @@ public class ProductManagementController extends MultiActionController {
         Product product = productAdd.getProduct();
         if (result.hasErrors()) {
             System.out.println("Error Handling : There's an error!!! ");
-            Map<String, Object> model = new HashMap<String, Object>();
-            List<Product> products = this.listProducts();
-            model.put("products", products);
-            req.setAttribute("openAddForm","open");
-            req.setAttribute("errorProduct",product.getId());
-            return new ModelAndView("productmanagement","model",model).addAllObjects(model);
+            req.setAttribute("openAddForm", "open");
+            req.setAttribute("errorProduct", product.getId());
+            return manageProducts();
         }
         try {
             productManager.addProduct(product);
-            return new ModelAndView(new RedirectView("productmanagement.htm",true));
+            return new ModelAndView(new RedirectView("productmanagement.htm", true));
         } catch (Exception e) {
             req.setAttribute("exception", e);
-            return new ModelAndView(new RedirectView("productmanagement.htm",true));
+            return manageProducts();
         }
     }
 
     @RequestMapping(value = "productupdate")
-    public ModelAndView updateProduct(HttpServletRequest req, HttpServletResponse res, @ModelAttribute("productupdate") @Valid ProductUpdate productUpdate, BindingResult result) throws Exception {
+    public ModelAndView updateProduct(HttpServletRequest req, @ModelAttribute("productupdate") @Valid ProductUpdate productUpdate, BindingResult result) throws Exception {
         Product product = productUpdate.getProduct();
         String OriginalNameProduct = req.getParameter("updateName");
-        
         product.setId(Integer.parseInt(req.getParameter("id")));
+
         if (result.hasErrors()) {
             System.out.println("Error Handling : ");
-             Map<String, Object> model = new HashMap<String, Object>();
-            List<Product> products = this.listProducts();
-            model.put("products", products);
             req.setAttribute("nameErrorProduct", OriginalNameProduct);
-            req.setAttribute("errorProduct",product.getId());
-            
-            return new ModelAndView("productmanagement","model",model).addAllObjects(model);
+            req.setAttribute("errorProduct", product.getId());
+            return manageProducts();
         }
 
-        
         logger.info("ProductManagementController: trying to update product");
         try {
             productManager.UpdateProduct(product);
-            return new ModelAndView(new RedirectView("productmanagement.htm",true));
+            return new ModelAndView(new RedirectView("productmanagement.htm", true));
         } catch (Exception e) {
             req.setAttribute("exception", e);
-            return new ModelAndView(new RedirectView("productmanagement.htm",true));
+            return manageProducts();
         }
     }
 
     @RequestMapping(value = "productdelete", method = RequestMethod.GET)
-    public ModelAndView deleteProduct(HttpServletRequest req, HttpServletResponse res) throws Exception {
-        logger.info("UserManagementController: trying to delete product");
+    public ModelAndView deleteProduct(HttpServletRequest req) throws Exception {
+        logger.info("ProductManagementController: trying to delete product");
         try {
             int id = Integer.parseInt(req.getParameter("id"));
             productManager.deleteProduct(id);
-            return new ModelAndView(new RedirectView("productmanagement.htm",true));
+            return new ModelAndView(new RedirectView("productmanagement.htm", true));
         } catch (Exception e) {
             req.setAttribute("exception", e);
-            return new ModelAndView(new RedirectView("productmanagement.htm",true));
+            return manageProducts();
         }
     }
 
     @RequestMapping(value = "productfind", method = RequestMethod.POST)
-    public ModelAndView findProducts(HttpServletRequest req, HttpServletResponse res, @ModelAttribute("productfind") @Valid ProductFind productFind, BindingResult result) throws Exception {
+    public ModelAndView findProducts(HttpServletRequest req, @ModelAttribute("productfind") @Valid ProductFind productFind, BindingResult result) throws Exception {
 
         if (result.hasErrors()) {
             return new ModelAndView(new RedirectView("productmanagement.htm"));
@@ -128,15 +100,8 @@ public class ProductManagementController extends MultiActionController {
 
         String key = productFind.getKey();
         List<Product> products = (List<Product>) productManager.findProduct(key);
-        Map<String, Object> model = new HashMap<String, Object>();
-        model.put("products", products);
-        try {
-            logger.info("ProductManagementController: returning the product management view");
-            return new ModelAndView("productmanagement", "model", model).addAllObjects(model);
-        } catch (Exception e) {
-            model.put("exception", e);
-            return new ModelAndView("productmanagement");
-        }
+        logger.info("ProductManagementController: returning the product management view");
+        return manageProducts().addObject("products", products);
     }
 
     @ModelAttribute("productfind")
@@ -152,5 +117,11 @@ public class ProductManagementController extends MultiActionController {
     @ModelAttribute("productadd")
     public ProductAdd getProductAdd() {
         return new ProductAdd();
+    }
+
+    @ModelAttribute("products")
+    private List<Product> listProducts() throws Exception {
+        List<Product> products = productManager.listProducts();
+        return products;
     }
 }
