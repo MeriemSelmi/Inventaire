@@ -30,35 +30,7 @@ public class UserManagementController {
     public ModelAndView manageUsers() {
         return new ModelAndView("usermanagement");
     }
-
-    @RequestMapping(value = "userupdate.htm", method = RequestMethod.POST)
-    public ModelAndView updateUser(
-            HttpServletRequest request, @ModelAttribute("userupdate") @Valid UserUpdate userUpdate,
-            BindingResult result) {
-
-        User user = userUpdate.getUser();
-        user.setId(Integer.parseInt(request.getParameter("id")));
-        String OriginalLoginUser = request.getParameter("updateLogin");
-        if (result.hasErrors()) {
-            request.setAttribute("loginErrorUser", OriginalLoginUser);
-            request.setAttribute("errorUser",user.getId());
-            
-            return manageUsers();
-            
-        }
-
-        
-        user.setId(Integer.parseInt(request.getParameter("id")));
-
-        try {
-            userManager.update(user);
-            return new ModelAndView(new RedirectView("/user/usermanagement.htm", true));
-        } catch (Exception e) {
-            result.rejectValue("login", "error.user.update");
-            return manageUsers();
-        }
-    }
-
+    
     @RequestMapping(value = "useradd.htm", method = RequestMethod.POST)
     public ModelAndView addUser(
             HttpServletRequest request, @ModelAttribute("useradd") @Valid UserAdd userAdd,
@@ -72,6 +44,29 @@ public class UserManagementController {
 
         try {
             userManager.add(user);
+            return new ModelAndView(new RedirectView("/user/usermanagement.htm", true));
+        } catch (Exception e) {
+            result.rejectValue("login", "error.user.update");
+            return manageUsers();
+        }
+    }
+
+    @RequestMapping(value = "userupdate.htm", method = RequestMethod.POST)
+    public ModelAndView updateUser(
+            HttpServletRequest request, @ModelAttribute("userupdate") @Valid UserUpdate userUpdate,
+            BindingResult result) {
+
+        User user = userUpdate.getUser();
+        user.setId(Integer.parseInt(request.getParameter("id")));
+        String OriginalLoginUser = request.getParameter("updateLogin");
+        if (result.hasErrors()) {
+            request.setAttribute("loginErrorUser", OriginalLoginUser);
+            request.setAttribute("errorUser",user.getId());            
+            return manageUsers();          
+        }
+
+        try {
+            userManager.update(user);
             return new ModelAndView(new RedirectView("/user/usermanagement.htm", true));
         } catch (Exception e) {
             result.rejectValue("login", "error.user.update");
