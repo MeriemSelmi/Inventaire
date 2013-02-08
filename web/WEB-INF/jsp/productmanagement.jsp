@@ -63,8 +63,8 @@
                                            <p class="nomProduit" ><c:out value="${product.name}"></c:out></p> 
                                             
                                             <div class="productDiv" id="${product.name}"   >
-                                                <input type="hidden" value="${nameErrorProduct}" id="errorP" />
-                                                <input type="hidden" value="${errorProduct}" id="errorId" />
+                                                <input type="text" value="${nameErrorProduct}" id="errorP" />
+                                                <input type="text" value="${errorProduct}" id="errorId" />
                                                 
                                                     <div  >
                                                         
@@ -90,7 +90,7 @@
                                                 <div id="${product.id}" class="ui-widget-content ui-corner-all" hidden="hidden" >
                                                     <table><tr><td class="noDeco"> <p class="title"><fmt:message key="title.update" /></p> </td><td class="noDeco"><div align="right" id="hideButton1" onclick="runHideEffect('${product.id}')"></div></td></tr></table>
                                                     <form:form method="post" action="productupdate.htm" commandName="productupdate" acceptCharset="UTF-8" >
-                                                        <input type="hidden" name="updateMail" value="${product.name}" />  
+                                                        <input type="text" name="updateName" value="${product.name}" />  
                                                         <table>
                                                             <tr><input type="text" hidden="true" name="id" value="${product.id}" /></tr>
                                                             <tr><td><fmt:message key="product.label.name" /></td>
