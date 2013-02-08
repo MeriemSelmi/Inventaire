@@ -14,24 +14,32 @@
     </style>
 
     <body>
-        <fieldset>
-            <legend><fmt:message key="title.authenticate"/> </legend>
-            
-            <form:form method="post" commandName="authentication"> 
-                <form:errors path="error" cssClass="error" /> <br>
-                
-                <label><fmt:message key="user.label.login"/> : </label>
-                <form:input path="login"/>
-                <form:errors path="login" cssClass="error"/><br>
 
-                <label><fmt:message key="user.label.password"/> : </label>
-                <form:input path="password"/>
-                <form:errors path="password" cssClass="error"/><br>
+       <div id="content" align="center">
+           <form:form method="post" commandName="authentication">
+               <table align="center">
+                   <th><div id="auth-title"><fmt:message key="title.authenticate"/> </div></th>
+               <th> <form:errors path="error" cssClass="error" /> <br></th>
+               <tr> <td><div>
+                    <label id="auth-label"><fmt:message key="user.label.login"/> : </label>
+                    <form:input path="login" placeholder="Username" id="username" />
+                    <form:errors path="login" cssClass="error"/><br>                                   
+                       </div></td></tr>
+              <tr> <td> <div>
+                   <label id="auth-label"><fmt:message key="user.label.password"/> : </label>
+                    <form:input path="password" placeholder="Password" id="password" />
+                    <form:errors path="password" cssClass="error"/><br>
+                      </div></td></tr>
+              <tr>
+                  <td align="center"><input type="submit" value="<fmt:message key="button.authenticate"/>">
+                      <input type="reset" value="<fmt:message key="button.reset" />" ></td>
 
-                <input type="submit" value="<fmt:message key="button.authenticate"/>" class="sansLabel">
-                <input type="reset" value="<fmt:message key="button.reset"/>">
+               </tr>
+               </table>
+           </form:form>
 
-            </form:form>
-        </fieldset>
+       </div>
+
+        
     </body>
 </html>
