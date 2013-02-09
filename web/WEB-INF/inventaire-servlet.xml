@@ -11,7 +11,7 @@
         
  <!--****************************COMMON CONFIGURATION*********************************-->     
     <mvc:annotation-driven/>
-    <context:component-scan base-package="inventaire.web" />
+    <context:component-scan base-package="inventory.web" />
 
     <bean id="viewResolver"
           class="org.springframework.web.servlet.view.InternalResourceViewResolver">
@@ -28,11 +28,11 @@
             <mvc:mapping path="/user/*"/>
             <mvc:mapping path="/product/*"/>
             <mvc:mapping path="/profile/*"/>
-            <bean class="inventaire.security.SessionInterceptor" />
+            <bean class="inventory.security.SessionInterceptor" />
         </mvc:interceptor>
         <mvc:interceptor>
             <mvc:mapping path="/user/*"/>
-            <bean class="inventaire.security.SecurityInterceptor" />
+            <bean class="inventory.security.SecurityInterceptor" />
         </mvc:interceptor>
     </mvc:interceptors>
     

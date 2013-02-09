@@ -10,17 +10,17 @@
 
     <!-- the parent application context definition for the springapp application -->
    
-    <bean id="productManager" class="inventaire.service.SimpleProductManager">
+    <bean id="productManager" class="inventory.service.product.SimpleProductManager">
         <property name="productDao" ref="productDao"/>
     </bean>
 
-    <bean id="productDao" class="inventaire.repository.JdbcProductDao"/>
+    <bean id="productDao" class="inventory.repository.JdbcProductDao"/>
 
-    <bean id="userManager" class="inventaire.service.SimpleUserManager">
+    <bean id="userManager" class="inventory.service.user.SimpleUserManager">
         <property name="userDao" ref="userDao"/>
     </bean>
 
-    <bean id="userDao" class="inventaire.repository.JdbcUserDao"/>
+    <bean id="userDao" class="inventory.repository.JdbcUserDao"/>
     
 <!--  
     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
