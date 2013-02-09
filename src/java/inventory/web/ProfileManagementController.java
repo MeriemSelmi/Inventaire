@@ -44,7 +44,7 @@ public class ProfileManagementController {
         User user = profileUpdate.getUser();
         user.setId(Integer.parseInt(request.getParameter("id")));
         try {
-            userManager.update(user);
+            userManager.updateUser(user);
             request.getSession().setAttribute("loggedUser", user);
             return new ModelAndView(new RedirectView("/profile/profilemanagement.htm", true));
         } catch (Exception e) {

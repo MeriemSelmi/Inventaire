@@ -21,6 +21,9 @@ public class ProductAdd {
     @NotEmpty(message="{product.label.name.error}")
     private String supplier;
 
+    public Product getProduct(){
+        return new Product(name,description,quantity,price,supplier);
+    }
 
     public String getName() {
         return name;
@@ -60,11 +63,6 @@ public class ProductAdd {
 
     public void setSupplier(String supplier) {
         this.supplier = supplier;
-    }
-    
-    public Product getProduct(){
-        return new Product(name,description,quantity,price,supplier);
-    }
-    
+    }  
     
 }

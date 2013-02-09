@@ -9,6 +9,7 @@ import org.hibernate.validator.constraints.NotEmpty;
  * @author Balkis
  */
 public class ProductUpdate {
+
     @NotEmpty
     private String name;
     @NotEmpty
@@ -20,6 +21,10 @@ public class ProductUpdate {
     private String price;
     @NotEmpty
     private String supplier;
+
+    public Product getProduct() {
+        return new Product(name, description, quantity, price, supplier);
+    }
 
     public String getName() {
         return name;
@@ -60,9 +65,4 @@ public class ProductUpdate {
     public void setSupplier(String supplier) {
         this.supplier = supplier;
     }
-        
-    public Product getProduct(){
-        return new Product(name,description,quantity,price,supplier);
-    }
-    
 }

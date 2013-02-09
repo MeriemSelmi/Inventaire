@@ -43,7 +43,7 @@ public class UserManagementController {
         User user = userAdd.getUser();
 
         try {
-            userManager.add(user);
+            userManager.addUser(user);
             return new ModelAndView(new RedirectView("/user/usermanagement.htm", true));
         } catch (Exception e) {
             result.rejectValue("login", "error.user.update");
@@ -66,7 +66,7 @@ public class UserManagementController {
         }
 
         try {
-            userManager.update(user);
+            userManager.updateUser(user);
             return new ModelAndView(new RedirectView("/user/usermanagement.htm", true));
         } catch (Exception e) {
             result.rejectValue("login", "error.user.update");
@@ -79,7 +79,7 @@ public class UserManagementController {
 
         User user = new User();
         user.setId(Integer.parseInt(request.getParameter("id")));
-        userManager.delete(user);
+        userManager.deleteUser(user);
         return new ModelAndView(new RedirectView("/user/usermanagement.htm", true));
     }
 
@@ -122,7 +122,7 @@ public class UserManagementController {
     private List<User> listUsers() {
         List<User> users = new LinkedList<User>();
         try {
-            users = userManager.getUsers();
+            users = userManager.listUsers();
         } catch (Exception e) {
         }
         return users;

@@ -70,7 +70,7 @@ public class ProductManagementController {
 
         logger.info("ProductManagementController: trying to update product");
         try {
-            productManager.UpdateProduct(product);
+            productManager.updateProduct(product);
             return new ModelAndView(new RedirectView("productmanagement.htm", true));
         } catch (Exception e) {
             req.setAttribute("exception", e);
@@ -99,7 +99,7 @@ public class ProductManagementController {
         }
 
         String key = productFind.getKey();
-        List<Product> products = (List<Product>) productManager.findProduct(key);
+        List<Product> products = (List<Product>) productManager.findProducts(key);
         logger.info("ProductManagementController: returning the product management view");
         return manageProducts().addObject("products", products);
     }

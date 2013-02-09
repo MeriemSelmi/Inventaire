@@ -10,7 +10,7 @@ public class SimpleUserManager implements UserManager {
     private UserDao userDao;
 
     @Override
-    public List<User> getUsers() throws Exception {
+    public List<User> listUsers() throws Exception {
         return userDao.getUsers();
     }
 
@@ -20,17 +20,17 @@ public class SimpleUserManager implements UserManager {
     }
 
     @Override
-    public void update(User user) throws Exception {
+    public void addUser(User user) throws Exception {
+        userDao.add(user);
+    }
+    
+    @Override
+    public void updateUser(User user) throws Exception {
         userDao.update(user);
     }
 
     @Override
-    public void add(User user) throws Exception {
-        userDao.add(user);
-    }
-
-    @Override
-    public void delete(User user) {
+    public void deleteUser(User user) {
         userDao.delete(user);
     }
     
