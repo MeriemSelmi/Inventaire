@@ -1,8 +1,0 @@
--ajouter un footer dans les pages (liens vers les differentes pages, lien info)
-- changer le CSS
-- donner un titre au dialogs
-- cr�er un logo
--externaliser les liens vers les vues
-- utiliser les annotations pour les controlleur
-- afficher les messages d'erreur (utilisateur introuvable...)
-- apr�s une recherche, la liste des personnes s'affiche: au clic qur une personne ?
