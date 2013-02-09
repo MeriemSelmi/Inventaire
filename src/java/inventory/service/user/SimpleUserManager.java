@@ -11,7 +11,7 @@ public class SimpleUserManager implements UserManager {
 
     @Override
     public List<User> listUsers() throws Exception {
-        return userDao.getUsers();
+        return userDao.list();
     }
 
     @Override
@@ -38,7 +38,7 @@ public class SimpleUserManager implements UserManager {
     public List<User> findUsers(String keyword) {
         List<User> users = new LinkedList<User>();
         try {
-            users= userDao.findUsers(keyword);
+            users= userDao.find(keyword);
         } catch (Exception e) {
         }
         return users;

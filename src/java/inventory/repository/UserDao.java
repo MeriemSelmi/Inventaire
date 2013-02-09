@@ -3,17 +3,12 @@ package inventory.repository;
 import inventory.domain.User;
 import java.util.List;
 
-/**
- *
- * @author Meriem
- */
 public interface UserDao {
     
+    public List<User> list() throws Exception;
     public User authenticate(User user) throws Exception;
-    public List<User> getUsers() throws Exception;
-    public User getUserById(int id);
-    public void update(User user) throws Exception;
     public void add(User user) throws Exception;
+    public void update(User user) throws Exception;
     public void delete(User user);
-    public List<User> findUsers(String keyword) throws Exception;
+    public List<User> find(String keyword) throws Exception;
 }
