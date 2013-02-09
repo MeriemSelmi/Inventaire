@@ -216,6 +216,14 @@ td{
     padding: 3px 3px 3px 3px;
 }
 
+.textareas{
+    font-family: century gothic;
+    border-radius: 3px 3px;
+    border-color: #999999;
+    padding: 3px 3px 3px 3px; 
+    
+}
+
 
 #deleteButton,#updateButton,#addButton,a,#hideButton1,#hideButton2{
     cursor: pointer; 
