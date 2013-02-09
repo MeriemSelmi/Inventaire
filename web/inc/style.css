@@ -235,14 +235,35 @@ td{
 
 /* hedhi naffs'ha el .nomProduit elli fil productmanagement */
 #accordion p{
-            color: #4927e7;
+    color: #5448cd;
             text-decoration: none;
             font-weight: 300;
             font-size: 20px;
             font-family: century gothic;
 }
+#accordion p:hover{
+    color: #ffffff;
+            text-decoration: none;
+            font-weight: 300;
+            font-size: 20px;
+            font-family: century gothic;
+            background-image:-moz-linear-gradient(#3F1CA6, #643ADE);
+            background-image:-webkit-linear-gradient(#3F1CA6, #643ADE);
+            background-image:-o-linear-gradient(#3F1CA6, #643ADE);
+            background-image:linear-gradient(#3F1CA6, #643ADE);
+            border-color: #b9b9b9;
+}
+
+#accordion p:active{
+            color: red;
+            text-decoration: none;
+            font-weight: 300;
+            font-size: 20px;
+            font-family: century gothic;
+}
+
 .error-caption{
-     background: white;
+    background: #f6f6f6;
      border-radius: 3px 3px;
     
 }

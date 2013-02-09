@@ -20,13 +20,7 @@
     
     
     <style>
-        .nomProduit{
-            color: #5c36ed;
-            text-decoration: none;
-            font-weight: 300;
-            font-size: 20px;
-            font-family: century gothic;
-        }
+
 
         .title{
     color:#4927e7;
