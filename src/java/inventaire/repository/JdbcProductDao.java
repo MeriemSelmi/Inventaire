@@ -73,15 +73,12 @@ public class JdbcProductDao implements ProductDao{
     public void update(Product product) throws Exception{
         logger.info("JdbcProductDao: Updating a product");
         session = HibernateUtil.getSessionFactory().getCurrentSession();
+        session.beginTransaction();
         try{
-            session.beginTransaction();
             session.update(product);
             session.getTransaction().commit();
-            session.clear();
-        }
-        catch(Exception e){
+        }catch(Exception e){
             session.getTransaction().rollback();
-            session.clear();
         }
     }
 
