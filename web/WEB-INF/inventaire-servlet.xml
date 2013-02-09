@@ -2,10 +2,8 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:util="http://www.springframework.org/schema/util"
        xmlns:mvc="http://www.springframework.org/schema/mvc"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
-       http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.1.xsd
        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
         
@@ -53,121 +51,5 @@
               class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
             <property name="paramName" value="language"/>
         </bean>
-    </mvc:interceptors>
-    
-<!--    
-    <bean id="urlHandler"
-          class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping" >
-        <property name="mappings">
-            <map>
-                <entry key="/authentication.htm" value="AuthenticationFormController"/>
-                <entry key="/welcome.htm" value="WelcomeController"/>
-                <entry key="/user/*.htm" value="UserManagementController"/>
-                <entry key="/profile/*.htm" value="ProfileManagementController"/>
-                <entry key="/product/*.htm" value="ProductManagementController" />
-                <entry key="/security.htm" value="SecurityController" />
-            </map>
-        </property>
-    </bean>
-    
-    <bean id="WelcomeController" class="inventaire.web.WelcomeController" />
-    
-    <bean id="SecurityController" class="inventaire.security.SecurityController" />
-    
--->    
-    <!--****************************USERS CONFIGURATION*********************************--> 
-<!--    
-    <bean id="AuthenticationFormController" class="inventaire.web.AuthenticationFormController" > 
-        <property name="sessionForm" value="true"/>
-        <property name="commandName" value="authentication"/>
-        <property name="commandClass" value="inventaire.service.Authentication"/> 
-        <property name="validator">
-            <bean class="inventaire.service.AuthenticationValidator"/>
-        </property>
-        <property name="formView" value="authentication"/>
-        <property name="successView" value="welcome.htm"/>
-        <property name="userManager" ref="userManager"/>
-    </bean>
-       
-    <bean id="UserManagementController" class="inventaire.web.UserManagementController" name="/user/usermanagement.htm">
-        <property name="methodNameResolver" ref="userResolver" /> 
-        <property name="userManager" ref="userManager"/>
-        <property name="validators">
-            <list>
-                <bean class="inventaire.service.UserAddValidator"/>
-                <bean class="inventaire.service.UserUpdateValidator"/>
-                <bean class="inventaire.service.UserFindValidator"/>
-            </list>
-        </property>
-    </bean>
-
-    <bean id="ProfileManagementController" class="inventaire.web.ProfileManagementController" >
-        <property name="methodNameResolver" ref="profileResolver" /> 
-        <property name="userManager" ref="userManager"/>
-        <property name="validators">
-            <list>
-                <bean class="inventaire.service.UserUpdateValidator"/>
-            </list>
-        </property>
-    </bean>
-    
-        <bean id="userResolver"
-          class="org.springframework.web.servlet.mvc.multiaction.PropertiesMethodNameResolver"
-          lazy-init="default">
-        <property name="mappings">
-            <props>
-                <prop key="/user/usermanagement.htm">manageUsers</prop>
-                <prop key="/user/userupdate.htm">updateUser</prop>
-                <prop key="/user/useradd.htm">addUser</prop>
-                <prop key="/user/userdelete.htm">deleteUser</prop>
-                <prop key="/user/userfind.htm">findUsers</prop>             
-            </props>
-        </property>
-    </bean>
-    
-    <bean id="profileResolver"
-          class="org.springframework.web.servlet.mvc.multiaction.PropertiesMethodNameResolver"
-          lazy-init="default">
-        <property name="mappings">
-            <props>
-                <prop key="/profile/profilemanagement.htm">manageProfile</prop>
-                <prop key="/profile/profileupdate.htm">updateProfile</prop>
-                <prop key="/profile/logout.htm">logout</prop>
-            </props>
-        </property>
-    </bean>
--->    
-    <!--****************************PRODUCTS CONFIGURATION*********************************-->
-<!--    
-    <bean id="ProductManagementController" class="inventaire.web.ProductManagementController" >
-        <property name="methodNameResolver" ref="productResolver" />
-        <property name="productManager" ref="productManager" />
-        <property name="validators">          
-            <list>
-                <bean class="inventaire.service.ProductAddValidator"/>
-                <bean class="inventaire.service.ProductUpdateValidator"/>
-                <bean class="inventaire.service.ProductFindValidator"/>
- 
-            </list>
-        </property>
-    </bean>
-    
-    
-    <bean name="productAddValidate" class="inventaire.service.ProductAddValidator" />
-    
-    <bean id="productResolver"
-          class="org.springframework.web.servlet.mvc.multiaction.PropertiesMethodNameResolver"
-          lazy-init="default">
-        <property name="mappings">
-            <props>
-                <prop key="/product/productmanagement.htm">manageProducts</prop>
-                <prop key="/product/productupdate.htm">updateProduct</prop>
-                <prop key="/product/productadd.htm">addProduct</prop>
-                <prop key="/product/productdelete.htm">deleteProduct</prop>
-                <prop key="/product/productfind.htm">findProducts</prop>
-            </props>
-        </property>
-            
-    </bean>
-    -->               
+    </mvc:interceptors>          
 </beans>
