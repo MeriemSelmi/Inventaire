@@ -4,15 +4,22 @@ body{
     
 }
 
+#head{
+    margin: 5px 20px 5px 10px;
+    
+}
+
+
 
 
 header, footer{
- 
-    background-color: #505051;
+   
+    background-color: #666666;
     width:100%;
     border-color: #bfbfbf;
     border-style: ridge;
     font-family: century gothic;
+    font-size: 16px;
     color:  #ffffff;
     text-align: right;
     margin-bottom: 30px;
@@ -23,12 +30,18 @@ header a, footer a{
     font-size: smaller;
 }
 
+.accueil{
+    
+    float:left;
+}
+
 #welcom-box{
     background: #ffffff;
     opacity:0.6;
     filter:alpha(opacity=40);
     height:200px;
     border-radius: 5px 5px;
+    padding: 3px 3px;
     
 }
 
@@ -37,13 +50,18 @@ header a, footer a{
     font-family: Century Gothic;
     font-size: 35px;
     background-color: white;
-
     color:#ffffff;
-    background: #2f2f2f;
-    width:100%;
+    background: #333333;
+    width:50%;
+    border-radius: 3px 3px;
+    margin: 10px 10px 10px 10px;
+    padding-left: 20px;
     
 }
 
+#footer-page{
+    margin: 10px 10px 10px 10px;
+}
 
 
 .links{
@@ -70,7 +88,7 @@ fieldset {
 
 form label {
     float: left;
-    width: 100px;
+    width: 200px;
     margin: 3px 0px 0px 0px;
 }
 
@@ -101,7 +119,7 @@ root {
 
 td{
     background: #fcfcfc;
-    border-radius: 18px;
+    border-radius: 5px;
     padding: 10px;    
 }
 
@@ -137,14 +155,15 @@ td{
  
     font-size: 30px;
     font-family: century gothic;
-    opacity:0.6;
+    opacity:0.7;
     filter:alpha(opacity=40);
     background-color: #505051;
     border-width: 1px;
     border-style: double;
     border-color: #fffcff;
-    border-radius: 10px;
-    color: #ffffff;    
+    border-radius: 5px;
+    color: #ffffff;   
+  
 }
 
 
@@ -192,8 +211,10 @@ td{
 .updateTextareas{      
     color:lightgrey;
     font-family: century gothic;
+    border-radius: 3px 3px;
+    border-color: #999999;
+    padding: 3px 3px 3px 3px;
 }
-
 
 
 #deleteButton,#updateButton,#addButton,a,#hideButton1,#hideButton2{
@@ -201,7 +222,7 @@ td{
 }
 
 #hideButton1,#hideButton2{
-  background-image: url(up.png);
+  background-image: url(slide.png);
   background-repeat: no-repeat;
   width:40px;
   height:40px;
@@ -220,9 +241,14 @@ td{
             font-size: 20px;
             font-family: century gothic;
 }
+.error-caption{
+     background: white;
+     border-radius: 3px 3px;
+    
+}
 
 
-/* ************************************ESSAI AUTH PAGE************************************************** */
+/* ************************************ AUTH PAGE************************************************** */
 
 /* Reset CSS */
 html, div, span, applet, object, iframe,
@@ -471,4 +497,5 @@ background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #ff
     font-size: 15px;
     color:#666666;
     margin-bottom: 5px;
+    
 }

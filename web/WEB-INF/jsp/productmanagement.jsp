@@ -33,6 +33,9 @@
     font-size:20px;
     
 }
+
+
+
         
     </style>
     
@@ -54,7 +57,7 @@
                 </form:form>
             </caption>
             <!--**********************************ERRORS SPACE************************************************-->
-            <caption><div class="error">${exception}</div></caption>
+            <caption class="error-caption"><div class="error">${exception}</div></caption>
             <!--**********************************PRODUCT LIST***************************************************-->
             <tr>
                 <td>

@@ -11,7 +11,7 @@
          
         
         <div id="welcom-box">
-           <legend id="welcome-title"><fmt:message key="title.welcome"/></legend>
+           <legend id="welcome-title" ><fmt:message key="title.welcome"/></legend>
            <div class="links">
                <ul type="none">
                    <li> <a href="<c:url value="/product/productmanagement.htm"/>"><fmt:message key="product.page.title"/></a></li>
