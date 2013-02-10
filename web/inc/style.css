@@ -13,8 +13,8 @@ body{
 
 
 header, footer{
-   
-    background-color: #666666;
+    display:block;
+    background-color: #454545;
     width:100%;
     border-color: #bfbfbf;
     border-style: ridge;
@@ -28,6 +28,7 @@ header, footer{
 header a, footer a{
     color:  #ffffff;
     font-size: smaller;
+    
 }
 
 .accueil{
@@ -37,8 +38,8 @@ header a, footer a{
 
 #welcom-box{
     background: #ffffff;
-    opacity:0.6;
-    filter:alpha(opacity=40);
+    opacity:0.8;
+    filter:alpha(opacity=70);
     height:200px;
     border-radius: 5px 5px;
     padding: 3px 3px;
@@ -155,9 +156,9 @@ td{
  
     font-size: 30px;
     font-family: century gothic;
-    opacity:0.7;
+    opacity:0.8;
     filter:alpha(opacity=40);
-    background-color: #505051;
+    background-color: #434242;
     border-width: 1px;
     border-style: double;
     border-color: #fffcff;
