@@ -8,14 +8,67 @@ body{
     margin: 5px 20px 5px 10px;
     
 }
+#logout{
+    
+    background-image: url(logout.png);
+    background-repeat: no-repeat;
+    width: 30px;
+    height:30px;
+    background-size:30px 30px;
+    margin-right: 5px;
+    margin-left: 5px;
 
+    
+}
 
+#home{
+    background-image: url(home.png);
+    background-repeat: no-repeat;
+    width: 40px;
+    height:40px;
+    background-size:40px 40px;
+    margin-right: 5px;
+    margin-left: 5px;
+ 
+    
+}
 
+#product{
+    background-image: url(product.png);
+    background-repeat: no-repeat;
+    width: 40px;
+    height:40px;
+    background-size:40px 40px;
+    margin-right: 5px;
+    margin-left: 5px;
+}
+
+#profile{
+    
+    background-image: url(profile.png);
+    background-repeat: no-repeat;
+    width: 40px;
+    height:40px;
+    background-size:40px 40px;
+    margin-right: 5px;
+    margin-left: 5px;
+    
+}
+#user{
+    background-image: url(users.png);
+    background-repeat: no-repeat;
+    width: 40px;
+    height:40px;
+    background-size:40px 40px;
+    margin-right: 10px;
+    margin-left: 5px;
+    
+}
 
 header, footer{
     display:block;
     background-color: #454545;
-    width:100%;
+ 
     border-color: #bfbfbf;
     border-style: ridge;
     font-family: century gothic;
@@ -23,7 +76,9 @@ header, footer{
     color:  #ffffff;
     text-align: right;
     margin-bottom: 30px;
+    height: 70px;
 }
+
 
 header a, footer a{
     color:  #ffffff;
