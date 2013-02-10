@@ -19,7 +19,7 @@
            <form:form method="post" commandName="authentication">
                <table align="center">
                    <th><div id="auth-title"><fmt:message key="title.authenticate"/> </div></th>
-               <th> <form:errors path="error" cssClass="error" /> <br></th>
+                    <tr> <td><form:errors path="error" cssClass="error" /> </td></tr>
                <tr> <td class="noDeco"><div>
                     <label id="auth-label"><fmt:message key="user.label.login"/>: </label>
                     <form:input path="login" placeholder="Username" id="username" />
@@ -27,7 +27,7 @@
                        </div></td></tr>
               <tr> <td class="noDeco"> <div>
                    <label id="auth-label"><fmt:message key="user.label.password"/>: </label>
-                    <form:input path="password" placeholder="Password" id="password" />
+                    <form:password path="password" placeholder="Password" id="password" />
                     <form:errors path="password" cssClass="error"/><br>
                       </div></td></tr>
               <tr>
