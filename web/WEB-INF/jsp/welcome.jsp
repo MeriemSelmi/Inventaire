@@ -14,11 +14,10 @@
            <legend id="welcome-title" ><fmt:message key="title.welcome"/></legend>
            <div class="links">
                <ul type="none">
-                   <li> <a href="<c:url value="/product/productmanagement.htm"/>"><fmt:message key="product.page.title"/></a></li>
-                   <li> <a href="<c:url value="/profile/profilemanagement.htm"/>"><fmt:message key="profile.page.title"/></a><br></li>
-            
+                   <li> <a href="<c:url value="/product/productmanagement.htm"/>"><div><img src="inc/product.png" width="25" height="25" class="product"><fmt:message key="product.page.title"/></div></a></li>
+                   <li> <a href="<c:url value="/profile/profilemanagement.htm"/>"><div><img src="inc/profile.png" width="25" height="25" class="profile"><fmt:message key="profile.page.title"/></div></a></li>        
                    <li><c:if test="${loggedUser.role=='Administrator'}">
-                <a href="<c:url value="/user/usermanagement.htm"/>"><fmt:message key="user.page.title"/></a>
+                           <a href="<c:url value="/user/usermanagement.htm"/>"><div><img src="inc/users.png" width="25" height="25" class="user"><fmt:message key="user.page.title"/></div></a>
                        </c:if></li>
                </ul>
            </div>
