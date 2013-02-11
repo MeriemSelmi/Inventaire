@@ -25,7 +25,6 @@ public class AuthenticationController {
 
     @RequestMapping(method = RequestMethod.GET)
     public ModelAndView showForm(ModelMap model) {
-        model.put("authentication", new Authentication());
         return new ModelAndView("authentication");
     }
 
@@ -50,5 +49,10 @@ public class AuthenticationController {
             logger.info("AuthenticationController: authentication failed.");
             return showForm(new ModelMap());
         }
+    }
+    
+    @ModelAttribute("authentication")
+    public Authentication getAuthentication() {
+        return new Authentication();
     }
 }
